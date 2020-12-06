@@ -1,0 +1,9 @@
+1-	ERRORE nelle formule dei pid che usimao dato che usiamo 
+	la forma parallela bisgno convertire i dati in ti e td e 
+	non lascare kd e ki
+
+	ti=kp/ki
+
+	td= kd/kp 
+
+2-	funzione feedback da sistemare la retorazione negativa
