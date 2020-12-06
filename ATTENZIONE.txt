@@ -1,9 +1,21 @@
-1-	ERRORE nelle formule dei pid che usimao dato che usiamo 
-	la forma parallela bisgno convertire i dati in ti e td e 
+HO INIZIATO A STURUTTURARE IL CODICE ATTRAVERSO LE STRUTTURE DATO
+CHE NON MI SEMBRAVANO DIFFICI DI UTILIZZO E PERMETTONO DI RENDERLO
+PIU PULITO CREANDO SOTTOFUNZIONI
+LE COSE CHE HO FATTO LE INSERITE COMMENTATE PER NON CREARE PROBLEMI 
+DI FUNZIONAMENTO E CONPRENSIONE
+
+PER I PI-D E I-PD HO SOLO INSERITO LE FORMULE SENZA CREARE L'ALGORITMO 
+GENETICO PERCHE' VOLEVO PRIMA CONFONTARMI CON TE
+
+1-	ERRORE nelle formule dei pid che usimao dato 
+	la forma parallela bisogna convertirla in ti e td e 
 	non lascare kd e ki
 
 	ti=kp/ki
 
 	td= kd/kp 
 
-2-	funzione feedback da sistemare la retorazione negativa
+2-	funzione feedback da sistemare la retorazione negativa ???
+
+3-  salvataggio grafico in una variebile per esportazione
+

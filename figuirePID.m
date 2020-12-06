@@ -131,7 +131,9 @@ strSelection= get(elementSelection,'String');
                     %upper bounds ub 
                     ub_PID=[10 500 50 20];
                     [x_PID,fval_PID] = ga(@(K)pidtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
-            
+                    
+                    %ga_info_to_struct(favl,x,S_PID,'pid')
+                    
             %PIDA genetic algorithm
             
                     %{
@@ -148,7 +150,8 @@ strSelection= get(elementSelection,'String');
                     %upper bounds ub 
                     ub_PIDA=[10 500 50 20 50 20];
                     [x_PIDA,fval_PIDA] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
-            
+                    
+                    %ga_info_to_struct(favl,x,S_PID,'pid')
 
             
             
@@ -167,7 +170,9 @@ strSelection= get(elementSelection,'String');
     title('PID');
     grid on;
     
-
+    
+    
+    %ga_info_to_struct(PID,strSelection,'pid');
 
 % plot PIDA Controller
     
@@ -199,6 +204,22 @@ strSelection= get(elementSelection,'String');
    
    
 % export to Excel
+
+%   ---!!! DA FINIRE !!!---
+%  sistema = struct;
+%  sistema.pid = ga_info_to_struct(favl,x,S_PID,'pid');
+%  sistema.pida = ga_info_to_struct(favl,x,S_PID,'pida');
+%  sistema.ipd = ga_info_to_struct(favl,x,S_PID,'i_pd');
+%  sistema.dpi = ga_info_to_struct(favl,x,S_PID,'pi_d');
+%  
+%  sistema.pid_dist = ga_info_to_struct(favl,x,S_PID,'pid');
+%  sistema.pida_dist = ga_info_to_struct(favl,x,S_PID,'pida');
+%  sistema.ipd_dist = ga_info_to_struct(favl,x,S_PID,'i_pd');
+%  sistema.dpi_dist = ga_info_to_struct(favl,x,S_PID,'pi_d');
+%  
+%  print_excel(sistema,strSelection);
+%  
+ 
 
   %pid con b=1 c=1 D
     PID=[fval_PID;x_PID(1);x_PID(2);x_PID(3);0;1;1;x_PID(4);0;S_PID.RiseTime;S_PID.SettlingTime;S_PID.Overshoot;S_PID.Undershoot;S_PID.Peak;S_PID.PeakTime];
