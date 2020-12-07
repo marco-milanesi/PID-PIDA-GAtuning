@@ -27,7 +27,7 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 
 - The program will also export an Excel file in the same folder of the program with step informations such as Rise time, settling time, and other step-response characteristics.
 
-##Type of Controllers
+## Type of Controllers
 
 - PID
 
