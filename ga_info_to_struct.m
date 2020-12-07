@@ -7,7 +7,7 @@ function pid = ga_info_to_struct(favl,x,S_PID,type)
     pid.Ti = x(2);
     pid.Td = x(3);
     pid.N = x(4);
-    
+    %switch che in base al tipo di controllore asssegna i vari paremetri
     switch type
         case 'pid'
                 pid.Ta = [];
@@ -37,7 +37,7 @@ function pid = ga_info_to_struct(favl,x,S_PID,type)
                 pid.alfa=[];     
     end
     
-    pid.Risetime = S_PID.SettlingTime;
+    pid.Risetime = S_PID.RiseTime;
     pid.settlingtime =S_PID.SettlingTime  ;
     pid.overshoot = S_PID.Overshoot;
     pid.undershoot = S_PID.Undershoot;
