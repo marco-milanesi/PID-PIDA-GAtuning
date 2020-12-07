@@ -1,48 +1,48 @@
-function pid = ga_info_to_struct(favl,x,S_PID,type)
+function controller = ga_info_to_struct(favl,x,S_controller,type)
 %funzione per convertire i dati riguardanti un controllore in una sotto
 %struttura
-
-    pid.IAE = favl;
-    pid.Kp = x(1) ;
-    pid.Ti = x(2);
-    pid.Td = x(3);
-    pid.N = x(4);
+    controller = struct ;
+    
+    controller.IAE = favl;
+    controller.Kp = x(1) ;
+    controller.Ti = x(2);
+    controller.Td = x(3);
+    controller.N = x(4);
     %switch che in base al tipo di controllore asssegna i vari paremetri
     switch type
-        case 'pid'
-                pid.Ta = [];
-                pid.b = 1;
-                pid.c = 1;
-                pid.alfa = [];
+        case 'controller'
+                controller.Ta = [];
+                controller.b = 1;
+                controller.c = 1;
+                controller.alfa = [];
         case 'i_pd'
-                pid.Ta = [];
-                pid.b = 0;
-                pid.c = 0;
-                pid.alfa = [];
+                controller.Ta = [];
+                controller.b = 0;
+                controller.c = 0;
+                controller.alfa = [];
         case 'pi_d'
-                pid.Ta=[];
-                pid.b=1;
-                pid.c=0;
-                pid.alfa=[];
-        case 'pida'
-                pid.Ta = x(5);
-                pid.b = 1;
-                pid.c = 1;
-                pid.alfa = x(6);
+                controller.Ta=[];
+                controller.b=1;
+                controller.c=0;
+                controller.alfa=[];
+        case 'controllera'
+                controller.Ta = x(5);
+                controller.b = 1;
+                controller.c = 1;
+                controller.alfa = x(6);
         otherwise
-                pid.Ta=[];
-                pid.b=[];
-                pid.c=[];
-                pid.N=[];
-                pid.alfa=[];     
+                controller.Ta=[];
+                controller.b=[];
+                controller.c=[];
+                controller.alfa=[];     
     end
     
-    pid.Risetime = S_PID.RiseTime;
-    pid.settlingtime =S_PID.SettlingTime  ;
-    pid.overshoot = S_PID.Overshoot;
-    pid.undershoot = S_PID.Undershoot;
-    pid.peak = S_PID.Peak;
-    pid.peaktime = S_PID.PeakTime;
+    controller.Risetime = S_controller.RiseTime;
+    controller.settlingtime =S_controller.SettlingTime  ;
+    controller.overshoot = S_controller.Overshoot;
+    controller.undershoot = S_controller.Undershoot;
+    controller.peak = S_controller.Peak;
+    controller.peaktime = S_controller.PeakTime;
 end
 
 

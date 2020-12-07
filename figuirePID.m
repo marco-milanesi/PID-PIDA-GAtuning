@@ -151,7 +151,7 @@ strSelection= get(elementSelection,'String');
                     ub_PIDA=[10 500 50 20 50 20];
                     [x_PIDA,fval_PIDA] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
                     
-                    %ga_info_to_struct(favl,x,S_PID,'pid')
+                    %ga_info_to_struct(favl,x,S_PID,'pida')
 
             
             
