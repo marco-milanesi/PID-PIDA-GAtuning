@@ -30,11 +30,14 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 ## Type of Controllers
 
 - PID
-<img source="Images/PID%20-%20PIDA%20Controller.png" width="1000" height="300">
-
+![](Images/PID%20-%20PIDA%20Controller.png)
 
 - PI-D
+![](Images/PI-D-Controller.png)
 
 - I-PD
+![](Images/I-PD-Controller.png)
 
 - PIDA
+![](Images/PID%20-%20PIDA%20Controller.png)
+
