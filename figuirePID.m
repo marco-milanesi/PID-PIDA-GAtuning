@@ -139,6 +139,35 @@ strSelection= get(elementSelection,'String');
         S_PID_Dist=stepinfo(Disturb_PID);
         analized.pid_dist =  ga_info_to_struct(IAE,x_PID,S_PID_Dist,'pid');
 
+        
+        %{
+        I-PD genetic algorithm
+        x(1) = Kp
+        x(2) = Ti
+        x(3)= Td
+        x(4)= N
+        %}         
+        %lower bounds lb 
+        lb_PID=[0.001 0.1 0.1 5];
+        %upper bounds ub 
+        ub_PID=[10 500 50 20];
+        [x_IPD,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        
+        K1 = x_IPD(1)/(s*x_IPD(2));
+        K2 = x_IPD(1)*(1+(s*x_IPD(2)))/(1 + s*(x_IPD(3)/x_IPD(4)));
+        
+        ClosedLoop1_IPD = feedback(G,K2);
+        Loop_IPD = series(K1,ClosedLoop1_IPD);
+        ClosedLoop_IPD = feedback(Loop_IPD,1);
+        S_IPD=stepinfo(ClosedLoop_IPD); 
+        analized.ipd = ga_info_to_struct(IAE,x_IPD,S_IPD,'ipd');
+        
+        Disturb_IPD = feedback(G,(K1+K2));
+        S_IPD_Dist=stepinfo(Disturb_IPD);
+        analized.ipd_dist =  ga_info_to_struct(IAE,x_IPD,S_IPD_Dist,'ipd');
+
+
+        
         %{
         PIDA genetic algorithm
         x(1) = Kp
@@ -176,8 +205,8 @@ strSelection= get(elementSelection,'String');
             t_sim = 0:dt:(S_PID.SettlingTime * 2);
         end
         subplot(2,2,[1,2]);
-        plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_PIDA,t_sim),'b-');
-        legend('PID','PIDA');
+        plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_PIDA,t_sim),'g-');
+        legend('PID','IPD','PIDA');
         title('reference tracking');
         xlabel('time');
         ylabel('amplitude');
@@ -190,8 +219,8 @@ strSelection= get(elementSelection,'String');
             t_sim = 0:dt:(S_PID_Dist.SettlingTime * 2);
         end
         subplot(2,2,[3,4]);
-        plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_PIDA,t_sim),'b-');
-        legend('PID','PIDA');
+        plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_PIDA,t_sim),'g-');
+        legend('PID','IPD','PIDA');
         title('disturbance rejection');
         xlabel('time');
         ylabel('amplitude');
@@ -200,8 +229,7 @@ strSelection= get(elementSelection,'String');
         % export to Excel
 
         %   ---!!! DA FINIRE !!!---
-        
-        analized.ipd = ga_info_to_struct(0,x_PID,S_PID,'i_pd');
+       
         analized.dpi = ga_info_to_struct(0,x_PID,S_PID,'pi_d');
   
 %        sistema.pid_dist = ga_info_to_struct(favl,x,S_PID,'pid');
