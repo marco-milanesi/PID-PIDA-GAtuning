@@ -73,162 +73,196 @@ varargout{1} = handles.output;
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 
-% hObject    handle to pushbutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+        % hObject    handle to pushbutton1 (see GCBO)
+        % eventdata  reserved - to be defined in a future version of MATLAB
+        % handles    structure with handles and user data (see GUIDATA)
 
-analized = struct;
-
-elementSelection = get(handles.uibuttongroup,'SelectedObject');
-global strSelection
-strSelection= get(elementSelection,'String');
-%System Transfer Function Selection
+        analized = struct;
         s = tf('s');
+        elementSelection = get(handles.uibuttongroup,'SelectedObject');
+        global strSelection
+        strSelection = get(elementSelection,'String');
+
+        %System Transfer Function Selection
         switch strSelection
             case 'Multiple Equal Poles'
-                G= 1/(s+1)
+                G = 1/(s+1);
             case 'Fourth Order System'
-                G=1/(s+1)/(1 + 0.1*s)/(1 + 0.1^2 * s)/(1+ 0.1^3 *s)
+                G = 1/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
             case 'Right Half Plane Zero'
-                G= 1-0.1*s /(s+1)^3 
+                G = 1-0.1*s/(s+1)^3; 
             case 'Time Delay and Lag'
-                G= (1/ (1 + 0.1*s))*exp(-s)
+                G = (1/(1+0.1*s))*exp(-s);
             case 'Time Delay and Double Lag'
-                G=(1/ (1 + 0.1*s)^2)*exp(-s)
+                G = (1/(1+0.1*s)^2)*exp(-s);
             case 'Fast and Slow Modes'
-                G= (100/(s+10)^2) *((1/s+1) + (0.5/s+0.05))
+                G = (100/(s+10)^2)*((1/s+1)+(0.5/s+0.05));
             case 'Oscillatory System'
-                G= 1/(s+1)/(s^2 + 0.2*s + 1)
+                G = 1/(s+1)/(s^2+0.2*s+1);
             case 'Unstable Pole'
-                G=1/(s^2 -1)
-%             otherwise
-%                 G=[]
+                G = 1/(s^2-1);
+            case 'Multiple Equal Poles Integral'
+                G = s/(s+1);
+            case 'Fourth Order System Integral'
+                G = s/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
+            case 'Right Half Plane Zero Integral'
+                G = (1-0.1*s)*s/(s+1)^3; 
+            case 'Time Delay and Lag Integral'
+                G = (s/(1+0.1*s))*exp(-s);
+            case 'Time Delay and Double Lag Integral'
+                G = (1/(1+0.1*s)^2)*exp(-s);
+            %case 'custom'
+            %   G leggere da una matrice come esempio del profe
+            otherwise
+                G = [];
         end
-        % Genetic Algorithm
 
         %time step
         dt = 0.001;
-
         %Genetic Algorithm Paremeters
-            
         %Population Size of each Iteration
-        PopSize = 50;
-        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
+        PopSize = 1;
+        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',10,'useparallel',true);
 
         %{
         PID genetic algorithm
         x(1) = Kp
         x(2) = Ti
         x(3)= Td
-        x(4)=N
+        x(4)= N
         %}         
         %lower bounds lb 
-        lb_PID=[0.001 0.1 0.1 5];
+        lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
-        ub_PID=[10 500 50 20];
-        [x_PID,IAE] = ga(@(K)pidtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        ub_PID = [10 500 50 20];
         
-        K = x_PID(1) + x_PID(2)/s + (x_PID(3)*s)/(1 + s*(x_PID(3)/x_PID(4)));
+        [control,IAE] = ga(@(K)pidtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        
+        K = control(1) + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4)));
         
         Loop_PID = series(K,G);
         ClosedLoop_PID = feedback(Loop_PID,1);
-        S_PID=stepinfo(ClosedLoop_PID);
-        analized.pid = ga_info_to_struct(IAE,x_PID,S_PID,'pid');
+        info = stepinfo(ClosedLoop_PID);
+        analized.pid = ga_info_to_struct(IAE,control,info,'pid');
+        analized.time = info.SettlingTime;
         
         Disturb_PID = feedback(G,K);
-        S_PID_Dist=stepinfo(Disturb_PID);
-        analized.pid_dist =  ga_info_to_struct(IAE,x_PID,S_PID_Dist,'pid');
-
+        info = stepinfo(Disturb_PID);
+        
+        analized.pid_dist =  ga_info_to_struct(IAE,control,info,'pid');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end
+        
+        
         
         %{
         I-PD genetic algorithm
         x(1) = Kp
         x(2) = Ti
-        x(3)= Td
-        x(4)= N
+        x(3) = Td
+        x(4) = N
         %}         
         %lower bounds lb 
-        lb_PID=[0.001 0.1 0.1 5];
+        lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
-        ub_PID=[10 500 50 20];
-        [x_IPD,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        ub_PID = [10 500 50 20];
+        [control,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
         
-        K1 = x_IPD(1)/(s*x_IPD(2));
-        K2 = x_IPD(1)*(1+(s*x_IPD(2)))/(1 + s*(x_IPD(3)/x_IPD(4)));
+        K1 = control(1)/(s*control(2));
+        K2 = control(1)*(1+(s*control(2)))/(1 + s*(control(3)/control(4)));
         
         ClosedLoop1_IPD = feedback(G,K2);
         Loop_IPD = series(K1,ClosedLoop1_IPD);
         ClosedLoop_IPD = feedback(Loop_IPD,1);
-        S_IPD=stepinfo(ClosedLoop_IPD); 
-        analized.ipd = ga_info_to_struct(IAE,x_IPD,S_IPD,'i_pd');
+        info = stepinfo(ClosedLoop_IPD); 
+        analized.ipd = ga_info_to_struct(IAE,control,info,'i_pd');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end
         
         Disturb_IPD = feedback(G,(K1+K2));
-        S_IPD_Dist=stepinfo(Disturb_IPD);
-        analized.ipd_dist =  ga_info_to_struct(IAE,x_IPD,S_IPD_Dist,'i_pd');
-
+        info = stepinfo(Disturb_IPD);
+        analized.ipd_dist =  ga_info_to_struct(IAE,control,info,'i_pd');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end
+        
+        
+        
         %{
         PI-D genetic algorithm
         x(1) = Kp
         x(2) = Ti
-        x(3)= Td
-        x(4)= N
+        x(3) = Td
+        x(4) = N
         %}         
         %lower bounds lb 
-        lb_PID=[0.001 0.1 0.1 5];
+        lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
-        ub_PID=[10 500 50 20];
-        [x_DPI,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        ub_PID = [10 500 50 20];
+        [control,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
         
-        K1 = x_DPI(1);
-        K2 = x_DPI(1)/(s*x_DPI(2));
-        K3 = x_DPI(1)*(1+((s*x_DPI(3))/(1+(x_DPI(3)*s/x_DPI(4)))));
+        K1 = control(1);
+        K2 = control(1)/(s*control(2));
+        K3 = control(1)*(1+((s*control(3))/(1+(control(3)*s/control(4)))));
+        
         ClosedLoop_DPI = (G*(K1+K2))/(1+G*(K2+K3));
-        S_DPI=stepinfo(ClosedLoop_DPI); 
-        analized.dpi = ga_info_to_struct(IAE,x_DPI,S_DPI,'pi_d');
+        info = stepinfo(ClosedLoop_DPI); 
+        analized.dpi = ga_info_to_struct(IAE,control,info,'pi_d');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end
         
         Disturb_DPI = feedback(G,K2+K3);
-        S_DPI_Dist=stepinfo(Disturb_DPI); 
-        analized.dpi_dist =  ga_info_to_struct(IAE,x_DPI,S_DPI_Dist,'pi_d');
-
+        info = stepinfo(Disturb_DPI); 
+        analized.dpi_dist =  ga_info_to_struct(IAE,control,info,'pi_d');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end
+        
         
 
         %{
         PIDA genetic algorithm
         x(1) = Kp
         x(2) = Ti
-        x(3)= Td
-        x(4)=N
-        x(5)=Ta
-        x(6)=alfa
+        x(3) = Td
+        x(4) = N
+        x(5) = Ta
+        x(6) = alfa
         %}
                     
         %lower bounds lb 
-        lb_PIDA=[0.001 0.1 0.1 5 0.1 5];
+        lb_PIDA = [0.001 0.1 0.1 5 0.1 5];
         %upper bounds ub 
-        ub_PIDA=[10 500 50 20 50 20];
+        ub_PIDA = [10 500 50 20 50 20];
         
-        [x_PIDA,IAE] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
+        [control,IAE] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
         
-        K = x_PIDA(1) + x_PIDA(2)/s + (x_PIDA(3)*s)/(1 + s*(x_PIDA(3)/x_PIDA(4))) + (x_PIDA(5)*s^2)/((1 + s*x_PIDA(5)/x_PIDA(6))^2); 
+        K = control(1) + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4))) + (control(5)*s^2)/((1 + s*control(5)/control(6))^2); 
        
         Loop_PIDA = series(K,G);
         ClosedLoop_PIDA = feedback(Loop_PIDA,1);
-        S_PIDA=stepinfo(ClosedLoop_PIDA);     
-        analized.pida = ga_info_to_struct(IAE,x_PIDA,S_PIDA,'pida');
-        
+        info = stepinfo(ClosedLoop_PIDA);     
+        analized.pida = ga_info_to_struct(IAE,control,info,'pida');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end       
         
         Disturb_PIDA = feedback(G,K);
-        S_PIDA_Dist=stepinfo(Disturb_PIDA);
-        analized.pida_dist = ga_info_to_struct(IAE,x_PIDA,S_PIDA_Dist,'pida');
-       
+        info = stepinfo(Disturb_PIDA);
+        analized.pida_dist = ga_info_to_struct(IAE,control,info,'pida');
+        if analized.time < info.SettlingTime
+            analized.time = info.SettlingTime;
+        end           
         
-        %reference traking
-        if S_PID.SettlingTime < S_PIDA.SettlingTime
-            t_sim = 0:dt:(S_PIDA.SettlingTime * 2); 
-        else
-            t_sim = 0:dt:(S_PID.SettlingTime * 2);
-        end
-        t_sim =0:dt:3;
+        
+        
+        %time array simulation
+        t_sim =0:dt:analized.time*2;
+        
+        %reference traking graf
         subplot(2,2,[1,2]);
         plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
         legend('PID','I-PD','PD-I','PIDA');
@@ -237,13 +271,7 @@ strSelection= get(elementSelection,'String');
         ylabel('amplitude');
         grid on;
         
-        %disturbance rejection
-        if S_PID_Dist.SettlingTime < S_PIDA_Dist.SettlingTime
-            t_sim = 0:dt:(S_PIDA_Dist.SettlingTime * 2); 
-        else
-            t_sim = 0:dt:(S_PID_Dist.SettlingTime * 2);
-        end
-        t_sim =0:dt:3;
+        %disturbance rejection graf
         subplot(2,2,[3,4]);
         plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
         legend('PID','I-PD','PD-I','PIDA');
