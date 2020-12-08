@@ -38,6 +38,8 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BY_%7Bsp%7D%7D%20%3D%20%5Cfrac%7BGC%7D%7B1&plus;GC%7D)
 
+![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BD%7D%20%3D%20%5Cfrac%7BG%7D%7B1&plus;GC%7D)
+
 ### PI-D Controller
 -------------------------------------------------
 Proportional and Integral action is applied to the control error while Derivative action is applied to the process variable.
@@ -93,5 +95,7 @@ A simple solution to make a PI controller perform well for both reference tracki
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C%28s%29%3D%20K_%7Bp%7D%20%5Cleft%20%28%201%20&plus;%20%5Cfrac%7B1%7D%7BsT_%7Bi%7D%7D%20&plus;%20%5Cfrac%7BsT_%7Bd%7D%7D%7B1&plus;%5Cfrac%7BT_%7Bd%7D%7D%7BN%7Ds%7D%20&plus;%20%5Cfrac%7Bs%5E%7B2%7DT_%7Ba%7D%7D%7B%5Cleft%20%281&plus;%5Cfrac%7BT_%7Ba%7D%7D%7B%5Calpha%7D%5Cright%20%29%5E%7B2%7D%7D%5Cright%20%29)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BY_%7Bsp%7D%7D%20%3D%20%5Cfrac%7BGC%7D%7B1&plus;GC%7D)
+
+![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BD%7D%20%3D%20%5Cfrac%7BG%7D%7B1&plus;GC%7D)
 
 
