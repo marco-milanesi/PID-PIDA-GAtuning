@@ -54,9 +54,20 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B2%7D%28s%29%3DK_%7Bp%7D%20%5Cleft%20%28%201&plus;%5Cfrac%7BT_%7Bd%7Ds%7D%7B1&plus;%5Cfrac%7BT_%7Bd%7D%7D%7BN%7Ds%7D%20%5Cright%20%29)
 
-## PI Controller
+### PI Controller
 -------------------------------------------------
+A simple solution to make a PI controller perform well for both reference tracking and disturbance rejection is to upgrade it to an ISA-PID controller. It improves reference tracking response by providing an additional tuning parameters b that allows independent control of the impact of the reference signal on the proportional action.
 
+- Set-point weight b is a real number between 0 and 1. When it decreases, the overshoot in the reference tracking response is reduced. 
+
+- The disturbance rejection responses are the same because setpoint weight b only affects reference tracking.
+
+
+![](Images/PI-Controller.png)
+
+![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C%28s%29%20%3D%20K_%7Bp%7D%20&plus;%20%5Cfrac%7BK_%7Bi%7D%7D%7Bs%7D)
+
+![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20F%28s%29%20%3D%20%5Cfrac%7BbK_%7Bp%7Ds%20&plus;%20K_%7Bi%7D%7D%7BK_%7Bp%7Ds%20&plus;%20K_%7Bi%7D%7D)
 
 ### PIDA Controller
 -------------------------------------------------
