@@ -1,5 +1,8 @@
 # PID and PIDA Controllers
 
+<img src="Images/UserInterface.png" width="800" height="406">
+
+
 ## Run the program
 To run the program launch the figure in the command window.
 
