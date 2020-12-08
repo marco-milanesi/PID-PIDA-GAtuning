@@ -38,6 +38,8 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 
 ### PI-D Controller
 -------------------------------------------------
+Proportional and Integral action is applied to the control error while Derivative action is applied to the process variable.
+
 ![](Images/PI-D-Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B1%7D%28s%29%3D%20K_%7Bp%7D)
@@ -48,6 +50,8 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 
 ### I-PD Controller
 -------------------------------------------------
+Integral action is applied to the control error while Proportional and Derivative action is applied to the process variable.
+
 ![](Images/I-PD-Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B1%7D%28s%29%3D%5Cfrac%7BK_%7Bp%7D%7D%7BsT_%7Bi%7D%7D)
