@@ -44,7 +44,7 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B2%7D%28s%29%3D%20%5Cfrac%7BK_%7Bp%7D%7D%7BsT_%7Bi%7D%7D)
 
-![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B3%7D%28s%29%3D%20K_%7Bp%7D%20&plus;%20%5Cfrac%7BsT_%7Bd%7D%7D%7B1&plus;%5Cfrac%7BT_%7Bd%7D%7D%7BN%7Ds%7D)
+![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B3%7D%28s%29%20%3D%20K_%7Bp%7D%5Cleft%20%28%201&plus;%5Cfrac%7BsT_%7Bd%7D%7D%7B1&plus;%5Cfrac%7BT_%7Bd%7D%7D%7BN%7Ds%7D%20%5Cright%20%29)
 
 ### I-PD Controller
 -------------------------------------------------
