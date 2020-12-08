@@ -1,6 +1,6 @@
 # PID and PIDA Controllers
 
-<img src="Images/UserInterface2.png" width="1387" height="697">
+<img src="Images/UserInterface.png" width="800" height="406">
 
 
 ## Run the program
