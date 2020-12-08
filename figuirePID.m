@@ -112,8 +112,8 @@ strSelection= get(elementSelection,'String');
         %Genetic Algorithm Paremeters
             
         %Population Size of each Iteration
-        PopSize = 5;
-        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1,'useparallel',true);
+        PopSize = 50;
+        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
         %{
         PID genetic algorithm
