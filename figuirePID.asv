@@ -175,28 +175,57 @@ strSelection= get(elementSelection,'String');
         else
             t_sim = 0:dt:(S_PID.SettlingTime * 2);
         end
-        subplot(2,2,[1,2]);
-        plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_PIDA,t_sim),'b-');
-        legend('PID','PIDA');
+        
+        plot(t_sim,step(ClosedLoop_PID,t_sim),'r',step(ClosedLoop_PIDA,t_sim),'b');
+        plot(t_sim,step(ClosedLoop_PID,t_sim),'b',t_sim,step(ClosedLoop_PIDA,t_sim),'g')
+        
+        legend('pid','pida');
         title('reference tracking');
-        xlabel('time');
-        ylabel('amplitude');
         grid on;
         
-        %disturbance rejection
-        if S_PID_Dist.SettlingTime < S_PIDA_Dist.SettlingTime
-            t_sim = 0:dt:(S_PIDA_Dist.SettlingTime * 2); 
-        else
-            t_sim = 0:dt:(S_PID_Dist.SettlingTime * 2);
-        end
-        subplot(2,2,[3,4]);
-        plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_PIDA,t_sim),'b-');
-        legend('PID','PIDA');
-        title('disturbance rejection');
-        xlabel('time');
-        ylabel('amplitude');
-        grid on;
-
+        
+        
+        
+        
+        
+        
+        
+%         t_PID = 0:dt:(S_PID.SettlingTime * 2); 
+%         subplot(2,2,1);
+%         plot(t_PID,step(ClosedLoop_PID,t_PID),'b');
+%         xlabel('t');
+%         ylabel('y')
+%         title('PID');
+%         grid on;
+%         saveas(file,'plot');
+%         saveas(file,'plot.png');
+%         
+%         
+%         
+%         t_PIDA = 0:dt:(S_PIDA.SettlingTime * 2); 
+%         subplot(2,2,2);
+%         plot(t_PIDA,step(ClosedLoop_PIDA,t_PIDA),'g');
+%         
+%         xlabel('t');
+%         ylabel('y')
+%         title('PIDA');
+%         grid on;
+% 
+%         % plot all controls           
+%         subplot(2,2,[3,4]);
+%    
+%         if S_PID.SettlingTime < S_PIDA.SettlingTime
+%             t_sim = 0:dt:(S_PIDA.SettlingTime * 2); 
+%         else
+%             t_sim = 0:dt:(S_PID.SettlingTime * 2);
+%         end
+%         plot(t_sim,step(ClosedLoop_PID,t_sim),'b',t_sim,step(ClosedLoop_PIDA,t_sim),'g');
+%         xlabel('t');
+%         ylabel('y')
+%         title('PID and PIDA');
+%         grid on;
+%         
+   
         % export to Excel
 
         %   ---!!! DA FINIRE !!!---
