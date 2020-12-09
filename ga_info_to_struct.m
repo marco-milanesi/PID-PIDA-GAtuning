@@ -1,8 +1,7 @@
 function controller = ga_info_to_struct(favl,x,S_controller,type)
-%funzione per convertire i dati riguardanti un controllore in una sotto
-%struttura
+    %funzione per convertire i dati riguardanti un controllore in una sotto
+    %struttura
     controller = struct ;
-    
     controller.IAE = favl;
     controller.Kp = x(1) ;
     controller.Ti = x(2);
