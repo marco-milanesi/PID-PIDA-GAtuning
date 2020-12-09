@@ -4,11 +4,11 @@
 
 
 ## Run the program
-To run the program launch the figure in the command window.
+To run the program launch the UserInterface.m in the command window.
 
 ## Documentation
 
-In this program we implement Genetic Algorithm (GA) in determing PID and PIDA controllers parameters to compensate different benchmark systems.
+In this program we implement Genetic Algorithm (GA) in determing PID, PI-D, I-PD and PIDA controllers parameters to compensate different benchmark systems.
   
 |      Benchmark Systems       |      Transfer Function  G(s)     |
 | -----------------------------|:--------------------------------------:|
@@ -24,9 +24,10 @@ In this program we implement Genetic Algorithm (GA) in determing PID and PIDA co
 ## Explanation of the program
 > A simple explanation of the user interface of the programme and which parameters it calculates.
 
-- After launching the program, select the Benchsmark system you want to compensate and select the objective function that is used to evaluate fitness of each chromosome.
+- After launching the program, select the Benchsmark system you want to compensate and the GA calculates the objective function IAE.
 
-- The Program will display the step response of feedback system with PID and PIDA controller and the system you have selected.
+
+- The Program will display the reference tracking and disturbance rejection og the four controllers and the system you have selected.
 
 - The program will also export an Excel file in the same folder of the program with step informations such as Rise time, settling time, and other step-response characteristics.
 
