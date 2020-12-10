@@ -170,7 +170,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         global strSelection
         strSelection = get(elementSelection,'String');
         
-                %System Transfer Function Selection
+        %System Transfer Function Selection
         switch strSelection
             case 'Multiple Equal Poles'
                 G = 1/(s+1);
@@ -208,8 +208,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 1;
-        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',10,'useparallel',true);
+        PopSize = 50;
+        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
         %{
         PID genetic algorithm
