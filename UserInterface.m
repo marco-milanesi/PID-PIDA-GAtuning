@@ -22,7 +22,7 @@ function varargout = UserInterface(varargin)
 
 % Edit the above text to modify the response to help UserInterface
 
-% Last Modified by GUIDE v2.5 08-Dec-2020 22:19:34
+% Last Modified by GUIDE v2.5 10-Dec-2020 14:43:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -43,7 +43,6 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-
 % --- Executes just before UserInterface is made visible.
 function UserInterface_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -60,7 +59,6 @@ guidata(hObject, handles);
 
 % UIWAIT makes UserInterface wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-
 
 % --- Outputs from this function are returned to the command line.
 function varargout = UserInterface_OutputFcn(hObject, eventdata, handles) 
@@ -80,10 +78,6 @@ function radiobutton1_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton1
 
-
-
-
-
 % --- Executes on button press in radiobutton2.
 function radiobutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton2 (see GCBO)
@@ -91,7 +85,6 @@ function radiobutton2_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton2
-
 
 % --- Executes on button press in radiobutton3.
 function radiobutton3_Callback(hObject, eventdata, handles)
@@ -101,7 +94,6 @@ function radiobutton3_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton3
 
-
 % --- Executes on button press in radiobutton4.
 function radiobutton4_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton4 (see GCBO)
@@ -109,7 +101,6 @@ function radiobutton4_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton4
-
 
 % --- Executes on button press in radiobutton5.
 function radiobutton5_Callback(hObject, eventdata, handles)
@@ -119,7 +110,6 @@ function radiobutton5_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton5
 
-
 % --- Executes on button press in radiobutton6.
 function radiobutton6_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton6 (see GCBO)
@@ -127,7 +117,6 @@ function radiobutton6_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton6
-
 
 % --- Executes on button press in radiobutton7.
 function radiobutton7_Callback(hObject, eventdata, handles)
@@ -137,7 +126,6 @@ function radiobutton7_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton7
 
-
 % --- Executes on button press in radiobutton8.
 function radiobutton8_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton8 (see GCBO)
@@ -146,14 +134,19 @@ function radiobutton8_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton8
 
-
 % --- Executes on button press in radiobutton9.
 function radiobutton9_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton9 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+
 % Hint: get(hObject,'Value') returns toggle state of radiobutton9
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
 
 % --- Executes on button press in pushbutton1.
@@ -372,3 +365,5 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         
         
+
+
