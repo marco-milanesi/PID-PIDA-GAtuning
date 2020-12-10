@@ -189,15 +189,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             case 'Unstable Pole'
                 G = 1/(s^2-1);
             case 'Multiple Equal Poles Integral'
-                G = s/(s+1);
+                G = 1/s/(s+1);
             case 'Fourth Order System Integral'
-                G = s/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
+                G = 1/s/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
             case 'Right Half Plane Zero Integral'
-                G = (1-0.1*s)*s/(s+1)^3; 
+                G = (1-0.1*s)/s/(s+1)^3; 
             case 'Time Delay and Lag Integral'
-                G = (s/(1+0.1*s))*exp(-s);
+                G = (1/s/(1+0.1*s))*exp(-s);
             case 'Time Delay and Double Lag Integral'
-                G = (1/(1+0.1*s)^2)*exp(-s);
+                G = (1/s/(1+0.1*s)^2)*exp(-s);
             %case 'custom'
             %   G leggere da una matrice come esempio del profe
             otherwise
