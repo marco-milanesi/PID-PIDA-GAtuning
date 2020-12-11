@@ -53,7 +53,21 @@ function UserInterface_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for UserInterface
 handles.output = hObject;
-
+global variable;
+global multi_pole; 
+global alpha_fos; 
+global alpha_hpz;
+global time_dl;
+global time_ddl;
+global omegazero;
+        
+multi_pole = [1 2 3 4 8];
+alpha_fos = [0.1, 0.2, 0.5, 1];
+alpha_hpz = [0.1, 0.2, 0.5, 1, 2, 5];
+time_dl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
+time_ddl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
+omegazero = [1, 2, 5, 10];
+        
 % Update handles structure
 guidata(hObject, handles);
 
@@ -83,6 +97,30 @@ function radiobutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global multi_pole;
+global variable;
+prompt={'select order multiple poles 1 2 3 4 8'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = cell2mat(input);
+check = 0;
+for idx = 1:numel(multi_pole)
+        element = multi_pole(idx);
+       if  element == in(1)
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in(1);
+
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton2
 
@@ -156,14 +194,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
         analized = struct;
-        
-        multi_pole = [1, 2, 3, 4, 8];
-        alpha_fos = [0.1, 0.2, 0.5, 1];
-        alpha_hpz = [0.1, 0.2, 0.5, 1, 2, 5];
-        time_dl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
-        time_ddl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
-        omegazero = [1, 2, 5, 10];
-        
+        global variable;
+
         s = tf('s');
         elementSelection = get(handles.uibuttongroup,'SelectedObject');
         global strSelection
@@ -172,7 +204,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %System Transfer Function Selection
         switch strSelection
             case 'Multiple Equal Poles'
-                G = 1/(s+1);
+                G = 1/(s+1)^variable;
             case 'Fourth Order System'
                 G = 1/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
             case 'Right Half Plane Zero'
