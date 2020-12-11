@@ -155,9 +155,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-        
-
         analized = struct;
+        
+        multi_pole = [1, 2, 3, 4, 8];
+        alpha_fos = [0.1, 0.2, 0.5, 1];
+        alpha_hpz = [0.1, 0.2, 0.5, 1, 2, 5];
+        time_dl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
+        time_ddl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
+        omegazero = [1, 2, 5, 10];
+        
         s = tf('s');
         elementSelection = get(handles.uibuttongroup,'SelectedObject');
         global strSelection
@@ -191,8 +197,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
                 G = (1/s/(1+0.1*s))*exp(-s);
             case 'Time Delay and Double Lag Integral'
                 G = (1/s/(1+0.1*s)^2)*exp(-s);
-            %case 'custom'
-            %   G leggere da una matrice come esempio del profe
+            case 'custom'
+                G =[]; %leggere da una matrice come esempio del profe
             otherwise
                 G = [];
         end
@@ -345,7 +351,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %reference traking graf
         subplot(2,2,[1,2]);
         plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PD-I','PIDA');
+        legend('PID','I-PD','PI-D','PIDA');
         title('reference tracking');
         xlabel('time');
         ylabel('amplitude');
@@ -354,13 +360,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %disturbance rejection graf
         subplot(2,2,[3,4]);
         plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PD-I','PIDA');
+        legend('PID','I-PD','PI-D','PIDA');
         title('disturbance rejection');
         xlabel('time');
         ylabel('amplitude');
         grid on;
 
-        % export to Excel
+        %export to Excel
         print_excel(analized,strSelection);
 
         
