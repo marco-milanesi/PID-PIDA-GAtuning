@@ -62,8 +62,8 @@ global time_ddl;
 global omegazero;
         
 multi_pole = [1 2 3 4 8];
-alpha_fos = [0.1, 0.2, 0.5, 1];
-alpha_hpz = [0.1, 0.2, 0.5, 1, 2, 5];
+alpha_fos = [0.1 0.2 0.5 1];
+alpha_hpz = [0.1 0.2 0.5 1 2 5];
 time_dl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
 time_ddl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
 omegazero = [1, 2, 5, 10];
@@ -128,7 +128,30 @@ variable = in(1);
 function radiobutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user data (see GUIDATA)global multi_pole;
+global variable;
+global alpha_fos;
+prompt={'select param alfa 0.1 0.2 0.5 1'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = cell2mat(input);
+check = 0;
+for idx = 1:numel(alpha_fos)
+        element = alpha_fos(idx);
+       if  element == in(1)
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in(1);
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton3
 
@@ -206,7 +229,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             case 'Multiple Equal Poles'
                 G = 1/(s+1)^variable;
             case 'Fourth Order System'
-                G = 1/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
+                G = 1/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s);
             case 'Right Half Plane Zero'
                 G = 1-0.1*s/(s+1)^3; 
             case 'Time Delay and Lag'
