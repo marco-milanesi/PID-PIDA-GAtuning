@@ -68,6 +68,7 @@ time_dl=[0 0.1 0.2 0.5 2 5 10];
 time_ddl=[0 0.1 0.2 0.5 2 5 10];
 omegazero = [1 2 5 10];
         
+matlab.
 % Update handles structure
 guidata(hObject, handles);
 
@@ -560,6 +561,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         %export to Excel
         print_excel(analized,strSelection);
+        
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
