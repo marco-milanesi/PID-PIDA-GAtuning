@@ -108,10 +108,10 @@ if (sizeinput == 0)
     return
 end
 in = cell2mat(input);
+ini = str2num(in);
 check = 0;
-for idx = 1:numel(multi_pole)
-        element = multi_pole(idx);
-       if  element == in(1)
+for element = multi_pole
+       if  element == ini
          check = 1;
          msgbox('Operation Correct');
        end
@@ -139,11 +139,11 @@ sizeinput = size(input);
 if (sizeinput == 0) 
     return
 end
-in = cell2mat(input);
+in = cell2mat(input(1,1));
+ini = str2num(in);
 check = 0;
-for idx = 1:numel(alpha_fos)
-        element = alpha_fos(idx);
-       if  element == in(1)
+for element = alpha_fos
+       if  element == ini
          check = 1;
          msgbox('Operation Correct');
        end
