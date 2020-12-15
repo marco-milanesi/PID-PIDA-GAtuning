@@ -64,9 +64,9 @@ global omegazero;
 multi_pole = [1 2 3 4 8];
 alpha_fos = [0.1 0.2 0.5 1];
 alpha_hpz = [0.1 0.2 0.5 1 2 5];
-time_dl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
-time_ddl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
-omegazero = [1, 2, 5, 10];
+time_dl=[0 0.1 0.2 0.5 2 5 10];
+time_ddl=[0 0.1 0.2 0.5 2 5 10];
+omegazero = [1 2 5 10];
         
 % Update handles structure
 guidata(hObject, handles);
@@ -227,6 +227,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         %System Transfer Function Selection
         switch strSelection
+            case 'Select a System'
+                msgbox('Error costant, please recreate system', 'Errore!', 'error');
             case 'Multiple Equal Poles'
                 G = 1/(s+1)^variable;
             case 'Fourth Order System'
