@@ -22,7 +22,7 @@ function varargout = UserInterface(varargin)
 
 % Edit the above text to modify the response to help UserInterface
 
-% Last Modified by GUIDE v2.5 08-Dec-2020 22:19:34
+% Last Modified by GUIDE v2.5 10-Dec-2020 14:43:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -43,7 +43,6 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-
 % --- Executes just before UserInterface is made visible.
 function UserInterface_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -54,13 +53,26 @@ function UserInterface_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for UserInterface
 handles.output = hObject;
-
+global variable;
+global multi_pole; 
+global alpha_fos; 
+global alpha_hpz;
+global time_dl;
+global time_ddl;
+global omegazero;
+        
+multi_pole = [1 2 3 4 8];
+alpha_fos = [0.1 0.2 0.5 1];
+alpha_hpz = [0.1 0.2 0.5 1 2 5];
+time_dl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
+time_ddl=[0, 0.1, 0.2, 0.5, 2, 5, 10];
+omegazero = [1, 2, 5, 10];
+        
 % Update handles structure
 guidata(hObject, handles);
 
 % UIWAIT makes UserInterface wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
-
 
 % --- Outputs from this function are returned to the command line.
 function varargout = UserInterface_OutputFcn(hObject, eventdata, handles) 
@@ -80,27 +92,68 @@ function radiobutton1_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton1
 
-
-
-
-
 % --- Executes on button press in radiobutton2.
 function radiobutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global multi_pole;
+global variable;
+prompt={'select order multiple poles 1 2 3 4 8'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = cell2mat(input);
+check = 0;
+for idx = 1:numel(multi_pole)
+        element = multi_pole(idx);
+       if  element == in(1)
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in(1);
+
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton2
-
 
 % --- Executes on button press in radiobutton3.
 function radiobutton3_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton3 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+% handles    structure with handles and user data (see GUIDATA)global multi_pole;
+global variable;
+global alpha_fos;
+prompt={'select param alfa 0.1 0.2 0.5 1'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = cell2mat(input);
+check = 0;
+for idx = 1:numel(alpha_fos)
+        element = alpha_fos(idx);
+       if  element == in(1)
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in(1);
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton3
-
 
 % --- Executes on button press in radiobutton4.
 function radiobutton4_Callback(hObject, eventdata, handles)
@@ -110,7 +163,6 @@ function radiobutton4_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton4
 
-
 % --- Executes on button press in radiobutton5.
 function radiobutton5_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton5 (see GCBO)
@@ -118,7 +170,6 @@ function radiobutton5_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton5
-
 
 % --- Executes on button press in radiobutton6.
 function radiobutton6_Callback(hObject, eventdata, handles)
@@ -128,7 +179,6 @@ function radiobutton6_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton6
 
-
 % --- Executes on button press in radiobutton7.
 function radiobutton7_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton7 (see GCBO)
@@ -136,7 +186,6 @@ function radiobutton7_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton7
-
 
 % --- Executes on button press in radiobutton8.
 function radiobutton8_Callback(hObject, eventdata, handles)
@@ -146,14 +195,19 @@ function radiobutton8_Callback(hObject, eventdata, handles)
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton8
 
-
 % --- Executes on button press in radiobutton9.
 function radiobutton9_Callback(hObject, eventdata, handles)
 % hObject    handle to radiobutton9 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+
 % Hint: get(hObject,'Value') returns toggle state of radiobutton9
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
 
 
 % --- Executes on button press in pushbutton1.
@@ -162,8 +216,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-        
+
         analized = struct;
+        global variable;
+
         s = tf('s');
         elementSelection = get(handles.uibuttongroup,'SelectedObject');
         global strSelection
@@ -172,9 +228,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %System Transfer Function Selection
         switch strSelection
             case 'Multiple Equal Poles'
-                G = 1/(s+1);
+                G = 1/(s+1)^variable;
             case 'Fourth Order System'
-                G = 1/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
+                G = 1/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s);
             case 'Right Half Plane Zero'
                 G = 1-0.1*s/(s+1)^3; 
             case 'Time Delay and Lag'
@@ -197,8 +253,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
                 G = (1/s/(1+0.1*s))*exp(-s);
             case 'Time Delay and Double Lag Integral'
                 G = (1/s/(1+0.1*s)^2)*exp(-s);
-            %case 'custom'
-            %   G leggere da una matrice come esempio del profe
+            case 'custom'
+                G =[]; %leggere da una matrice come esempio del profe
             otherwise
                 G = [];
         end
@@ -207,7 +263,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 50;
+        PopSize = 5;
         options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
         %{
@@ -351,7 +407,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %reference tracking plote
         subplot(2,2,[1,2]);
         plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PD-I','PIDA');
+        legend('PID','I-PD','PI-D','PIDA');
         title('reference tracking');
         xlabel('time');
         ylabel('amplitude');
@@ -360,14 +416,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %disturbance rejection plote
         subplot(2,2,[3,4]);
         plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PD-I','PIDA');
+        legend('PID','I-PD','PI-D','PIDA');
         title('disturbance rejection');
         xlabel('time');
         ylabel('amplitude');
         grid on;
 
-        % export to Excel
+        %export to Excel
         print_excel(analized,strSelection);
 
         
         
+
+
