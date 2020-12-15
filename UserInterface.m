@@ -357,10 +357,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-        global isZoom;
-        isZoom = 0;
-        global startTime;
-        global endTime;
+
         analized = struct;
         global variable;
 
@@ -404,12 +401,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             otherwise
                 G = [];
         end
+        
+        analized.systemTransferFunction = G;
 
         %time step
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 5;
+        PopSize = 150;
         options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
         %{
@@ -431,12 +430,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_PID = series(K,G);
         global ClosedLoop_PID;
         ClosedLoop_PID = feedback(Loop_PID,1);
+        analized.ClosedLoop.pid = ClosedLoop_PID;
         info = stepinfo(ClosedLoop_PID);
         analized.pid = ga_info_to_struct(IAE,control,info,'pid');
         analized.time = info.SettlingTime;
         
         global Disturb_PID;
         Disturb_PID = feedback(G,K);
+        analized.Disturb.pid = Disturb_PID;
         info = stepinfo(Disturb_PID);
         
         analized.pid_dist =  ga_info_to_struct(IAE,control,info,'pid');
@@ -466,6 +467,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_IPD = series(K1,ClosedLoop1_IPD);
         global ClosedLoop_IPD;
         ClosedLoop_IPD = feedback(Loop_IPD,1);
+        analized.ClosedLoop.ipd = ClosedLoop_IPD;
         info = stepinfo(ClosedLoop_IPD); 
         analized.ipd = ga_info_to_struct(IAE,control,info,'i_pd');
         if analized.time < info.SettlingTime
@@ -473,6 +475,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         end
         global Disturb_IPD;
         Disturb_IPD = feedback(G,(K1+K2));
+        analized.Disturb.ipd = Disturb_IPD;
         info = stepinfo(Disturb_IPD);
         analized.ipd_dist =  ga_info_to_struct(IAE,control,info,'i_pd');
         if analized.time < info.SettlingTime
@@ -500,6 +503,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         global ClosedLoop_DPI;
         ClosedLoop_DPI = (G*(K1+K2))/(1+G*(K2+K3));
+        analized.ClosedLoop.dpi = ClosedLoop_DPI;
         info = stepinfo(ClosedLoop_DPI); 
         analized.dpi = ga_info_to_struct(IAE,control,info,'pi_d');
         if analized.time < info.SettlingTime
@@ -508,6 +512,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         global Disturb_DPI;
         Disturb_DPI = feedback(G,K2+K3);
+        analized.Disturb.dpi = Disturb_DPI;
         info = stepinfo(Disturb_DPI); 
         analized.dpi_dist =  ga_info_to_struct(IAE,control,info,'pi_d');
         if analized.time < info.SettlingTime
@@ -538,6 +543,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_PIDA = series(K,G);
         global ClosedLoop_PIDA;
         ClosedLoop_PIDA = feedback(Loop_PIDA,1);
+        analized.ClosedLoop.pida = ClosedLoop_PIDA;
         info = stepinfo(ClosedLoop_PIDA);     
         analized.pida = ga_info_to_struct(IAE,control,info,'pida');
         if analized.time < info.SettlingTime
@@ -546,87 +552,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         global Disturb_PIDA;
         Disturb_PIDA = feedback(G,K);
+        analized.Disturb.pida = Disturb_PIDA;
         info = stepinfo(Disturb_PIDA);
         analized.pida_dist = ga_info_to_struct(IAE,control,info,'pida');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end           
                   
-        
-        
-        %time array simulation
-        t_sim =0:dt:analized.time * 2;
-        
-        %reference tracking plote
-        subplot(2,2,[1,2]);
-        plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PI-D','PIDA');
-        title('reference tracking');
-        xlabel('time');
-        ylabel('amplitude');
-        grid on;
-        
-        %disturbance rejection plote
-        subplot(2,2,[3,4]);
-        plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PI-D','PIDA');
-        title('disturbance rejection');
-        xlabel('time');
-        ylabel('amplitude');
-        grid on;
-
         %export to Excel
-        print_excel(analized,strSelection);
+        print_excel(analized,strSelection,variable);
+
+
+
 
         
-        
-
-
-
-
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-global ClosedLoop_PID;
-global Disturb_PID;
-global ClosedLoop_IPD;
-global Disturb_IPD;
-global ClosedLoop_DPI;
-global Disturb_DPI;
-global ClosedLoop_PIDA;
-global Disturb_PIDA;
-
-
-
-prompt = {'inizio:', 'fine:'};
-title = 'Inizo - fine tempo di simulazione';
-in = inputdlg(prompt, title);
-global startTime;
-startTime = str2num(cell2mat(in(1,1)));
-global endTime;
-endTime = str2num(cell2mat(in(2,1)));
-
-%time array simulation
-        dt = 0.001;
-        t_sim =startTime:dt:endTime;
-        
-        %reference tracking plote
-        subplot(2,2,[1,2]);
-        plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PI-D','PIDA');
-%         title('test');
-        xlabel('time');
-        ylabel('amplitude');
-        grid on;
-        
-        %disturbance rejection plote
-        subplot(2,2,[3,4]);
-        plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
-        legend('PID','I-PD','PI-D','PIDA');
-%         title('disturbance rejection');
-        xlabel('time');
-        ylabel('amplitude');
-        grid on;

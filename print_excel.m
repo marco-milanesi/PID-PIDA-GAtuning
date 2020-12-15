@@ -1,4 +1,4 @@
-function [] = print_excel(data,name)
+function [] = print_excel(data,name,type)
 
     %pid con b=1 c=1 ingresso setpoint
     PID ={data.pid.IAE;data.pid.Kp;data.pid.Ti;data.pid.Td;data.pid.Ta;data.pid.b;data.pid.c;data.pid.N;data.pid.alfa;data.pid.Risetime;data.pid.settlingtime;data.pid.overshoot;data.pid.undershoot;data.pid.peak;data.pid.peaktime};
@@ -31,12 +31,12 @@ function [] = print_excel(data,name)
     Tab = table(parametri,PID,IPD,DPI,PIDA,PID_DIST,IPD_DIST,DPI_DIST,PIDA_DIST);
     
     %generazione nome del file da salvare in base al sistema in input
-    filename_excel = strcat(name,'.xlsx');
+    filename_excel = strcat(name,string(type),'.xlsx');
     
     %scrittura file excel
     writetable(Tab,filename_excel);
     
-    filename_mat = strcat(name,'.mat');
+    filename_mat = strcat(name,string(type),'.mat');
     save(filename_mat,'data');
 end
 
