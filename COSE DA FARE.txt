@@ -1,5 +1,0 @@
-cosa da fare:
-- aggiornamento popolazione nei vari casi(pida , pid pop = 100) 
-- provare a ridurre l'errore
-- salvare tabella finale in matlab
-
