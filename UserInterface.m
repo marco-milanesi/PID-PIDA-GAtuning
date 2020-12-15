@@ -20,13 +20,7 @@ function varargout = UserInterface(varargin)
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help UserInterface
 
-<<<<<<< HEAD
-% Last Modified by GUIDE v2.5 15-Dec-2020 15:27:23
-=======
-% Last Modified by GUIDE v2.5 15-Dec-2020 15:55:42
->>>>>>> d327ed5ca667e1f5b0e0b7c04157fc1164f520a2
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -106,17 +100,11 @@ if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
     return;
 end
-<<<<<<< HEAD
-variable = ini;
 
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton2
-
-% --- Executes on button press in radiobutton3.
-=======
 variable = in;
 % four order system
->>>>>>> d327ed5ca667e1f5b0e0b7c04157fc1164f520a2
+
 function radiobutton3_Callback(hObject, eventdata, handles)
 global variable;
 global alpha_fos;
@@ -139,16 +127,10 @@ if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
     return;
 end
-<<<<<<< HEAD
-variable = ini;
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton3
-
-% --- Executes on button press in radiobutton4.
-=======
 variable = in;
 % half plane zero
->>>>>>> d327ed5ca667e1f5b0e0b7c04157fc1164f520a2
+
 function radiobutton4_Callback(hObject, eventdata, handles)
 global variable;
 global alpha_hpz;
@@ -596,7 +578,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %export to Excel
         print_excel(analized,strSelection);
 
-<<<<<<< HEAD
         
         
 
@@ -649,19 +630,3 @@ endTime = str2num(cell2mat(in(2,1)));
         xlabel('time');
         ylabel('amplitude');
         grid on;
-
-
-
-
-
-
-
-
-
-=======
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
->>>>>>> d327ed5ca667e1f5b0e0b7c04157fc1164f520a2
