@@ -74,6 +74,7 @@ guidata(hObject, handles);
 function varargout = UserInterface_OutputFcn(hObject, eventdata, handles) 
 
 varargout{1} = handles.output;
+
 % multipole
 function radiobutton2_Callback(hObject, eventdata, handles)
 global multi_pole;
@@ -343,17 +344,6 @@ if check == 0
 end
 variable = in;
 
-
-
-
-
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
@@ -419,7 +409,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(3)= Td
         x(4)= N
         %}         
-        %lower bounds lb 
+        %lower bounds lb
         lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
         ub_PID = [10 500 50 20];
@@ -571,5 +561,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %export to Excel
         print_excel(analized,strSelection);
 
-
-
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
