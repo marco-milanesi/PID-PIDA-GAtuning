@@ -163,7 +163,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
         
-
         analized = struct;
         s = tf('s');
         elementSelection = get(handles.uibuttongroup,'SelectedObject');
@@ -349,7 +348,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %time array simulation
         t_sim =0:dt:analized.time*2;
         
-        %reference traking graf
+        %reference tracking plote
         subplot(2,2,[1,2]);
         plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
         legend('PID','I-PD','PD-I','PIDA');
@@ -358,7 +357,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         ylabel('amplitude');
         grid on;
         
-        %disturbance rejection graf
+        %disturbance rejection plote
         subplot(2,2,[3,4]);
         plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
         legend('PID','I-PD','PD-I','PIDA');
