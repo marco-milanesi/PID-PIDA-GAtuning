@@ -22,7 +22,7 @@ function varargout = UserInterface(varargin)
 
 % Edit the above text to modify the response to help UserInterface
 
-% Last Modified by GUIDE v2.5 10-Dec-2020 14:43:28
+% Last Modified by GUIDE v2.5 15-Dec-2020 15:27:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -60,6 +60,10 @@ global alpha_hpz;
 global time_dl;
 global time_ddl;
 global omegazero;
+
+global isZoom;
+global startTime;
+global endTime;
         
 multi_pole = [1 2 3 4 8];
 alpha_fos = [0.1 0.2 0.5 1];
@@ -120,7 +124,7 @@ if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
     return;
 end
-variable = in(1);
+variable = ini;
 
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton2
@@ -152,7 +156,7 @@ if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
     return;
 end
-variable = in(1);
+variable = ini;
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton3
 
@@ -217,7 +221,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-
+        global isZoom;
+        isZoom = 0;
+        global startTime;
+        global endTime;
         analized = struct;
         global variable;
 
@@ -286,11 +293,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         K = control(1) + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4)));
         
         Loop_PID = series(K,G);
+        global ClosedLoop_PID;
         ClosedLoop_PID = feedback(Loop_PID,1);
         info = stepinfo(ClosedLoop_PID);
         analized.pid = ga_info_to_struct(IAE,control,info,'pid');
         analized.time = info.SettlingTime;
         
+        global Disturb_PID;
         Disturb_PID = feedback(G,K);
         info = stepinfo(Disturb_PID);
         
@@ -319,13 +328,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         ClosedLoop1_IPD = feedback(G,K2);
         Loop_IPD = series(K1,ClosedLoop1_IPD);
+        global ClosedLoop_IPD;
         ClosedLoop_IPD = feedback(Loop_IPD,1);
         info = stepinfo(ClosedLoop_IPD); 
         analized.ipd = ga_info_to_struct(IAE,control,info,'i_pd');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
-        
+        global Disturb_IPD;
         Disturb_IPD = feedback(G,(K1+K2));
         info = stepinfo(Disturb_IPD);
         analized.ipd_dist =  ga_info_to_struct(IAE,control,info,'i_pd');
@@ -352,6 +362,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         K2 = control(1)/(s*control(2));
         K3 = control(1)*(1+((s*control(3))/(1+(control(3)*s/control(4)))));
         
+        global ClosedLoop_DPI;
         ClosedLoop_DPI = (G*(K1+K2))/(1+G*(K2+K3));
         info = stepinfo(ClosedLoop_DPI); 
         analized.dpi = ga_info_to_struct(IAE,control,info,'pi_d');
@@ -359,6 +370,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end
         
+        global Disturb_DPI;
         Disturb_DPI = feedback(G,K2+K3);
         info = stepinfo(Disturb_DPI); 
         analized.dpi_dist =  ga_info_to_struct(IAE,control,info,'pi_d');
@@ -388,6 +400,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         K = control(1) + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4))) + (control(5)*s^2)/((1 + s*control(5)/control(6))^2); 
        
         Loop_PIDA = series(K,G);
+        global ClosedLoop_PIDA;
         ClosedLoop_PIDA = feedback(Loop_PIDA,1);
         info = stepinfo(ClosedLoop_PIDA);     
         analized.pida = ga_info_to_struct(IAE,control,info,'pida');
@@ -395,17 +408,18 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end       
         
+        global Disturb_PIDA;
         Disturb_PIDA = feedback(G,K);
         info = stepinfo(Disturb_PIDA);
         analized.pida_dist = ga_info_to_struct(IAE,control,info,'pida');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end           
-        
+                  
         
         
         %time array simulation
-        t_sim =0:dt:analized.time*2;
+        t_sim =0:dt:analized.time * 2;
         
         %reference tracking plote
         subplot(2,2,[1,2]);
@@ -430,5 +444,62 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         
         
+
+
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+global ClosedLoop_PID;
+global Disturb_PID;
+global ClosedLoop_IPD;
+global Disturb_IPD;
+global ClosedLoop_DPI;
+global Disturb_DPI;
+global ClosedLoop_PIDA;
+global Disturb_PIDA;
+
+
+
+prompt = {'inizio:', 'fine:'};
+title = 'Inizo - fine tempo di simulazione';
+in = inputdlg(prompt, title);
+global startTime;
+startTime = str2num(cell2mat(in(1,1)));
+global endTime;
+endTime = str2num(cell2mat(in(2,1)));
+
+%time array simulation
+        dt = 0.001;
+        t_sim =startTime:dt:endTime;
+        
+        %reference tracking plote
+        subplot(2,2,[1,2]);
+        plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
+        legend('PID','I-PD','PI-D','PIDA');
+%         title('test');
+        xlabel('time');
+        ylabel('amplitude');
+        grid on;
+        
+        %disturbance rejection plote
+        subplot(2,2,[3,4]);
+        plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
+        legend('PID','I-PD','PI-D','PIDA');
+%         title('disturbance rejection');
+        xlabel('time');
+        ylabel('amplitude');
+        grid on;
+
+
+
+
+
+
+
 
 
