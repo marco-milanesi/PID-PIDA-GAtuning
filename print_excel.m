@@ -35,6 +35,8 @@ function [] = print_excel(data,name)
     
     %scrittura file excel
     writetable(Tab,filename);
+    
+    save Tab.mat data;
 end
 
     

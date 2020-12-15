@@ -217,6 +217,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+
         analized = struct;
         global variable;
 
@@ -227,6 +228,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         %System Transfer Function Selection
         switch strSelection
+            case 'Select a System'
+                msgbox('Error costant, please recreate system', 'Errore!', 'error');
             case 'Multiple Equal Poles'
                 G = 1/(s+1)^variable;
             case 'Fourth Order System'
@@ -263,7 +266,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 50;
+        PopSize = 5;
         options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
         %{
@@ -404,7 +407,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %time array simulation
         t_sim =0:dt:analized.time*2;
         
-        %reference traking graf
+        %reference tracking plote
         subplot(2,2,[1,2]);
         plot(t_sim,step(ClosedLoop_PID,t_sim),'r-',t_sim,step(ClosedLoop_IPD,t_sim),'b-',t_sim,step(ClosedLoop_DPI,t_sim),'k-',t_sim,step(ClosedLoop_PIDA,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
@@ -413,7 +416,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         ylabel('amplitude');
         grid on;
         
-        %disturbance rejection graf
+        %disturbance rejection plote
         subplot(2,2,[3,4]);
         plot(t_sim,step(Disturb_PID,t_sim),'r-',t_sim,step(Disturb_IPD,t_sim),'b-',t_sim,step(Disturb_DPI,t_sim),'k-',t_sim,step(Disturb_PIDA,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
