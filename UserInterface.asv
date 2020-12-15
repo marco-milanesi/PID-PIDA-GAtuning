@@ -74,29 +74,15 @@ guidata(hObject, handles);
 % UIWAIT makes UserInterface wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
-% --- Outputs from this function are returned to the command line.
-function varargout = UserInterface_OutputFcn(hObject, eventdata, handles) 
-% varargout  cell array for returning output args (see VARARGOUT);
-% hObject    handle to figure
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Get default command line output from handles structure
+function varargout = UserInterface_OutputFcn(hObject, eventdata, handles) 
+
 varargout{1} = handles.output;
 
-% --- Executes on button press in radiobutton1.
 function radiobutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton1
-
-% --- Executes on button press in radiobutton2.
+% multipole
 function radiobutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 global multi_pole;
 global variable;
@@ -107,11 +93,10 @@ sizeinput = size(input);
 if (sizeinput == 0) 
     return
 end
-in = cell2mat(input);
+in = str2num(cell2mat(input));
 check = 0;
-for idx = 1:numel(multi_pole)
-        element = multi_pole(idx);
-       if  element == in(1)
+for element = multi_pole
+       if  element == in
          check = 1;
          msgbox('Operation Correct');
        end
@@ -120,16 +105,10 @@ if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
     return;
 end
-variable = in(1);
+variable = in;
 
-
-% Hint: get(hObject,'Value') returns toggle state of radiobutton2
-
-% --- Executes on button press in radiobutton3.
+% four order system
 function radiobutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton3 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)global multi_pole;
 global variable;
 global alpha_fos;
 prompt={'select param alfa 0.1 0.2 0.5 1'};
@@ -139,12 +118,10 @@ sizeinput = size(input);
 if (sizeinput == 0) 
     return
 end
-in = cell2mat(input(1,1));
-ini = str2num(in);
+in = str2num(cell2mat(input(1,1)));
 check = 0;
-for idx = 1:numel(alpha_fos)
-        element = alpha_fos(idx);
-       if  element == in(1)
+for element = alpha_fos
+       if  element == in
          check = 1;
          msgbox('Operation Correct');
        end
@@ -153,31 +130,82 @@ if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
     return;
 end
-variable = in(1);
+variable = in;
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton3
-
-% --- Executes on button press in radiobutton4.
+% half plane zero
 function radiobutton4_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton4 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+global variable;
+global alpha_hpz;
+prompt={'select param alfa 0.1 0.2 0.5 1 2 5'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = str2num(cell2mat(input(1,1)));
+check = 0;
+for element = alpha_hpz
+       if  element == in
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in;
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton4
-
-% --- Executes on button press in radiobutton5.
+%time delay and lagh
 function radiobutton5_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton5 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+global variable;
+global time_dl;
+prompt={'select param  0 0.1 0.2 0.5 2 5 10'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = str2num(cell2mat(input(1,1)));
+check = 0;
+for element = time_dl
+       if  element == in
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in;
 
-% Hint: get(hObject,'Value') returns toggle state of radiobutton5
-
-% --- Executes on button press in radiobutton6.
+%time delay and double Lag
 function radiobutton6_Callback(hObject, eventdata, handles)
-% hObject    handle to radiobutton6 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
+global variable;
+global time_dl;
+prompt={'select param time 0 0.1 0.2 0.5 2 5 10'};
+title='inserimento sistema';
+input = inputdlg(prompt, title);
+sizeinput = size(input);
+if (sizeinput == 0) 
+    return
+end
+in = str2num(cell2mat(input(1,1)));
+check = 0;
+for element = time_dl
+       if  element == in
+         check = 1;
+         msgbox('Operation Correct');
+       end
+end
+if check == 0
+    msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    return;
+end
+variable = in;
 
 % Hint: get(hObject,'Value') returns toggle state of radiobutton6
 
