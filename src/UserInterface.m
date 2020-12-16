@@ -51,7 +51,7 @@ function UserInterface_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for UserInterface
 handles.output = hObject;
-global variable;
+global variable ;
 global multi_pole; 
 global alpha_fos; 
 global alpha_hpz;
@@ -62,7 +62,8 @@ global omegazero;
 global isZoom;
 global startTime;
 global endTime;
-        
+
+variable = 0;     
 multi_pole = [1 2 3 4 8];
 alpha_fos = [0.1 0.2 0.5 1];
 alpha_hpz = [0.1 0.2 0.5 1 2 5];
@@ -104,8 +105,8 @@ end
 
 
 variable = in;
-% four order system
 
+% four order system
 function radiobutton3_Callback(hObject, eventdata, handles)
 global variable;
 global alpha_fos;
@@ -130,8 +131,8 @@ if check == 0
 end
 
 variable = in;
-% half plane zero
 
+% half plane zero
 function radiobutton4_Callback(hObject, eventdata, handles)
 global variable;
 global alpha_hpz;
@@ -155,6 +156,7 @@ if check == 0
     return;
 end
 variable = in;
+
 %time delay and lagh
 function radiobutton5_Callback(hObject, eventdata, handles)
 global variable;
@@ -179,6 +181,7 @@ if check == 0
     return;
 end
 variable = in;
+
 %time delay and double Lag
 function radiobutton6_Callback(hObject, eventdata, handles)
 global variable;
@@ -203,8 +206,12 @@ if check == 0
     return;
 end
 variable = in;
+
 %fast and slow modes
 function radiobutton7_Callback(hObject, eventdata, handles)
+global variable ;
+variable = 1; 
+
 % oscillatory sistem.
 function radiobutton8_Callback(hObject, eventdata, handles)
 global variable;
@@ -229,8 +236,12 @@ if check == 0
     return;
 end
 variable = in;
+
 %unstable pole
 function radiobutton9_Callback(hObject, eventdata, handles)
+global variable ;
+variable = 1;  
+
 % multi poles integral
 function radiobutton10_Callback(hObject, eventdata, handles)
 global multi_pole;
@@ -255,6 +266,7 @@ if check == 0
     return;
 end
 variable = in;
+
 % four order system integral
 function radiobutton11_Callback(hObject, eventdata, handles)
 global variable;
@@ -279,6 +291,7 @@ if check == 0
     return;
 end
 variable = in;
+
 % half plane zero integral
 function radiobutton12_Callback(hObject, eventdata, handles)
 global variable;
@@ -303,6 +316,7 @@ if check == 0
     return;
 end
 variable = in;
+
 % time delay and Lag integral
 function radiobutton13_Callback(hObject, eventdata, handles)
 global variable;
@@ -327,6 +341,7 @@ if check == 0
     return;
 end
 variable = in;
+
 % time delay and double Lag integral
 function radiobutton14_Callback(hObject, eventdata, handles)
 global variable;
@@ -352,15 +367,56 @@ if check == 0
 end
 variable = in;
 
+
+% custom system
+function radiobutton20_Callback(hObject, eventdata, handles)
+global variable ;
+global system;
+
+prompt={'zero', 'poles', 'k' ,'time delay'};
+title='inserimento sistema';
+u_dati = inputdlg(prompt, title);
+
+dim_m_u_dati = size(u_dati);
+dim_u_dati = dim_m_u_dati(1,1);
+
+if (dim_u_dati == 0) 
+    return
+end
+a = eval(cell2mat(u_dati(1,1)));
+b = eval(cell2mat(u_dati(2,1)));
+c = eval(cell2mat(u_dati(3,1)));
+t = eval(cell2mat(u_dati(4,1)));
+s = tf('s');
+try
+    sys = zpk(a, b, c);
+catch
+    msgbox('Errore nella creazione del sistema inserito..', 'Errore!', 'error');
+    return;
+end
+create = 1;
+for in = a
+    create = create * (s+in + 1);
+end
+for in = b
+    create = create / (s+in + 1);
+end
+    system = create *exp(-s*t);
+    save 'system' ; 
+variable = 1;
+
+
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
-
+        global variable ;
+        global system;
+        if variable ==  0
+            msgbox('Please select a system', 'Errore!', 'error');
+            return;
+        end
+        msgbox('start simulation --> wait end before start a new simulation'); 
         analized = struct;
-        global variable;
 
         s = tf('s');
         elementSelection = get(handles.uibuttongroup,'SelectedObject');
@@ -376,33 +432,32 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             case 'Fourth Order System'
                 G = 1/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s);
             case 'Right Half Plane Zero'
-                G = 1-0.1*s/(s+1)^3; 
+                G = (1-variable*s)/(s+1)^3; 
             case 'Time Delay and Lag'
-                G = (1/(1+0.1*s))*exp(-s);
+                G = (1/(1+variable*s))*exp(-s);
             case 'Time Delay and Double Lag'
-                G = (1/(1+0.1*s)^2)*exp(-s);
+                G = (1/(1+variable*s)^2)*exp(-s);
             case 'Fast and Slow Modes'
                 G = (100/(s+10)^2)*((1/s+1)+(0.5/s+0.05));
             case 'Oscillatory System'
-                G = 1/(s+1)/(s^2+0.2*s+1);
+                G = 1/(s+1)/(s^2+(2*0.1*variable*s)+(variable*variable));
             case 'Unstable Pole'
                 G = 1/(s^2-1);
             case 'Multiple Equal Poles Integral'
-                G = 1/s/(s+1);
+                G = 1/s/(s+1)^variable;
             case 'Fourth Order System Integral'
-                G = 1/s/(s+1)/(1+0.1*s)/(1+0.1^2*s)/(1+0.1^3*s);
+                G = 1/s/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s);
             case 'Right Half Plane Zero Integral'
-                G = (1-0.1*s)/s/(s+1)^3; 
+                G = (1-variable*s)/s/(s+1)^3; 
             case 'Time Delay and Lag Integral'
-                G = (1/s/(1+0.1*s))*exp(-s);
+                G = (1/s/(1+variable*s))*exp(-s);
             case 'Time Delay and Double Lag Integral'
-                G = (1/s/(1+0.1*s)^2)*exp(-s);
-            case 'custom'
-                G =[]; %leggere da una matrice come esempio del profe
+                G = (1/s/(1+variable*s)^2)*exp(-s);
+            case 'Custom'
+                G = system; %leggere da una matrice come esempio del profe
             otherwise
                 G = [];
         end
-        
         analized.systemTransferFunction = G;
 
         %time step
@@ -562,11 +617,5 @@ function pushbutton1_Callback(hObject, eventdata, handles)
                   
         %export to Excel
         print_excel(analized,strSelection,variable);
-
-        
-
-
-
-
-
-        
+        msgbox('end simulation');
+        variable=0;
