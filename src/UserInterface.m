@@ -464,7 +464,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 150;
+        PopSize = 100;
         options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
         %{
@@ -556,9 +556,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         K1 = control(1);
         K2 = control(1)/(s*control(2));
         K3 = control(1)*(1+((s*control(3))/(1+(control(3)*s/control(4)))));
-        
+                
         global ClosedLoop_DPI;
-        ClosedLoop_DPI = (G*(K1+K2))/(1+G*(K2+K3));
+        ClosedLoop_DPI = (G*(K1+K2))/(1+(G*K3)+(G*(K1+K2)));
         analized.ClosedLoop.dpi = ClosedLoop_DPI;
         info = stepinfo(ClosedLoop_DPI); 
         analized.dpi = ga_info_to_struct(IAE,control,info,'pi_d');
