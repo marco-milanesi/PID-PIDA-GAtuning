@@ -1,5 +1,5 @@
 function J = dpitest(G,dt,parms)
-
+clear all;
 s = tf('s');
 % parms(1)Kp
 % parms(2)Ti

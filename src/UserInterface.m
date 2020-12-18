@@ -408,7 +408,8 @@ variable = 1;
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-
+           
+        clear all;
         global variable ;
         global system;
         if variable ==  0
@@ -464,9 +465,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 100;
+        PopSize = 10;
         options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
+        IAE = 0;
+        control = [0 0 0 0];
+        
         %{
         PID genetic algorithm
         x(1) = Kp
@@ -501,7 +505,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end
         
-        
+        IAE = 0;
+        control = [0 0 0 0];
         
         %{
         I-PD genetic algorithm
@@ -538,6 +543,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end
         
+        IAE = 0;
+        control = [0 0 0 0];
         
         
         %{
@@ -575,6 +582,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end
         
+        IAE = 0;
+        control = [0 0 0 0];
         
 
         %{

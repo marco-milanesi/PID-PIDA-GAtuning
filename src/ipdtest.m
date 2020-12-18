@@ -1,5 +1,5 @@
 function J = ipdtest(G,dt,parms)
-
+clear all;
 s = tf('s');
 % parms(1)kp
 % parms(2)ti
