@@ -558,7 +558,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         K3 = control(1)*((s*control(3))/(1+(control(3)*s/control(4))));
                 
         global ClosedLoop_DPI;
-        ClosedLoop_DPI = (G*(K1+K2))/(1+(G*K3)+(G*(K1+K2)));
+        ClosedLoop_DPI = minreal((G*(K1+K2))/(1+(G*K3)+(G*(K1+K2))));
         analized.ClosedLoop.dpi = ClosedLoop_DPI;
         info = stepinfo(ClosedLoop_DPI); 
         analized.dpi = ga_info_to_struct(IAE,control,info,'pi_d');
