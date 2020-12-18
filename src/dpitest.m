@@ -8,7 +8,7 @@ s = tf('s');
 
 K1 = parms(1);
 K2 = parms(1)/(s*parms(2));
-K3 = parms(1)*(1+((s*parms(3))/(1+(parms(3)*s/parms(4)))));
+K3 = parms(1)*((s*parms(3))/(1+(parms(3)*s/parms(4))));
 
 ClosedLoop = (G*(K1+K2))/(1+(G*K3)+(G*(K1+K2)));
 t = 0:dt:20;
