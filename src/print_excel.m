@@ -27,8 +27,9 @@ function [] = print_excel(data,name,type)
     %nomi dei  parametri dei pid/pida
     parametri = {'IAE';'Kp';'Ti';'Td';'Ta';'b';'c';'N';'alfa';'Risetime';'settlingtime';'overshoot %';'undershoot';'peak';'peaktime'};
     
-    %generaazione dati in tabella completo
+    %generaazione dati in tabella completo     
     Tab = table(parametri,PID,IPD,DPI,PIDA,PID_DIST,IPD_DIST,DPI_DIST,PIDA_DIST);
+   
     
     %generazione nome del file da salvare in base al sistema in input
     filename_excel = strcat(name,string(type),'.xlsx');
