@@ -1,5 +1,5 @@
 function J = pidatest(G,dt,parms)
-clear all;
+
 s = tf('s');
 
 K = parms(1) + parms(2)/s + (parms(3)*s)/(1 + s*(parms(3)/parms(4))) + (parms(5)*s^2)/((1 + s*parms(5)/parms(6))^2); 
