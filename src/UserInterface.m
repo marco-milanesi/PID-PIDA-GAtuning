@@ -408,8 +408,6 @@ variable = 1;
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
-           
-        clear all;
         global variable ;
         global system;
         if variable ==  0
@@ -465,11 +463,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 10;
+        PopSize = 150;
         options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
 
-        IAE = 0;
-        control = [0 0 0 0];
+        
         
         %{
         PID genetic algorithm
@@ -505,8 +502,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end
         
-        IAE = 0;
-        control = [0 0 0 0];
         
         %{
         I-PD genetic algorithm
@@ -519,10 +514,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
         ub_PID = [10 500 50 20];
-        [control,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
         
-        K1 = control(1)/(s*control(2));
-        K2 = control(1)*(1+(s*control(2)))/(1 + s*(control(3)/control(4)));
+        K1 = control1(1)/(s*control1(2));
+        K2 = control1(1)*(1+(s*control1(2)))/(1 + s*(control1(3)/control1(4)));
         
         ClosedLoop1_IPD = feedback(G,K2);
         Loop_IPD = series(K1,ClosedLoop1_IPD);
@@ -530,7 +525,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         ClosedLoop_IPD = feedback(Loop_IPD,1);
         analized.ClosedLoop.ipd = ClosedLoop_IPD;
         info = stepinfo(ClosedLoop_IPD); 
-        analized.ipd = ga_info_to_struct(IAE,control,info,'i_pd');
+        analized.ipd = ga_info_to_struct(IAE1,control1,info,'i_pd');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
@@ -538,14 +533,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Disturb_IPD = feedback(G,(K1+K2));
         analized.Disturb.ipd = Disturb_IPD;
         info = stepinfo(Disturb_IPD);
-        analized.ipd_dist =  ga_info_to_struct(IAE,control,info,'i_pd');
+        analized.ipd_dist =  ga_info_to_struct(IAE1,control,info,'i_pd');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
-        
-        IAE = 0;
-        control = [0 0 0 0];
-        
+    
         
         %{
         PI-D genetic algorithm
@@ -558,17 +550,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
         ub_PID = [10 500 50 20];
-        [control,IAE] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        [control2,IAE2] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
         
-        K1 = control(1);
-        K2 = control(1)/(s*control(2));
-        K3 = control(1)*((s*control(3))/(1+(control(3)*s/control(4))));
+        K1 = control2(1);
+        K2 = control2(1)/(s*control2(2));
+        K3 = control2(1)*((s*control2(3))/(1+(control2(3)*s/control2(4))));
                 
         global ClosedLoop_DPI;
         ClosedLoop_DPI = minreal((G*(K1+K2))/(1+(G*K3)+(G*(K1+K2))));
         analized.ClosedLoop.dpi = ClosedLoop_DPI;
         info = stepinfo(ClosedLoop_DPI); 
-        analized.dpi = ga_info_to_struct(IAE,control,info,'pi_d');
+        analized.dpi = ga_info_to_struct(IAE2,control2,info,'pi_d');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
@@ -577,14 +569,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Disturb_DPI = feedback(G,K2+K3);
         analized.Disturb.dpi = Disturb_DPI;
         info = stepinfo(Disturb_DPI); 
-        analized.dpi_dist =  ga_info_to_struct(IAE,control,info,'pi_d');
+        analized.dpi_dist =  ga_info_to_struct(IAE2,control2,info,'pi_d');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
         
-        IAE = 0;
-        control = [0 0 0 0];
-        
+
 
         %{
         PIDA genetic algorithm
@@ -601,16 +591,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %upper bounds ub 
         ub_PIDA = [10 500 50 20 50 20];
         
-        [control,IAE] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
+        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
         
-        K = control(1) + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4))) + (control(5)*s^2)/((1 + s*control(5)/control(6))^2); 
+        K = control3(1) + control3(2)/s + (control3(3)*s)/(1 + s*(control3(3)/control3(4))) + (control3(5)*s^2)/((1 + s*control3(5)/control3(6))^2); 
        
         Loop_PIDA = series(K,G);
         global ClosedLoop_PIDA;
         ClosedLoop_PIDA = feedback(Loop_PIDA,1);
         analized.ClosedLoop.pida = ClosedLoop_PIDA;
         info = stepinfo(ClosedLoop_PIDA);     
-        analized.pida = ga_info_to_struct(IAE,control,info,'pida');
+        analized.pida = ga_info_to_struct(IAE3,control3,info,'pida');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end       
@@ -619,7 +609,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Disturb_PIDA = feedback(G,K);
         analized.Disturb.pida = Disturb_PIDA;
         info = stepinfo(Disturb_PIDA);
-        analized.pida_dist = ga_info_to_struct(IAE,control,info,'pida');
+        analized.pida_dist = ga_info_to_struct(IAE3,control3,info,'pida');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end           
@@ -628,3 +618,4 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         print_excel(analized,strSelection,variable);
         msgbox('end simulation');
         variable=0;
+        clear all;

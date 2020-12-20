@@ -1,5 +1,5 @@
 function J = pidtest(G,dt,parms)
-clear all;
+
 s = tf('s');
 
 K = parms(1) + parms(2)/s + (parms(3)*s)/(1 + s*(parms(3)/parms(4))); 
