@@ -14,7 +14,7 @@ ClosedLoop1 = feedback(G,K2);
 Loop = series(K1,ClosedLoop1);
 ClosedLoop = feedback(Loop,1);
 
-t = 0:dt:20;
+t = 0:dt:50;
 [y,t] = step(ClosedLoop,t);
 
 % CTRLtf = K/(1+K*G);

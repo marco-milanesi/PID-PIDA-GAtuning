@@ -59,10 +59,6 @@ global time_dl;
 global time_ddl;
 global omegazero;
 
-global isZoom;
-global startTime;
-global endTime;
-
 variable = 0;     
 multi_pole = [1 2 3 4 8];
 alpha_fos = [0.1 0.2 0.5 1];
@@ -463,11 +459,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         dt = 0.001;
         %Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 150;
-        options = optimoptions(@ga,'PopulationSize',PopSize,'TolFun',1e-3,'useparallel',true);
-
-        
-        
+        PopSize = 100;
+        MaxGeneration = 1500;
+        options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
         %{
         PID genetic algorithm
         x(1) = Kp
@@ -480,7 +474,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %upper bounds ub 
         ub_PID = [10 500 50 20];
         
-        [control,IAE] = ga(@(K)pidtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        [control,IAE] = ga(@(K)pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options);
         
         K = control(1) + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4)));
         
@@ -514,8 +508,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
         ub_PID = [10 500 50 20];
-        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
+        options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
+        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options1);
         
+
         K1 = control1(1)/(s*control1(2));
         K2 = control1(1)*(1+(s*control1(2)))/(1 + s*(control1(3)/control1(4)));
         
@@ -550,8 +546,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         lb_PID = [0.001 0.1 0.1 5];
         %upper bounds ub 
         ub_PID = [10 500 50 20];
-        [control2,IAE2] = ga(@(K)ipdtest(G,dt,K),4,[],[],[],[],lb_PID,ub_PID,[],options);
-        
+        options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
+        [control2,IAE2] = ga(@(K)dpitest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options2);
+
         K1 = control2(1);
         K2 = control2(1)/(s*control2(2));
         K3 = control2(1)*((s*control2(3))/(1+(control2(3)*s/control2(4))));
@@ -574,8 +571,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end
         
-
-
         %{
         PIDA genetic algorithm
         x(1) = Kp
@@ -590,8 +585,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         lb_PIDA = [0.001 0.1 0.1 5 0.1 5];
         %upper bounds ub 
         ub_PIDA = [10 500 50 20 50 20];
-        
-        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,[],[],[],[],lb_PIDA,ub_PIDA,[],options);
+        options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
+        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,ub_PIDA,[],options3);
         
         K = control3(1) + control3(2)/s + (control3(3)*s)/(1 + s*(control3(3)/control3(4))) + (control3(5)*s^2)/((1 + s*control3(5)/control3(6))^2); 
        
@@ -617,5 +612,4 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %export to Excel
         print_excel(analized,strSelection,variable);
         msgbox('end simulation');
-        variable=0;
         clear all;
