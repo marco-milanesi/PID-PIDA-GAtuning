@@ -505,11 +505,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_PID = [0.001 0.1 0.1 5];
+        lb_IPD = [0.001 0.1 0.1 5];
         %upper bounds ub 
-        ub_PID = [10 500 50 20];
+        ub_IPD = [10 500 50 20];
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
-        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options1);
+        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD,ub_IPD,[],options1);
         
 
         K1 = control1(1)/(s*control1(2));
@@ -543,11 +543,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_PID = [0.001 0.1 0.1 5];
+        lb_DPI = [0.001 0.1 0.1 5];
         %upper bounds ub 
-        ub_PID = [10 500 50 20];
+        ub_DPI = [10 500 50 20];
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
-        [control2,IAE2] = ga(@(K)dpitest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options2);
+        [control2,IAE2] = ga(@(K)dpitest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI,ub_DPI,[],options2);
 
         K1 = control2(1);
         K2 = control2(1)/(s*control2(2));
@@ -561,6 +561,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
+        %__________________________________________________________________________________________________________________________________________________
         
         global Disturb_DPI;
         Disturb_DPI = feedback(G,K2+K3);
