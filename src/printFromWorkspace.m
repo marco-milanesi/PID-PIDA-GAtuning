@@ -1,4 +1,4 @@
-function printFromWorksapce(data)
+function printFromWorkspace(data)
 %PRINTFROMWORKSAPCE Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -24,6 +24,7 @@ figure();
         xlabel('time');
         ylabel('amplitude');
         grid on;
+        savefig('Figure');
 
 end
 
