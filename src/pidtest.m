@@ -6,7 +6,7 @@ K = parms(1) + parms(2)/s + (parms(3)*s)/(1 + s*(parms(3)/parms(4)));
 Loop = series(K,G);
 ClosedLoop = feedback(Loop,1);
 
-t = 0:dt:20;
+t = 0:dt:50;
 [y,t] = step(ClosedLoop,t);
 
 % CTRLtf = K/(1+K*G);
