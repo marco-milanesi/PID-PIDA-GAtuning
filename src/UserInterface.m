@@ -566,7 +566,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         end
         
         global Disturb_DPI;
-        Disturb_DPI = feedback(G,K2+K3);
+        Disturb_DPI = feedback(G,K1+K2+K3);
         analized.Disturb.dpi = Disturb_DPI;
         info = stepinfo(Disturb_DPI); 
         analized.dpi_dist =  ga_info_to_struct(IAE2,control2,info,'pi_d');
