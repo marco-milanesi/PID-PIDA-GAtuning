@@ -491,7 +491,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.Disturb.pid = Disturb_PID;
         info = stepinfo(Disturb_PID);
         
-        analized.pid_dist =  ga_info_to_struct(IAE,control,info,'pid');
+        %analized.pid_dist =  ga_info_to_struct(IAE,control,info,'pid');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
@@ -529,7 +529,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Disturb_IPD = feedback(G,(K1+K2));
         analized.Disturb.ipd = Disturb_IPD;
         info = stepinfo(Disturb_IPD);
-        analized.ipd_dist =  ga_info_to_struct(IAE1,control,info,'i_pd');
+        %analized.ipd_dist =  ga_info_to_struct(IAE1,control,info,'i_pd');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
@@ -567,7 +567,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Disturb_DPI = feedback(G,K1+K2+K3);
         analized.Disturb.dpi = Disturb_DPI;
         info = stepinfo(Disturb_DPI); 
-        analized.dpi_dist =  ga_info_to_struct(IAE2,control2,info,'pi_d');
+        %analized.dpi_dist =  ga_info_to_struct(IAE2,control2,info,'pi_d');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
@@ -605,7 +605,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Disturb_PIDA = feedback(G,K);
         analized.Disturb.pida = Disturb_PIDA;
         info = stepinfo(Disturb_PIDA);
-        analized.pida_dist = ga_info_to_struct(IAE3,control3,info,'pida');
+        %analized.pida_dist = ga_info_to_struct(IAE3,control3,info,'pida');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end           
