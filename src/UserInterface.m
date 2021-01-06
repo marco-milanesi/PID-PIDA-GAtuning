@@ -58,8 +58,7 @@ global alpha_hpz;
 global time_dl;
 global time_ddl;
 global omegazero;
-
-variable = 0;     
+variable = -1;     
 multi_pole = [1 2 3 4 8];
 alpha_fos = [0.1 0.2 0.5 1];
 alpha_hpz = [0.1 0.2 0.5 1 2 5];
@@ -96,6 +95,7 @@ for element = multi_pole
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 
@@ -123,6 +123,7 @@ for element = alpha_fos
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 
@@ -149,6 +150,7 @@ for element = alpha_hpz
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -174,6 +176,7 @@ for element = time_dl
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -199,6 +202,7 @@ for element = time_ddl
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -229,6 +233,7 @@ for element = omegazero
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -259,6 +264,7 @@ for element = multi_pole
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -284,6 +290,7 @@ for element = alpha_fos
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -309,6 +316,7 @@ for element = alpha_hpz
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -334,6 +342,7 @@ for element = time_dl
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -359,6 +368,7 @@ for element = time_ddl
 end
 if check == 0
     msgbox('Error costant, please recreate system', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 variable = in;
@@ -388,6 +398,7 @@ try
     sys = zpk(a, b, c);
 catch
     msgbox('Errore nella creazione del sistema inserito..', 'Errore!', 'error');
+    variable = -1;  
     return;
 end
 create = 1;
@@ -399,25 +410,24 @@ for in = b
 end
     system = create *exp(-s*t);
     save 'system' ; 
-variable = 1;
+variable = -1;
 
 
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
         global variable ;
         global system;
-        if variable ==  0
-            msgbox('Please select a system', 'Errore!', 'error');
-            return;
-        end
-        msgbox('start simulation --> wait end before start a new simulation'); 
-        analized = struct;
-
         s = tf('s');
         elementSelection = get(handles.uibuttongroup,'SelectedObject');
         global strSelection
         strSelection = get(elementSelection,'String');
         
+        if variable == -1
+            msgbox('Please select a system', 'Errore!', 'error');
+            return;
+        end
+
+        msgbox('start simulation --> wait end before start a new simulation');      
         %System Transfer Function Selection
         switch strSelection
             case 'Select a System'
@@ -453,6 +463,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             otherwise
                 G = [];
         end
+        analized = struct;
         analized.systemTransferFunction = G;
 
         %time step
