@@ -1,4 +1,4 @@
-clear all
+ clear all
 s =tf('s');
 variable = 1;
 G = 1/(s+1)^variable;
