@@ -36,7 +36,7 @@ In this program we implement Genetic Algorithm (GA) in determing PID, PI-D, I-PD
 ### PID Controller
 -------------------------------------------------
 
-![](data/PID%20-%20PIDA%20Controller.png)
+![](data/image/PID%20-%20PIDA%20Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C%28s%29%3D%20K_%7Bp%7D%5Cleft%20%28%201&plus;%5Cfrac%7B1%7D%7BsT_%7Bi%7D%7D%20&plus;%5Cfrac%7BsT_%7Bd%7D%7D%7B1&plus;%5Cfrac%7BT_%7Bd%7D%7D%7BN%7Ds%7D%20%5Cright%20%29)
 
@@ -48,7 +48,7 @@ In this program we implement Genetic Algorithm (GA) in determing PID, PI-D, I-PD
 -------------------------------------------------
 Proportional and Integral action is applied to the control error while Derivative action is applied to the process variable.
 
-![](Images/PI-D-Controller.png)
+![](data/image/PI-D-Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B1%7D%28s%29%3D%20K_%7Bp%7D)
 
@@ -66,7 +66,7 @@ Proportional and Integral action is applied to the control error while Derivativ
 -------------------------------------------------
 Integral action is applied to the control error while Proportional and Derivative action is applied to the process variable.
 
-![](Images/I-PD-Controller.png)
+![](data/image/I-PD-Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C_%7B1%7D%28s%29%3D%5Cfrac%7BK_%7Bp%7D%7D%7BsT_%7Bi%7D%7D)
 
@@ -86,7 +86,7 @@ A simple solution to make a PI controller perform well for both reference tracki
 - The disturbance rejection responses are the same because setpoint weight b only affects reference tracking.
 
 
-![](Images/PI-Controller.png)
+![](data/image/PI-Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C%28s%29%20%3D%20K_%7Bp%7D%20&plus;%20%5Cfrac%7BK_%7Bi%7D%7D%7Bs%7D)
 
@@ -94,7 +94,7 @@ A simple solution to make a PI controller perform well for both reference tracki
 
 ### PIDA Controller
 -------------------------------------------------
-![](Images/PID%20-%20PIDA%20Controller.png)
+![](data/image/PID%20-%20PIDA%20Controller.png)
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20C%28s%29%3D%20K_%7Bp%7D%20%5Cleft%20%28%201%20&plus;%20%5Cfrac%7B1%7D%7BsT_%7Bi%7D%7D%20&plus;%20%5Cfrac%7BsT_%7Bd%7D%7D%7B1&plus;%5Cfrac%7BT_%7Bd%7D%7D%7BN%7Ds%7D%20&plus;%20%5Cfrac%7Bs%5E%7B2%7DT_%7Ba%7D%7D%7B%5Cleft%20%281&plus;%5Cfrac%7BT_%7Ba%7D%7D%7B%5Calpha%7D%5Cright%20%29%5E%7B2%7D%7D%5Cright%20%29)
 
