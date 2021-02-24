@@ -524,7 +524,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
 
         K1 = control1(1)/(s*control1(2));
-        K2 = control1(1)*(1+(s*control1(2)))/(1 + s*(control1(3)/control1(4)));
+        K2 = control1(1)*(1+(s*control1(3)))/(1 + s*(control1(3)/control1(4)));
         
         ClosedLoop1_IPD = feedback(G,K2);
         Loop_IPD = series(K1,ClosedLoop1_IPD);
