@@ -374,7 +374,7 @@ end
 variable = in;
 
 
-%% custom system
+% custom system
 function radiobutton20_Callback(hObject, eventdata, handles)
 global variable ;
 global system;
@@ -413,7 +413,7 @@ end
 variable = -1;
 
 
-%% Start Simulation
+%% Simulation
 function pushbutton1_Callback(hObject, eventdata, handles)
         global variable ;
         global system;
