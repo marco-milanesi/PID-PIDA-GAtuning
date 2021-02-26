@@ -1,7 +1,6 @@
 # PID and PIDA Controllers
 
-<img src="data/UserInterface.png" width="800" height="406">
-
+* * * 
 
 ## Run the program
 To run the program launch the UserInterface.m in the command window.
