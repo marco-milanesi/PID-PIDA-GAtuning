@@ -492,7 +492,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 
         %lower bounds lb
-        lb_PID = [0.001 0.1 0 3];
+        lb_PID = [0.001 0.1 0.0000000001 3];
         %upper bounds ub 
         ub_PID = [10 500 10 33];
         
@@ -527,7 +527,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_IPD = [0.001 0.1 0 3];
+        lb_IPD = [0.001 0.1 0.0000000001 3];
         %upper bounds ub 
         ub_IPD = [10 500 10 33];
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -566,7 +566,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
         %lower bounds lb 
-        lb_DPI = [0.001 0.1 0 3];
+        lb_DPI = [0.001 0.1 0.0000000001 3];
         %upper bounds ub 
         ub_DPI = [10 500 10 33];
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -607,7 +607,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
         %lower bounds lb 
-        lb_PIDA = [0.001 0.1 0 5 0 3];
+        lb_PIDA = [0.001 0.1 0.0000000001 5 0.0000000001 3];
         %upper bounds ub 
         ub_PIDA = [10 500 10 20 10 33];
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
