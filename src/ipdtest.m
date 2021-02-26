@@ -14,15 +14,13 @@ ClosedLoop1 = feedback(G,K2);
 Loop = series(K1,ClosedLoop1);
 ClosedLoop = feedback(Loop,1);
 
-t = 0:dt:50;
-[y,t] = step(ClosedLoop,t);
-
-% CTRLtf = K/(1+K*G);
-% u = lsim(K,1-y,t);
-
-%  Q = 1;
-%  R = .001;
-%  J = dt*sum(Q*(1-y(:)).^2 + R*u(:).^2)
-
-J=sum(abs(1-y)*dt);
+a = allmargin(Loop).Stable
+p =int8(a);
+if (p == 0) 
+    J = 1000000;
+else
+    t = 0:dt:50;
+    [y,t] = step(ClosedLoop,t);
+    J=sum(abs(1-y)*dt); 
+end
 
