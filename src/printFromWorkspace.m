@@ -38,8 +38,9 @@ figure();
     title('IAE Trend');
     
     bar(X,Y);
+ 
     
  %% Save figure
- savefig('Figure');
+  savefig('Figure');
 end
 
