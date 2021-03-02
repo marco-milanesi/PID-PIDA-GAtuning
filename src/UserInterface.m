@@ -1,6 +1,6 @@
 function varargout = UserInterface(varargin)
 % USERINTERFACE MATLAB code for UserInterface.fig
-%      USERINTERFACE, by itself, creates a new USERINTERFACE or raises the existing
+%      USERI NTERFACE, by itself, creates a new USERINTERFACE or raises the existing
 %      singleton*.
 %
 %      H = USERINTERFACE returns the handle to a new USERINTERFACE or the handle to
@@ -477,7 +477,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
     
         %Population Size of each Iteration
         PopSize = 200;
-        MaxGeneration = 2000;
+        MaxGeneration = 1800;
         options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
         
         
@@ -492,13 +492,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 
         %lower bounds lb
-        lb_PID = [0.001 0.1 0 3];
+        lb_PID = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_PID = [10 500 10 33];
         
         [control,IAE] = ga(@(K)pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options);
         
-        K = control(1)*(1 + control(2)/s + (control(3)*s)/(1 + s*(control(3)/control(4))));
+        
+        
+        K = control(1)*(1 + 1/(s*control(2)) + (control(3)*s)/(1 + s*(control(3)/control(4))));
         
         Loop_PID = series(K,G);
         global ClosedLoop_PID;
@@ -508,15 +510,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.pid = ga_info_to_struct(IAE,control,info,'pid');
         analized.time = info.SettlingTime;
         
-        global Disturb_PID;
-        Disturb_PID = feedback(G,K);
-        analized.Disturb.pid = Disturb_PID;
-        info = stepinfo(Disturb_PID);
-        
-        %analized.pid_dist =  ga_info_to_struct(IAE,control,info,'pid');
-        if analized.time < info.SettlingTime
-            analized.time = info.SettlingTime;
-        end
         
  %% I-PD genetic algorithm      
         
@@ -527,7 +520,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_IPD = [0.001 0.1 0 3];
+        lb_IPD = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_IPD = [10 500 10 33];
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -535,7 +528,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
 
         K1 = control1(1)/(s*control1(2));
-        K2 = control1(1)*(1+(s*control1(3)))/(1 + s*(control1(3)/control1(4)));
+        K2 = control1(1)*(1+(s*control1(3))/(1 + s*(control1(3)/control1(4))));
         
         ClosedLoop1_IPD = feedback(G,K2);
         Loop_IPD = series(K1,ClosedLoop1_IPD);
@@ -543,18 +536,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         ClosedLoop_IPD = feedback(Loop_IPD,1);
         analized.ClosedLoop.ipd = ClosedLoop_IPD;
         info = stepinfo(ClosedLoop_IPD); 
+        
         analized.ipd = ga_info_to_struct(IAE1,control1,info,'i_pd');
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end
-        global Disturb_IPD;
-        Disturb_IPD = feedback(G,(K1+K2));
-        analized.Disturb.ipd = Disturb_IPD;
-        info = stepinfo(Disturb_IPD);
-        %analized.ipd_dist =  ga_info_to_struct(IAE1,control,info,'i_pd');
-        if analized.time < info.SettlingTime
-            analized.time = info.SettlingTime;
-        end
+        
+
     
  %%   PI-D genetic algorithm 
  
@@ -566,7 +554,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
         %lower bounds lb 
-        lb_DPI = [0.001 0.1 0 3];
+        lb_DPI = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_DPI = [10 500 10 33];
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -586,14 +574,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         end
         
         
-        global Disturb_DPI;
-        Disturb_DPI = feedback(G,K1+K2+K3);
-        analized.Disturb.dpi = Disturb_DPI;
-        info = stepinfo(Disturb_DPI); 
-        %analized.dpi_dist =  ga_info_to_struct(IAE2,control2,info,'pi_d');
-        if analized.time < info.SettlingTime
-            analized.time = info.SettlingTime;
-        end
   
 %% PIDA genetic algorithm
         %{
@@ -607,13 +587,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
         %lower bounds lb 
-        lb_PIDA = [0.001 0.1 0 5 0 3];
+        lb_PIDA = [0.001 0.1 0.00001 5 0.00001 3];
         %upper bounds ub 
         ub_PIDA = [10 500 10 20 10 33];
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
         [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,ub_PIDA,[],options3);
         
-        K = control3(1)*(1 + control3(2)/s + (control3(3)*s)/(1 + s*(control3(3)/control3(4))) + (control3(5)*s^2)/((1 + s*control3(5)/control3(6))^2)); 
+        K = control3(1)*(1 + 1/(s*control3(2)) + (control3(3)*s)/(1 + s*(control3(3)/control3(4))) + (control3(5)*s^2)/((1 + s*control3(5)/control3(6))^2)); 
        
         Loop_PIDA = series(K,G);
         global ClosedLoop_PIDA;
@@ -625,14 +605,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             analized.time = info.SettlingTime;
         end       
         
-        global Disturb_PIDA;
-        Disturb_PIDA = feedback(G,K);
-        analized.Disturb.pida = Disturb_PIDA;
-        info = stepinfo(Disturb_PIDA);
-        %analized.pida_dist = ga_info_to_struct(IAE3,control3,info,'pida');
-        if analized.time < info.SettlingTime
-            analized.time = info.SettlingTime;
-        end           
+             
         
 %% export to Excel
         

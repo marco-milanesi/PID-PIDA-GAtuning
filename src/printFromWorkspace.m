@@ -17,14 +17,14 @@ figure();
         ylabel('amplitude');
         grid on;
         
-%% disturbance rejection plote
-        subplot(2,2,3);
-        plot(t_sim,step(data.Disturb.pid,t_sim),'r-',t_sim,step(data.Disturb.ipd,t_sim),'b-',t_sim,step(data.Disturb.dpi,t_sim),'k-',t_sim,step(data.Disturb.pida,t_sim),'m-');
-        legend('PID','I-PD','PI-D','PIDA');
-        title('disturbance rejection');
-        xlabel('time');
-        ylabel('amplitude');
-        grid on;
+% %% disturbance rejection plote
+%         subplot(2,2,3);
+%         plot(t_sim,step(data.Disturb.pid,t_sim),'r-',t_sim,step(data.Disturb.ipd,t_sim),'b-',t_sim,step(data.Disturb.dpi,t_sim),'k-',t_sim,step(data.Disturb.pida,t_sim),'m-');
+%         legend('PID','I-PD','PI-D','PIDA');
+%         title('disturbance rejection');
+%         xlabel('time');
+%         ylabel('amplitude');
+%         grid on;
         
         
 %% histograph
