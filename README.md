@@ -20,6 +20,18 @@ In this program we implement Genetic Algorithm (GA) in determing PID, PI-D, I-PD
 |Oscillatory System            |![Oscillatory System](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7B%28s&plus;1%29%28s%5E%7B2%7D&plus;0.2s&plus;1%29%7D) |
 |Unstable Pole                 |![Unstable Pole](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7Bs%5E%7B2%7D-1%7D)|
 
+## Lower and upper bound
+
+|      Controller              |      Values    |
+| :---------------------------:|:--------------------------------------:|
+| Proportional Action         |![Kp](https://latex.codecogs.com/gif.latex?Kp%20%3D%5Cleft%20%5B%200.001%20%5C%3A%2010%20%5Cright%20%5D)|
+| Integral Action         |![Ti](https://latex.codecogs.com/gif.latex?Ti%20%3D%5Cleft%20%5B%200.1%20%5C%3A%20500%20%5Cright%20%5D)|
+| Derivative Action        |![Td](https://latex.codecogs.com/gif.latex?Td%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|
+| Second Derivative Action       |![Ta](https://latex.codecogs.com/gif.latex?Ta%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|
+|Filter of Derivative Action       |![N](https://latex.codecogs.com/gif.latex?N%3D%5Cleft%20%5B%203%20%5C%3A%2033%20%5Cright%20%5D)|
+| Filter of the Second Derivative Action       |![alpha](| Second Derivative Action       |![Ta](https://latex.codecogs.com/gif.latex?Ta%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|)|
+
+
 ## Explanation of the program
 > A simple explanation of the user interface of the programme and which parameters it calculates.
 
