@@ -55,9 +55,7 @@ Proportional and Integral action is applied to the control error while Derivativ
 
 ![](https://latex.codecogs.com/gif.latex?C_3%28s%29%3D%20%5Cfrac%7Bs%5C%2CT_d%5C%2CK_p%7D%7B%201&plus;%20%5Cfrac%7BT_d%7D%7BN%7Ds%7D)
 
-![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BY_%7Bsp%7D%7D%3D%5Cfrac%7BG%20%28C_%7B1%7D%20&plus;%20C_%7B2%7D%29%7D%7B1&plus;G%28C_%7B2%7D&plus;C_%7B3%7D%29%7D)
 
-![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BD%7D%3D%5Cfrac%7BG%7D%7B1&plus;G%28C_%7B2%7D&plus;C_%7B3%7D%29%7D)
 
 
 
