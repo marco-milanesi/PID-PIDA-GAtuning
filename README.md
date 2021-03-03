@@ -29,7 +29,7 @@ In this program we implement Genetic Algorithm (GA) in determing PID, PI-D, I-PD
 | Derivative Action        |![Td](https://latex.codecogs.com/gif.latex?Td%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|
 | Second Derivative Action       |![Ta](https://latex.codecogs.com/gif.latex?Ta%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|
 |Filter of Derivative Action       |![N](https://latex.codecogs.com/gif.latex?N%3D%5Cleft%20%5B%203%20%5C%3A%2033%20%5Cright%20%5D)|
-| Filter of the Second Derivative Action       |![alpha](| Second Derivative Action       |![Ta](https://latex.codecogs.com/gif.latex?Ta%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|)|
+| Filter of the Second Derivative Action       |![alpha](https://latex.codecogs.com/gif.latex?%5Calpha%20%3D%5Cleft%20%5B%203%20%5C%3A%2033%20%5Cright%20%5D)|
 
 
 ## Explanation of the program
