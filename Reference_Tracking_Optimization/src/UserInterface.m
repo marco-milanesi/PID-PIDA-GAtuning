@@ -427,7 +427,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             return;
         end
 
-        msgbox('start simulation --> wait end before start a new simulation');      
+           
         
 
 %% System Transfer Function Selection
@@ -520,7 +520,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_IPD = [0.001 0.1 0.00001 3];
+        lb_IPD = [0.001 0.1 8 3];
         %upper bounds ub 
         ub_IPD = [10 500 20 33];
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -587,9 +587,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
         %lower bounds lb 
-        lb_PIDA = [0.001 0.1 0.00001 3 0.00001 3];
+        lb_PIDA = [0.001 0.1 0.00001 3 8 3];
         %upper bounds ub 
-        ub_PIDA = [10 500 10 33 20 33];
+        ub_PIDA = [10 500 10 33 30 33];
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
         [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,ub_PIDA,[],options3);
         
