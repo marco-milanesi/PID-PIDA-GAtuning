@@ -567,7 +567,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %lower bounds lb 
         lb_PIDA_dist = [0.001 0.1 0.00001 3 0.00001 3];
         %upper bounds ub 
-        ub_PIDA_dist = [10 500 10 33 10 33];
+        ub_PIDA_dist = [10 500 100 33 10 33];
 
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
