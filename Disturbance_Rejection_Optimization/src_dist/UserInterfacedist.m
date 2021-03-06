@@ -481,9 +481,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %} 
 
         %lower bounds lb
-        lb_PID_dist = [0.001 0.1 0.00001 3];
+        lb_PID_dist = [0.001 0.1 0.00001 30];
         %upper bounds ub 
-        ub_PID_dist = [10 500 10 33];
+        ub_PID_dist = [10 500 10 100];
 
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
@@ -504,9 +504,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_IPD_dist = [0.001 0.1 0.00001 3];
+        lb_IPD_dist = [0.001 0.1 0.00001 30];
         %upper bounds ub 
-        ub_IPD_dist = [10 500 10 33];
+        ub_IPD_dist = [10 500 10 100];
 
         optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist1,IAEdist1] = ga(@(K)ipd_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD_dist,ub_IPD_dist,[],optionsdist1);
@@ -533,9 +533,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
         %lower bounds lb 
-        lb_DPI_dist = [0.001 0.1 0.00001 3];
+        lb_DPI_dist = [0.001 0.1 0.00001 30];
         %upper bounds ub 
-        ub_DPI_dist = [10 500 10 33];
+        ub_DPI_dist = [10 500 10 100];
         
         optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist2,IAEdist2] = ga(@(K)dpi_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI_dist,ub_DPI_dist,[],optionsdist2);
