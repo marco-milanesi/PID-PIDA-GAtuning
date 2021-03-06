@@ -1,9 +1,9 @@
-function printFromWorkspace(data2,data1)
+function printFromWorkspace(dataStep, dataDist)
 figure();
 %% set point plote
-        t_sim = 0:0.001:data2.time;
+        t_sim = 0:0.001:dataStep.time;
         subplot(2,2,1);
-        plot(t_sim,step(data2.ClosedLoop.pid,t_sim),'r-',t_sim,step(data2.ClosedLoop.ipd,t_sim),'b-',t_sim,step(data2.ClosedLoop.dpi,t_sim),'k-',t_sim,step(data2.ClosedLoop.pida,t_sim),'m-');
+        plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),'r-',t_sim,step(dataStep.ClosedLoop.ipd,t_sim),'b-',t_sim,step(dataStep.ClosedLoop.dpi,t_sim),'k-',t_sim,step(dataStep.ClosedLoop.pida,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
         title('reference traking');
         xlabel('time');
@@ -12,9 +12,9 @@ figure();
                 
 
 %% disturbance rejection plote
-        t_sim = 0:0.001:data1.time;
+        t_sim = 0:0.001:dataDist.time;
         subplot(2,2,3);
-        plot(t_sim,step(data1.Disturb.pid,t_sim),'r-',t_sim,step(data1.Disturb.ipd,t_sim),'b-',t_sim,step(data1.Disturb.dpi,t_sim),'k-',t_sim,step(data1.Disturb.pida,t_sim),'m-');
+        plot(t_sim,step(dataDist.Disturb.pid,t_sim),'r-',t_sim,step(dataDist.Disturb.ipd,t_sim),'b-',t_sim,step(dataDist.Disturb.dpi,t_sim),'k-',t_sim,step(dataDist.Disturb.pida,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
         title('disturbance rejection');
         xlabel('time');
@@ -24,7 +24,7 @@ figure();
         
 %% histograph set point
     subplot(2,2,2);
-    Y = [data2.pid.IAE data2.ipd.IAE data2.dpi.IAE data2.pida.IAE];
+    Y = [dataStep.pid.IAE dataStep.ipd.IAE dataStep.dpi.IAE dataStep.pida.IAE];
     % The bar function uses a sorted list of the categories, so the bars might display in a different order than you expect. 
     % To preserve the order, call the reordercats function.
     
@@ -36,7 +36,7 @@ figure();
     
 %% histograph disturbance rejection
     subplot(2,2,4);
-    Y_dist = [data1.pid_dist.IAE data1.ipd_dist.IAE data1.dpi_dist.IAE data1.pida_dist.IAE];
+    Y_dist = [dataDist.pid_dist.IAE dataDist.ipd_dist.IAE dataDist.dpi_dist.IAE dataDist.pida_dist.IAE];
     % The bar function uses a sorted list of the categories, so the bars might display in a different order than you expect. 
     % To preserve the order, call the reordercats function.
     

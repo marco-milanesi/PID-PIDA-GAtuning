@@ -494,7 +494,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %lower bounds lb
         lb_PID = [0.001 0.1 0.00001 3];
         %upper bounds ub 
-        ub_PID = [10 500 10 33];
+        ub_PID = [10 500 10 150];
         
         [control,IAE] = ga(@(K)pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options);
         
@@ -522,7 +522,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %lower bounds lb 
         lb_IPD = [0.001 0.1 8 3];
         %upper bounds ub 
-        ub_IPD = [10 500 20 33];
+        ub_IPD = [10 500 20 150];
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
         [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD,ub_IPD,[],options1);
         
@@ -556,7 +556,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %lower bounds lb 
         lb_DPI = [0.001 0.1 0.00001 3];
         %upper bounds ub 
-        ub_DPI = [10 500 10 33];
+        ub_DPI = [10 500 10 150];
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
         [control2,IAE2] = ga(@(K)dpitest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI,ub_DPI,[],options2);
 
@@ -587,9 +587,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
         %lower bounds lb 
-        lb_PIDA = [0.001 0.1 0.00001 3 8 3];
+        lb_PIDA = [0.001 0.1 0.00001 3 10 3];
         %upper bounds ub 
-        ub_PIDA = [10 500 10 33 30 33];
+        ub_PIDA = [10 500 10 150 300 33];
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
         [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,ub_PIDA,[],options3);
         
