@@ -589,7 +589,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %lower bounds lb 
         lb_PIDA = [0.001 0.1 0.00001 3 10 3];
         %upper bounds ub 
-        ub_PIDA = [10 500 10 800 1000 33];
+        ub_PIDA = [10 500 10 600 600 33];
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
         [control3,IAE3] = ga(@(K)pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,ub_PIDA,[],options3);
         
