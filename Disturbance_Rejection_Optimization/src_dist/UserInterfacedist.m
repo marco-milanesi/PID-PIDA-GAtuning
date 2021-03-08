@@ -431,31 +431,31 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             case 'Select a System'
                 msgbox('Error costant, please recreate system', 'Errore!', 'error');
             case 'Multiple Equal Poles'
-                G = 1/(s+1)^variable;
+                G = 1/(s+1)^variable
             case 'Fourth Order System'
-                G = 1/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s);
+                G = 1/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s)
             case 'Right Half Plane Zero'
-                G = (1-variable*s)/(s+1)^3; 
+                G = (1-variable*s)/(s+1)^3 
             case 'Time Delay and Lag'
-                G = (1/(1+variable*s))*exp(-s);
+                G = (1/(1+variable*s))*exp(-s)
             case 'Time Delay and Double Lag'
-                G = (1/(1+variable*s)^2)*exp(-s);
+                G = (1/(1+variable*s)^2)*exp(-s)
             case 'Fast and Slow Modes'
-                G = (100/(s+10)^2)*((1/s+1)+(0.5/s+0.05));
+                G = (100/(s+10)^2)*((1/s+1)+(0.5/s+0.05))
             case 'Oscillatory System'
-                G = 1/(s+1)/(s^2+(2*0.1*variable*s)+(variable*variable));
+                G = 1/(s+1)/(s^2+(2*0.1*variable*s)+(variable*variable))
             case 'Unstable Pole'
-                G = 1/(s^2-1);
+                G = 1/(s^2-1)
             case 'Multiple Equal Poles Integral'
-                G = 1/s/(s+1)^variable;
+                G = 1/s/(s+1)^variable
             case 'Fourth Order System Integral'
-                G = 1/s/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s);
+                G = 1/s/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s)
             case 'Right Half Plane Zero Integral'
-                G = (1-variable*s)/s/(s+1)^3; 
+                G = (1-variable*s)/s/(s+1)^3
             case 'Time Delay and Lag Integral'
-                G = (1/s/(1+variable*s))*exp(-s);
+                G = (1/s/(1+variable*s))*exp(-s)
             case 'Time Delay and Double Lag Integral'
-                G = (1/s/(1+variable*s)^2)*exp(-s);
+                G = (1/s/(1+variable*s)^2)*exp(-s)
             case 'Custom'
                 G = system; %leggere da una matrice come esempio del profe
             otherwise
