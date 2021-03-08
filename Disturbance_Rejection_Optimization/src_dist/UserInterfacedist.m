@@ -443,7 +443,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
             case 'Fast and Slow Modes'
                 G = (100/(s+10)^2)*((1/s+1)+(0.5/s+0.05))
             case 'Oscillatory System'
-                G = 1/(s+1)/(s^2+(2*0.1*variable*s)+(variable*variable))
+                G = (variable*variable)/(s+1)/(s^2+(2*0.1*variable*s)+(variable*variable))
             case 'Unstable Pole'
                 G = 1/(s^2-1)
             case 'Multiple Equal Poles Integral'
