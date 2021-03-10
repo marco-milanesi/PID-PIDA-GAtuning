@@ -487,11 +487,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
-        K = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
+        K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
        
         global Disturb_PID;
-        Disturb_PID = feedback(G,K);
+        Disturb_PID = feedback(G,K_piddist);
+        
+        analized.Controller.pid = K_piddist;
+        Loop_PID = series(G,K_piddist);
+        analized.Loop.pid = Loop_PID;
         analized.Disturb.pid = Disturb_PID;
+        
         infodist = stepinfo(Disturb_PID);
         analized.pid_dist = ga_info_to_struct(IAEdist,controldist,infodist,'pid');
         analized.time = infodist.SettlingTime;
@@ -511,11 +516,21 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist1,IAEdist1] = ga(@(K)ipd_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD_dist,ub_IPD_dist,[],optionsdist1);
         
-        K1 = controldist1(1)/(s*controldist1(2));
-        K2 = controldist1(1)*(1+(s*controldist1(3))/(1 + s*(controldist1(3)/controldist1(4))));
+        K1_ipddist = controldist1(1)/(s*controldist1(2));
+        K2_ipddist = controldist1(1)*(1+(s*controldist1(3))/(1 + s*(controldist1(3)/controldist1(4))));
         
         global Disturb_IPD;
-        Disturb_IPD = feedback(G,(K1+K2));
+        Disturb_IPD = feedback(G,(K1_ipddist+K2_ipddist));
+        
+        analized.Controller.ipd.K1 = K1_ipddist;
+        analized.Controller.ipd.K2 = K2_ipddist;
+        
+        ClosedLoop1_IPD = feedback(G,K2_ipddist);
+        
+        Loop_IPD = series(K1_ipddist,ClosedLoop1_IPD);
+        
+        analized.Loop.ipd = Loop_IPD;
+        
         analized.Disturb.ipd = Disturb_IPD;
         infodist1 = stepinfo(Disturb_IPD);
         analized.ipd_dist =  ga_info_to_struct(IAEdist1,controldist1,infodist1,'i_pd');
@@ -540,12 +555,18 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist2,IAEdist2] = ga(@(K)dpi_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI_dist,ub_DPI_dist,[],optionsdist2);
 
-        K1 = controldist2(1);
-        K2 = controldist2(1)/(s*controldist2(2));
-        K3 = controldist2(1)*((s*controldist2(3))/(1+(controldist2(3)*s/controldist2(4))));
+        K1_dpidist = controldist2(1);
+        K2_dpidist = controldist2(1)/(s*controldist2(2));
+        K3_dpidist = controldist2(1)*((s*controldist2(3))/(1+(controldist2(3)*s/controldist2(4))));
              
         global Disturb_DPI;
-        Disturb_DPI = feedback(G,K1+K2+K3);
+        Disturb_DPI = feedback(G,K1_dpidist+K2_dpidist+K3_dpidist);
+        
+        analized.Controller.dpi.K1 = K1_dpidist;
+        analized.Controller.dpi.K2 = K2_dpidist;
+        analized.Controller.dpi.K3 = K3_dpidist;
+        
+        analized.Loop.dpi =(K1_dpidist+K2_dpidist)*(G/(1+(G*K3_dpidist)));
         analized.Disturb.dpi = Disturb_DPI;
         infodist2 = stepinfo(Disturb_DPI); 
         analized.dpi_dist =  ga_info_to_struct(IAEdist2,controldist2,infodist2,'pi_d');
@@ -572,10 +593,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
         
-        K = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(4))) + (controldist3(5)*s^2)/((1 + s*controldist3(5)/controldist3(6))^2)); 
+        K_pidadst = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(4))) + (controldist3(5)*s^2)/((1 + s*controldist3(5)/controldist3(6))^2)); 
       
         global Disturb_PIDA;
-        Disturb_PIDA = feedback(G,K);
+        Disturb_PIDA = feedback(G,K_pidadst);
+                
+        analized.Controller.pida = K_pidadst;
+        Loop_PIDA = series(K_pidadst,G);
+        analized.Loop.pida = Loop_PIDA;
+        
         analized.Disturb.pida = Disturb_PIDA;
         infodist3 = stepinfo(Disturb_PIDA);
         analized.pida_dist = ga_info_to_struct(IAEdist3,controldist3,infodist3,'pida');
