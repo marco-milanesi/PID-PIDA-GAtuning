@@ -16,7 +16,7 @@ Loop = series(K1,ClosedLoop1);
 ClosedLoop = feedback(Loop,1);
 
 
-t = 0:dt:50;
+t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
 J=sum(abs(1-y)*dt);
 
