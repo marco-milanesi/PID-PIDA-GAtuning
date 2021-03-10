@@ -481,7 +481,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %} 
 
         %lower bounds lb
-        lb_PID_dist = [0.001 0.1 0.00001 30];
+        lb_PID_dist = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_PID_dist = [10 500 10 100];
 
@@ -509,7 +509,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_IPD_dist = [0.001 0.1 0.00001 30];
+        lb_IPD_dist = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_IPD_dist = [10 500 10 100];
 
@@ -548,7 +548,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
         %lower bounds lb 
-        lb_DPI_dist = [0.001 0.1 0.00001 30];
+        lb_DPI_dist = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_DPI_dist = [10 500 10 100];
         
