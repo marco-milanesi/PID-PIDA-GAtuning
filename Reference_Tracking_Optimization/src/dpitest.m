@@ -14,7 +14,7 @@ K3 = parms(1)*((s*parms(3))/(1+(parms(3)*s/parms(4))));
 ClosedLoop = ((G*(K1+K2))/(1+(G*K3)+(G*(K1+K2))));
 Loop = series((K1+K2),feedback(G,K3));
 
-t = 0:dt:50;
+t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
 J=sum(abs(1-y)*dt);
 
