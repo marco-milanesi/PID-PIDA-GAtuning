@@ -593,13 +593,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
         
-        K_pidadst = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(4))) + (controldist3(5)*s^2)/((1 + s*controldist3(5)/controldist3(6))^2)); 
+        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(4))) + (controldist3(5)*s^2)/((1 + s*controldist3(5)/controldist3(6))^2)); 
       
         global Disturb_PIDA;
-        Disturb_PIDA = feedback(G,K_pidadst);
+        Disturb_PIDA = feedback(G,K_pidadist);
                 
-        analized.Controller.pida = K_pidadst;
-        Loop_PIDA = series(K_pidadst,G);
+        analized.Controller.pida = K_pidadist;
+        Loop_PIDA = series(K_pidadist,G);
         analized.Loop.pida = Loop_PIDA;
         
         analized.Disturb.pida = Disturb_PIDA;
