@@ -11,7 +11,7 @@ K2 = parms(1)/(s*parms(2));
 K3 = parms(1)*((s*parms(3))/(1+(parms(3)*s/parms(4))));
 ClosedLoop =minreal(feedback(G,K1+K2+K3));
 ClosedLoop1 = feedback(G,K3);
-t = 0:dt:50;
+t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
 J=sum(abs(y)*dt); 
 end
