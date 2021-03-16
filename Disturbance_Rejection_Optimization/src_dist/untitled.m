@@ -5,8 +5,8 @@ G = 1/(s+1)/(s^2+(2*0.1*1*s)+(1*1))
  
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 200;
-        MaxGeneration = 1800;
+        PopSize = 100;
+        MaxGeneration = 1000;
 
 %% PIDA genetic algorithm
         %{
@@ -18,19 +18,18 @@ G = 1/(s+1)/(s^2+(2*0.1*1*s)+(1*1))
         x(6) = alfa
         %}
                     
-        %lower bounds lb 
-        lb_PIDA_dist = [0.1 0.1 0.001 50 0.1 0.0001];
+        lb_PID_dist = [4 1 1 150];
         %upper bounds ub 
-        ub_PIDA_dist = [50 50 20 100 300 33];
+        ub_PID_dist = [6 3 3 300];
 
-        optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
-        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
+        optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
+        [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
+        K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
+       
+        global Disturb_PID;
+        Disturb_PID = feedback(G,K_piddist);
         
-        K_pidadst = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(4))) + (controldist3(5)*s^2)/((1 + s*controldist3(5)/controldist3(6))^2)); 
-      
-        global Disturb_PIDA;
-        Disturb_PIDA = feedback(G,K_pidadst);
         t=0:dt:100;
-        plot(t,step(Disturb_PIDA,t))
+        plot(t,step(Disturb_PID,t))
         
         
