@@ -470,7 +470,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         PopSize = 200;
-        MaxGeneration = 1800;
+        MaxGeneration = 1000;
 
 %% PID genetic algorithm
         %{
@@ -481,9 +481,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %} 
 
         %lower bounds lb
-        lb_PID_dist = [0.001 0.1 0.00001 0.01];
+        lb_PID_dist = [30 0.1 0.001 150];
         %upper bounds ub 
-        ub_PID_dist = [10 100 10 100];
+        ub_PID_dist = [100 5 5 250];
 
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
@@ -509,9 +509,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
         %lower bounds lb 
-        lb_IPD_dist = [0.001 0.1 0.00001 0.01];
+        lb_IPD_dist = [30 0.1 0.001 150];
         %upper bounds ub 
-        ub_IPD_dist = [10 100 10 100];
+        ub_IPD_dist = [100 5 5 250];
 
         optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist1,IAEdist1] = ga(@(K)ipd_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD_dist,ub_IPD_dist,[],optionsdist1);
@@ -548,9 +548,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
         %lower bounds lb 
-        lb_DPI_dist = [0.001 0.1 0.00001 0.01];
+        lb_DPI_dist = [30 0.1 0.001 150];
         %upper bounds ub 
-        ub_DPI_dist = [10 200 10 100];
+        ub_DPI_dist = [100 5 5 250];
         
         optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
         [controldist2,IAEdist2] = ga(@(K)dpi_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI_dist,ub_DPI_dist,[],optionsdist2);
@@ -586,9 +586,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
         %lower bounds lb 
-        lb_PIDA_dist = [0.001 0.1 0.00001 0.01 0.00001 0.01];
+        lb_PIDA_dist = [20 0.1 0.01 150 0.00001 3];
         %upper bounds ub 
-        ub_PIDA_dist = [10 100 100 33 500 33];
+        ub_PIDA_dist = [100 10 30 250 100 33];
 
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);

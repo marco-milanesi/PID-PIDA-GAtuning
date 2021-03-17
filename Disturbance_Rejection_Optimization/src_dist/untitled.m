@@ -7,7 +7,8 @@ G = 1/(s+1)/(s^2+(2*0.1*1*s)+(1*1))
         %Population Size of each Iteration
         PopSize = 200;
         MaxGeneration = 1800;
-
+        dataDist.Controller.pida
+        
 %% PIDA genetic algorithm
         %{
         x(1) = Kp
