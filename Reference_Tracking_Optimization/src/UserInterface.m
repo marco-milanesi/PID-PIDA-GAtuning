@@ -475,7 +475,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %Population Size of each Iteration
         PopSize = 500;
         MaxGeneration = 1800;
-        options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
         
         
 %% PID genetic algorithm
@@ -492,7 +491,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         lb_PID = [0.001 0.1 0.00001 3];
         %upper bounds ub 
         ub_PID = [10 500 10 500];
-        
+        options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
         [control,IAE] = ga(@(K)pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,ub_PID,[],options);
         
         K_pid = control(1)*(1 + 1/(s*control(2)) + (control(3)*s)/(1 + s*(control(3)/control(4))));
