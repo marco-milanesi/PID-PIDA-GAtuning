@@ -5,16 +5,9 @@ G = 1/(s+1)^4
  
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
-<<<<<<< HEAD
-        PopSize = 200;
-        MaxGeneration = 1800;
-        dataDist.Controller.pida
+        PopSize = 10;
+        MaxGeneration = 100;
         
-=======
-        PopSize = 50;
-        MaxGeneration = 500;
-
->>>>>>> bd2f73f9a3c3be52790a74b76f8df12566f69910
 %% PIDA genetic algorithm
         %{
         x(1) = Kp
@@ -25,9 +18,9 @@ G = 1/(s+1)^4
         x(6) = alfa
         %}
                     
-        lb_PIDA_dist = [5 1 1.6 390 110 0.1];
+        lb_PIDA_dist = [29 0.01 1 300 3 3];
         %upper bounds ub 
-        ub_PIDA_dist = [5.5 1.3 2.5 600 140 1];
+        ub_PIDA_dist = [35 0.09 2 450 100 33];
 
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
