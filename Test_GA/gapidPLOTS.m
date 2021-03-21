@@ -1,7 +1,7 @@
 clear all, close all, clc
 
 dt = 0.001;
-popsize = 200;
+popsize = 250;
 MaxGenerations = 1200;
 s = tf('s');
 G = (1/(1+2*s))*exp(-s)
