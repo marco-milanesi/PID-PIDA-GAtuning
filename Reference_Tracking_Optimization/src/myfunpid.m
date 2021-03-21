@@ -1,19 +1,19 @@
 function [state, options,optchanged] = myfunpid(options,state,flag)
-persistent history 
-persistent cost
+persistent historypid
+persistent costpid
 optchanged = false;
 
 switch flag
  case 'init'
-        history(:,:,1) = state.Population;
-        cost(:,1) = state.Score;
+        historypid(:,:,1) = state.Population;
+        costpid(:,1) = state.Score;
     case {'iter','interrupt'}
-        ss = size(history,1);
-        history(:,:,ss+1) = state.Population;
-        cost(:,ss+1) = state.Score;
+        ss = size(historypid,1);
+        historypid(:,:,ss+1) = state.Population;
+        costpid(:,ss+1) = state.Score;
     case 'done'
-        ss = size(history,1);
-        history(:,:,ss+1) = state.Population;
-        cost(:,ss+1) = state.Score;
-        save history_pid.mat history cost
+        ss = size(historypid,1);
+        historypid(:,:,ss+1) = state.Population;
+        costpid(:,ss+1) = state.Score;
+        save history_pid.mat historypid costpid
 end

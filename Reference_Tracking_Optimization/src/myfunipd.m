@@ -1,19 +1,19 @@
 function [state, options,optchanged] = myfunipd(options,state,flag)
-persistent history 
-persistent cost
+persistent historyipd 
+persistent costipd 
 optchanged = false;
 
 switch flag
  case 'init'
-        history(:,:,1) = state.Population;
-        cost(:,1) = state.Score;
+        historyipd(:,:,1) = state.Population;
+        costipd(:,1) = state.Score;
     case {'iter','interrupt'}
-        ss = size(history,1);
-        history(:,:,ss+1) = state.Population;
-        cost(:,ss+1) = state.Score;
+        ss = size(historyipd,1);
+        historyipd(:,:,ss+1) = state.Population;
+        costipd(:,ss+1) = state.Score;
     case 'done'
-        ss = size(history,1);
-        history(:,:,ss+1) = state.Population;
-        cost(:,ss+1) = state.Score;
-        save history_ipd.mat history cost
+        ss = size(historyipd,1);
+        historyipd(:,:,ss+1) = state.Population;
+        costipd(:,ss+1) = state.Score;
+        save history_ipd.mat historyipd costipd
 end
