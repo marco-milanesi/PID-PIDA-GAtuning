@@ -473,8 +473,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
     
         %Population Size of each Iteration
-        PopSize = 200;
-        MaxGeneration = 1800;
+        PopSize = 250;
+        MaxGeneration = 2000;
         
         
 %% PID genetic algorithm
@@ -535,7 +535,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
         population1 = rand(PopSize,3);
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@myfunipd);
-        [control1,IAE1] = ga(@(K)pidtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options1);
+        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options1);
         
         
         K1_ipd = control1(1)/(s*control1(2));
@@ -576,7 +576,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
         population2 = rand(PopSize,3);
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@myfundpi);
-        [control2,IAE2] = ga(@(K)pidtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options2);
+        [control2,IAE2] = ga(@(K)dpitest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options2);
         
 
         K1_dpi = control2(1);
@@ -620,7 +620,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
         population3 = rand(PopSize,4);
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@myfunpida);
-        [control3,IAE3] = ga(@(K)pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options3);
+        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options3);
         
         K_pida = control3(1)*(1 + 1/(s*control3(2)) + (control3(3)*s)/(1 + s*(0.0001)) + (control3(4)*s^2)/((1 + s*0.0001)^2)); 
        
