@@ -526,7 +526,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
         population1 = rand(PopSize,3);
         optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@myfunipddist);
-        [controldist1,IAEdist1] = ga(@(K)pid_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist1);
+        [controldist1,IAEdist1] = ga(@(K)ipd_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist1);
 
         K1_ipddist = controldist1(1)/(s*controldist1(2));
         K2_ipddist = controldist1(1)*(1+(s*controldist1(3))/(1 + s*(0.0001)));
@@ -570,7 +570,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
         population2 = rand(PopSize,3);
         optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@myfundpidist);
-        [controldist2,IAEdist2] = ga(@(K)pid_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist2);
+        [controldist2,IAEdist2] = ga(@(K)dpi_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist2);
 
 
         K1_dpidist = controldist2(1);
@@ -613,7 +613,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
         population3 = rand(PopSize,4);
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@myfunpidadist);
-        [controldist3,IAEdist3] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],optionsdist3);
+        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],optionsdist3);
 
         K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(0.0001)) + (controldist3(4)*s^2)/((1 + s*0.0001)^2)); 
       
