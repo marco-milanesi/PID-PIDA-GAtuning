@@ -469,8 +469,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 10;
-        MaxGeneration = 10;
+        PopSize = 200;
+        MaxGeneration = 1800;
 
 %% PID genetic algorithm
         %{
