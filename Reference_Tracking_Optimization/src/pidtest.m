@@ -2,7 +2,7 @@ function J = pidtest(G,dt,parms)
 
 s = tf('s');
 
-K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(4)))); 
+K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(0.0001))); 
 Loop = series(K,G);
 ClosedLoop = feedback(Loop,1);
 

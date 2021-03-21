@@ -469,8 +469,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 200;
-        MaxGeneration = 1000;
+        PopSize = 10;
+        MaxGeneration = 10;
 
 %% PID genetic algorithm
         %{
@@ -480,15 +480,21 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4)= N
         %} 
 
-        %lower bounds lb
-        lb_PID_dist = [30 0.1 0.001 150];
-        %upper bounds ub 
-        ub_PID_dist = [100 5 5 250];
+%         %lower bounds lb
+%         lb_PID_dist = [30 0.1 0.001 150];
+%         %upper bounds ub 
+%         ub_PID_dist = [100 5 5 250];
+%         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
+%         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
+%         K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
 
-        optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
-        [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
-        K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
-       
+        rng(1,'twister') % for reproducibility
+        population = rand(PopSize,3);
+        optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@myfunpiddist);
+        [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist);
+        
+        K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(0.0001)));
+        
         global Disturb_PID;
         Disturb_PID = feedback(G,K_piddist);
         
@@ -508,16 +514,22 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(3) = Td
         x(4) = N
         %}         
-        %lower bounds lb 
-        lb_IPD_dist = [30 0.1 0.001 150];
-        %upper bounds ub 
-        ub_IPD_dist = [100 5 5 250];
-
-        optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
-        [controldist1,IAEdist1] = ga(@(K)ipd_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD_dist,ub_IPD_dist,[],optionsdist1);
+%         %lower bounds lb 
+%         lb_IPD_dist = [30 0.1 0.001 150];
+%         %upper bounds ub 
+%         ub_IPD_dist = [100 5 5 250];
+% 
+%         optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
+%         [controldist1,IAEdist1] = ga(@(K)ipd_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_IPD_dist,ub_IPD_dist,[],optionsdist1);
+%         
         
+        rng(1,'twister') % for reproducibility
+        population1 = rand(PopSize,3);
+        optionsdist1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@myfunipddist);
+        [controldist1,IAEdist1] = ga(@(K)pid_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist1);
+
         K1_ipddist = controldist1(1)/(s*controldist1(2));
-        K2_ipddist = controldist1(1)*(1+(s*controldist1(3))/(1 + s*(controldist1(3)/controldist1(4))));
+        K2_ipddist = controldist1(1)*(1+(s*controldist1(3))/(1 + s*(0.0001)));
         
         global Disturb_IPD;
         Disturb_IPD = feedback(G,(K1_ipddist+K2_ipddist));
@@ -548,16 +560,22 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
         %lower bounds lb 
-        lb_DPI_dist = [30 0.1 0.001 150];
-        %upper bounds ub 
-        ub_DPI_dist = [100 5 5 250];
-        
-        optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
-        [controldist2,IAEdist2] = ga(@(K)dpi_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI_dist,ub_DPI_dist,[],optionsdist2);
+%         lb_DPI_dist = [30 0.1 0.001 150];
+%         %upper bounds ub 
+%         ub_DPI_dist = [100 5 5 250];
+%         
+%         optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
+%         [controldist2,IAEdist2] = ga(@(K)dpi_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_DPI_dist,ub_DPI_dist,[],optionsdist2);
+
+        rng(1,'twister') % for reproducibility
+        population2 = rand(PopSize,3);
+        optionsdist2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@myfundpidist);
+        [controldist2,IAEdist2] = ga(@(K)pid_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist2);
+
 
         K1_dpidist = controldist2(1);
         K2_dpidist = controldist2(1)/(s*controldist2(2));
-        K3_dpidist = controldist2(1)*((s*controldist2(3))/(1+(controldist2(3)*s/controldist2(4))));
+        K3_dpidist = controldist2(1)*((s*controldist2(3))/(1+(0.0001*s)));
              
         global Disturb_DPI;
         Disturb_DPI = feedback(G,K1_dpidist+K2_dpidist+K3_dpidist);
@@ -586,14 +604,18 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
         %lower bounds lb 
-        lb_PIDA_dist = [20 0.1 0.01 150 0.00001 3];
-        %upper bounds ub 
-        ub_PIDA_dist = [100 10 30 250 100 33];
+%         lb_PIDA_dist = [20 0.1 0.01 150 0.00001 3];
+%         %upper bounds ub 
+%         ub_PIDA_dist = [100 10 30 250 100 33];
+% 
+%         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
+%         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
+        rng(1,'twister') % for reproducibility
+        population3 = rand(PopSize,4);
+        optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@myfunpidadist);
+        [controldist3,IAEdist3] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],optionsdist3);
 
-        optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
-        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
-        
-        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(4))) + (controldist3(5)*s^2)/((1 + s*controldist3(5)/controldist3(6))^2)); 
+        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(0.0001)) + (controldist3(4)*s^2)/((1 + s*0.0001)^2)); 
       
         global Disturb_PIDA;
         Disturb_PIDA = feedback(G,K_pidadist);

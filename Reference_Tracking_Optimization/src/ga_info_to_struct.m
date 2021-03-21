@@ -6,7 +6,7 @@ function controller = ga_info_to_struct(favl,x,S_controller,type)
     controller.Kp = x(1) ;
     controller.Ti = x(2);
     controller.Td = x(3);
-    controller.N = x(4);
+    controller.N = [];
     %switch che in base al tipo di controllore asssegna i vari paremetri
     switch type
         case 'pid'
@@ -25,10 +25,10 @@ function controller = ga_info_to_struct(favl,x,S_controller,type)
                 controller.c=0;
                 controller.alfa=[];
         case 'pida'
-                controller.Ta = x(5);
+                controller.Ta = x(4);
                 controller.b = 1;
                 controller.c = 1;
-                controller.alfa = x(6);
+                controller.alfa = [];
         otherwise
                 controller.Ta=[];
                 controller.b=[];

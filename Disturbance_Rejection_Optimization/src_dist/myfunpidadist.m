@@ -15,5 +15,5 @@ switch flag
         ss = size(history,1);
         history(:,:,ss+1) = state.Population;
         cost(:,ss+1) = state.Score;
-        save history.mat history cost
+        save history_pida_dist.mat history cost
 end

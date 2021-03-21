@@ -8,7 +8,7 @@ s = tf('s');
 % formula presa da https://www.sciencedirect.com/science/article/pii/S2405896318304543
 
 K1 = parms(1)/(s*parms(2));
-K2 = parms(1)*(1+(s*parms(3))/(1 + s*(parms(3)/parms(4))));
+K2 = parms(1)*(1+(s*parms(3))/(1 + s*(0.0001)));
 
 ClosedLoop = minreal(feedback(G,(K1+K2)));
 

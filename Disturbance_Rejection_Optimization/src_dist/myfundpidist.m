@@ -1,4 +1,4 @@
-function [state, options,optchanged] = myfunpida(options,state,flag)
+function [state, options,optchanged] = myfundpidist(options,state,flag)
 persistent history 
 persistent cost
 optchanged = false;
@@ -15,5 +15,5 @@ switch flag
         ss = size(history,1);
         history(:,:,ss+1) = state.Population;
         cost(:,ss+1) = state.Score;
-        save history_pida.mat history cost
+        save history_dpi_dist.mat history cost
 end

@@ -1,7 +1,7 @@
 function J  = pid_test_dist(G,dt,parms)
 s = tf('s');
 
-K = parms(1)*(1 +1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(4)))); 
+K = parms(1)*(1 +1/(parms(2)*s) + (parms(3)*s)/(1 + s*(0.0001))); 
 ClosedLoop = minreal(feedback(G,K));
 
 t = 0:dt:100;

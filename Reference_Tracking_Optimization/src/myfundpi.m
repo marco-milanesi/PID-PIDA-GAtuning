@@ -1,4 +1,4 @@
-function [state, options,optchanged] = myfun(options,state,flag)
+function [state, options,optchanged] = myfundpi(options,state,flag)
 persistent history 
 persistent cost
 optchanged = false;
@@ -15,5 +15,5 @@ switch flag
         ss = size(history,1);
         history(:,:,ss+1) = state.Population;
         cost(:,ss+1) = state.Score;
-        save history.mat history cost
+        save history_dpi.mat history cost
 end
