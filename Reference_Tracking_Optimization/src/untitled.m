@@ -1,31 +1,23 @@
-      
+       
 %%  
 s=tf('s');
 dt = 0.0001;%time step
 
-G = 1/(s+1)^8
+G = 1/(s+1)^4
 
  
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 20;
-        MaxGeneration = 100;
-
+        PopSize = 100;
+        MaxGeneration = 2500;
         rng(1,'twister') % for reproducibility
-        population1 = rand(PopSize,3);
-        options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@myfunipd);
-        [control1,IAE1] = ga(@(K)pidtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options1);
+        population3 = rand(PopSize,4);
+        options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@myfunpida);
+        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options3);
         
-        
-        K1_ipd = control1(1)/(s*control1(2));
-        K2_ipd = control1(1)*(1+(s*control1(3))/(1 + s*(0.0001)));
-        
-        ClosedLoop1_IPD = feedback(G,K2_ipd);
-        Loop_IPD = series(K1_ipd,ClosedLoop1_IPD);
-        global ClosedLoop_IPD;
-        ClosedLoop_IPD = feedback(Loop_IPD,1);
-        
-        t=0:dt:100;
-        plot(t,step(ClosedLoop_PID,t))
-        
+        K_pida = control3(1)*(1 + 1/(s*control3(2)) + (control3(3)*s)/(1 + s*(0.0001)) + (control3(4)*s^2)/((1 + s*0.0001)^2)); 
+       
+        Loop_PIDA = series(K_pida,G);
+        global ClosedLoop_PIDA;
+        ClosedLoop_PIDA = feedback(Loop_PIDA,1);
 
