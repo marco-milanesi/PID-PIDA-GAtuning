@@ -10,7 +10,6 @@ t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
 J=sum(abs(1-y)*dt);
 
-
 end
 
 

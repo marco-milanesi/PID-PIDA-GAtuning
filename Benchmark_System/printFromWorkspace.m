@@ -3,7 +3,7 @@ figure();
 %% set point plote
         t_sim = 0:0.001:2*dataStep.time;
         subplot(2,2,1);
-        plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),'r-',t_sim,step(dataStep.ClosedLoop.ipd,t_sim),'b-',t_sim,step(dataStep.ClosedLoop.dpi,t_sim),'k-',t_sim,step(dataStep.ClosedLoop.pida,t_sim),'g-');
+        plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),'r-',t_sim,step(dataStep.ClosedLoop.ipd,t_sim),'b-',t_sim,step(dataStep.ClosedLoop.dpi,t_sim),'k-',t_sim,step(dataStep.ClosedLoop.pida,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
         title('reference traking');
         xlabel('time');
@@ -14,7 +14,7 @@ figure();
 %% disturbance rejection plote
         t_sim = 0:0.001:2*dataStep.time;
         subplot(2,2,3);
-        plot(t_sim,step(dataDist.Disturb.pid,t_sim),'r-',t_sim,step(dataDist.Disturb.pida,t_sim),'g-');
+        plot(t_sim,step(dataDist.Disturb.pid,t_sim),'r-',t_sim,step(dataDist.Disturb.pida,t_sim),'m-');
         legend('PID','PIDA');
         title('disturbance rejection');
         xlabel('time');
