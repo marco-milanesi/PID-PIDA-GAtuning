@@ -1,4 +1,4 @@
-function J = ipdtest_gapid(G,dt,parms)
+function J = i_pd_test(G,dt,parms)
 
 s = tf('s');
 % parms(1)kp

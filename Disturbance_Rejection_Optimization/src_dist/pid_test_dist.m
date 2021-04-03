@@ -13,7 +13,7 @@ switch costFunction
     case 0
         J=sum(abs(y)*dt);
     otherwise
-        J=costFunction;
+        J=costFunction*1.2;
 end
 
 end

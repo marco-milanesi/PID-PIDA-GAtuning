@@ -1,4 +1,4 @@
-function [state, options,optchanged] = myfun_ipd(options,state,flag)
+function [state, options,optchanged] = myfun_i_pd(options,state,flag)
 persistent history_i_pd 
 persistent cost_i_pd
 optchanged = false;

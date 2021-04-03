@@ -1,5 +1,4 @@
-% PI-D Controller
-function J = dpitest(G,dt,parms)
+function J = pi_d_test(G,dt,parms)
 
 s = tf('s');
 % parms(1)Kp

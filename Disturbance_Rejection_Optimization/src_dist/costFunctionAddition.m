@@ -4,7 +4,7 @@ wc = getGainCrossover(C*G,1); %Find the 0dB crossover frequencies
 
 switch length(wc)
     case 1
-        costFunctionAddition=0; % C*G is stable
+        costFunctionAddition=0; 
     otherwise
         % C*G is unstable
         w_v = [10^-1:10^-1:10^6];    % Vector Of Frequencies

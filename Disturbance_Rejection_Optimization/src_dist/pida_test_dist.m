@@ -7,5 +7,14 @@ ClosedLoop = minreal(feedback(G,K));
 
 t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
-J=sum(abs(y)*dt); 
+
+costFunction = costFunctionAddition(G,K);
+switch costFunction
+    case 0
+        J=sum(abs(y)*dt);
+    otherwise
+        J=costFunction*1.2;
+end
+
+
 end
