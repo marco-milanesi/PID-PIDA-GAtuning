@@ -58,6 +58,8 @@ global alpha_hpz;
 global time_dl;
 global time_ddl;
 global omegazero;
+global minimum_IAE;
+minimum_IAE=100;
 variable = -1;     
 multi_pole = [1 2 3 4 8];
 alpha_fos = [0.1 0.2 0.5 1];
@@ -466,11 +468,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.name = strSelection;
         analized.systemTransferFunction = G;
         dt = 0.0001;%time step
- 
+        global minimum_IAE;
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         PopSize = 1;
-        MaxGeneration = 10;
+        MaxGeneration = 1;
 
 %% PID genetic algorithm
         %{
@@ -510,7 +512,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.pid_dist = ga_info_to_struct(IAEdist,controldist,infodist,'pid');
         analized.time = infodist.SettlingTime;
 
-
+%% Minum Error
+        minimum_IAE = 100;
+        
 %% PIDA genetic algorithm
         %{
         x(1) = Kp
@@ -529,15 +533,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
 %         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
         rng(1,'twister') % for reproducibility
-        population3 = rand(PopSize,4);
+        population3 = rand(PopSize,5);
         clear gaoutfun
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@gaoutfun);
-        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],optionsdist3);
+        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),5,-eye(5),zeros(5,1),[],[],[],[],[],optionsdist3);
         record_PIDA_dist = gaoutfun();
         save 'history_PIDA_dist.mat'  record_PIDA_dist ;
         
         
-        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(0.0001)) + (controldist3(4)*s^2)/((1 + s*0.0001)^2)); 
+        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(0.0001)) + (controldist3(4)*s^2)/((1 + s*(controldist3(4)/controldist3(5)))^2)); 
       
         global Disturb_PIDA;
         Disturb_PIDA = feedback(G,K_pidadist);

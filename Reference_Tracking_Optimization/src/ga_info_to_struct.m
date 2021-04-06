@@ -28,7 +28,7 @@ function controller = ga_info_to_struct(favl,x,S_controller,type)
                 controller.Ta = x(4);
                 controller.b = 1;
                 controller.c = 1;
-                controller.alfa = x(4)/0.0001;
+                controller.alfa = x(5);
         otherwise
                 controller.Ta=[];
                 controller.b=[];
