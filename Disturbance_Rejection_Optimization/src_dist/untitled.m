@@ -2,7 +2,7 @@
 clear all
 s=tf('s');
 dt = 0.0001;%time step
-variable =5;
+variable =2;
 G = (1/(1+variable*s))*exp(-s)
 
 
@@ -10,8 +10,8 @@ global minimun_IAE;
 minimun_IAE = 100;
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
-        PopSize = 50;
-        MaxGeneration = 100;
+        PopSize = 100;
+        MaxGeneration = 500;
         
 %% PIDA genetic algorithm
         %{
