@@ -18,7 +18,7 @@ ClosedLoop = feedback(Loop,1);
 stable = allmargin(Loop).Stable;
 t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
-J1=sum(abs(y)*dt);
+J1=sum(abs(1-y)*dt);
         
 switch stable
     case 1

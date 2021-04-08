@@ -476,8 +476,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
     
         %Population Size of each Iteration
-        PopSize = 1;
-        MaxGeneration = 1;
+        PopSize = 200;
+        MaxGeneration = 500;
         
         
 %% PID genetic algorithm
@@ -491,7 +491,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 % 
 %         %lower bounds lb
-%         lb_PID = [0.001 0.1 0.00001 3];
+         lb_PID = [0 0 0];
 %         %upper bounds ub 
 %         ub_PID = [10 500 10 500];
 %         options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -503,7 +503,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         population = rand(PopSize,3);
         clear gaoutfun
         options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@gaoutfun);
-        [control,IAE] = ga(@(K)pidtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options);
+        [control,IAE] = ga(@(K)pidtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],lb_PID,[],[],options);
         record_PID = gaoutfun();
         save 'history_PID.mat'  record_PID ;
         K_pid = control(1)*(1 + 1/(s*control(2)) + (control(3)*s)/(1 + s*(0.0001)));
@@ -533,7 +533,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4) = N
         %}         
 %         %lower bounds lb 
-%         lb_IPD = [0.001 0.1 0.1 3];
+         lb_IPD = [0 0 0];
 %         %upper bounds ub 
 %         ub_IPD = [10 500 20 150];
 %         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -543,7 +543,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         population1 = rand(PopSize,3);
         clear gaoutfun
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@gaoutfun);
-        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options1);
+        [control1,IAE1] = ga(@(K)ipdtest(G,dt,K),3,-eye(3),zeros(3,1),[],[],lb_IPD,[],[],options1);
         record_PI_D = gaoutfun();
         save 'history_PI_D.mat'  record_PI_D ;
         
@@ -578,7 +578,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
  
 %         %lower bounds lb 
-%         lb_DPI = [0.001 0.1 0.00001 3];
+         lb_DPI = [0 0 0];
 %         %upper bounds ub 
 %         ub_DPI = [50 500 10 500];
 %         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfun);
@@ -587,7 +587,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         population2 = rand(PopSize,3);
         clear gaoutfun
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@gaoutfun);
-        [control2,IAE2] = ga(@(K)dpitest(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],options2);
+        [control2,IAE2] = ga(@(K)dpitest(G,dt,K),3,-eye(3),zeros(3,1),[],[],lb_DPI,[],[],options2);
         record_I_PD = gaoutfun();
         save 'history_I_PD.mat'  record_I_PD ;
          
@@ -626,7 +626,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         %}
                     
 %         %lower bounds lb 
-%         lb_PIDA = [0.001 0.1 0.00001 0.1 10 3];
+         lb_PIDA = [0 0 0 0 0];
 %         %upper bounds ub 
 %         ub_PIDA = [10 500 10 600 600 33];
 %         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpida);
@@ -636,7 +636,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         population3 = rand(PopSize,5);
         clear gaoutfun
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@gaoutfun);
-        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),5,-eye(5),zeros(5,1),[],[],[],[],[],options3);
+        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),5,-eye(5),zeros(5,1),[],[],lb_PIDA,[],[],options3);
         record_PIDA = gaoutfun();
         save 'history_PIDA.mat'  record_PIDA ;
         

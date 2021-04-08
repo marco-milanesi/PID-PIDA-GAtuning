@@ -9,14 +9,14 @@ s = tf('s');
 
 K1 = parms(1);
 K2 = parms(1)/(s*parms(2));
-K3 = parms(1)*((s*parms(3))/(1+(0.0001)));
+K3 = parms(1)*((s*parms(3))/(1+(0.0001*s)));
 
 ClosedLoop = ((G*(K1+K2))/(1+(G*K3)+(G*(K1+K2))));
 Loop = series((K1+K2),feedback(G,K3));
 stable = allmargin(Loop).Stable;
 t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
-J1=sum(abs(y)*dt);
+J1=sum(abs(1-y)*dt);
         
 switch stable
     case 1
