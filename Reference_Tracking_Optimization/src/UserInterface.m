@@ -594,7 +594,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
          
         K1_dpi = control2(1);
         K2_dpi = control2(1)/(s*control2(2));
-        K3_dpi = control2(1)*((s*control2(3))/(1+(0.0001)));
+        K3_dpi = control2(1)*((s*control2(3))/(1+(s*0.0001)));
                 
         global ClosedLoop_DPI;
         ClosedLoop_DPI = minreal((G*(K1_dpi+K2_dpi))/(1+(G*K3_dpi)+(G*(K1_dpi+K2_dpi))));
