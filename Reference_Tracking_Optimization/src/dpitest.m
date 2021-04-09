@@ -9,7 +9,7 @@ s = tf('s');
 
 K1 = parms(1);
 K2 = parms(1)/(s*parms(2));
-K3 = parms(1)*((s*parms(3))/(1+(0.0001*s)));
+K3 = parms(1)*((s*parms(3))/(1+(parms(3)/parms(4))*s));
 
 ClosedLoop = ((G*(K1+K2))/(1+(G*K3)+(G*(K1+K2))));
 Loop = series((K1+K2),feedback(G,K3));

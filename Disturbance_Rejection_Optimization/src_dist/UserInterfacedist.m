@@ -472,7 +472,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         PopSize = 100;
-        MaxGeneration = 500;
+        MaxGeneration = 200;
 
 %% PID genetic algorithm
         %{
@@ -489,16 +489,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
 %         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
 %         K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
-
+lb=[0.00001 0.00001 0.00001 0.00001];
         rng(1,'twister') % for reproducibility
-        population = rand(PopSize,3);
+        population = rand(PopSize,4);
         clear gaoutfun
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@gaoutfun);
-        [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),3,-eye(3),zeros(3,1),[],[],[],[],[],optionsdist);
+        [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],lb,[],optionsdist);
         record_PID_dist = gaoutfun();
         save 'history_PID_dist.mat'  record_PID_dist ;
         
-        K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(0.0001)));
+        K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
         
         global Disturb_PID;
         Disturb_PID = feedback(G,K_piddist);
@@ -533,15 +533,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
 %         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
         rng(1,'twister') % for reproducibility
-        population3 = rand(PopSize,5);
-        clear gaoutfun
+        population3 = rand(PopSize,6);
+        lb1=[0.001 0.001 0.001 0.001 0.001 0.001];
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@gaoutfun);
-        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),5,-eye(5),zeros(5,1),[],[],[],[],[],optionsdist3);
+        [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],[],lb1,[],optionsdist3);
         record_PIDA_dist = gaoutfun();
         save 'history_PIDA_dist.mat'  record_PIDA_dist ;
         
         
-        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(0.0001)) + (controldist3(4)*s^2)/((1 + s*(controldist3(4)/controldist3(5)))^2)); 
+        K_pidadist = controldist3(1)*(1 + 1/(controldist3(2)*s) + (controldist3(3)*s)/(1 + s*(controldist3(3)/controldist3(6))) + (controldist3(4)*s^2)/((1 + s*(controldist3(4)/controldist3(5)))^2)); 
       
         global Disturb_PIDA;
         Disturb_PIDA = feedback(G,K_pidadist);

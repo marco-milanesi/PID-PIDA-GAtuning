@@ -2,7 +2,7 @@ function J = pidatest(G,dt,parms)
 global minimum_IAE;
 s = tf('s');
 
-K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(0.0001)) + (parms(4)*s^2)/((1 + s*(parms(4)/parms(5))))^2); 
+K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(6))) + (parms(4)*s^2)/((1 + s*(parms(4)/parms(5))))^2); 
 Loop = series(K,G);
 ClosedLoop = minreal(feedback(Loop,1));
 stable = allmargin(Loop).Stable;

@@ -2,20 +2,23 @@
 %%  
 s=tf('s');
 dt = 0.0001;%time step
-
-G = (variable*variable)/(s+1)/(s^2+(2*0.1*variable*s)+(variable*variable))
-
+variable = 5;
+G = (1/(1+variable*s))*exp(-s)
         PopSize = 100;
-        MaxGeneration = 2500;
+        MaxGeneration = 250;
         rng(1,'twister') % for reproducibility
-        population3 = rand(PopSize,4);
-        options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@myfunpida);
-        [control3,IAE3] = ga(@(K)pidatest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options3);
+        population = rand(PopSize,4);
+        clear gaoutfun
+        options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@gaoutfun);
+        [control,IAE] = ga(@(K)pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options);
+        record_PID = gaoutfun();
+        save 'history_PID.mat'  record_PID ;
+        K_pid = control(1)*(1 + 1/(s*control(2)) + (control(3)*s)/(1 + s*(control(3)/control(4))));
+ 
 
-        
-        K_pida = control3(1)*(1 + 1/(s*control3(2)) + (control3(3)*s)/(1 + s*(0.0001)) + (control3(4)*s^2)/((1 + s*0.0001)^2)); 
-       
-        Loop_PIDA = series(K_pida,G);
-        global ClosedLoop_PIDA;
-        ClosedLoop_PIDA = feedback(Loop_PIDA,1);
 
+        Loop_PID = series(K_pid,G);
+        global ClosedLoop_PID;
+        ClosedLoop_PID = feedback(Loop_PID,1);
+        t=0:dt:50;
+        step(ClosedLoop_PID,t);
