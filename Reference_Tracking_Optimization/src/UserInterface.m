@@ -469,7 +469,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.systemTransferFunction = G;
 
         %time step
-        dt = 0.001 ;
+        dt = 0.0001 ;
         global minimum_IAE;
 
  %% Genetic Algorithm Paremeters

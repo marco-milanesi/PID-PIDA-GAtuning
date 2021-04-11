@@ -9,17 +9,17 @@ t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
 J1=sum(abs(y)*dt);
         
-% switch stable
-%     case 1
-%         if J1< minimum_IAE
-%            minimum_IAE=J1;
-%         end
-%     otherwise 
-%         if J1< minimum_IAE
-%             costFunction = costFunctionAddition(G*K);
-%             J1 = J1+0.1*costFunction;
-%         end
-% end
+switch stable
+    case 1
+        if J1< minimum_IAE
+           minimum_IAE=J1;
+        end
+    otherwise 
+        if J1< minimum_IAE
+            costFunction = costFunctionAddition(G*K);
+            J1 = J1+0.1*costFunction;
+        end
+end
 
 J=J1;
 

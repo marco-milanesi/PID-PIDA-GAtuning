@@ -467,7 +467,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized = struct;
         analized.name = strSelection;
         analized.systemTransferFunction = G;
-        dt = 0.0001;%time step
+        dt = 0.001;%time step
         global minimum_IAE;
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
