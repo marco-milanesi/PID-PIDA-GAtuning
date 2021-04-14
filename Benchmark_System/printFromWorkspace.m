@@ -1,5 +1,5 @@
 function printFromWorkspace(dataStep, dataDist)
-figure();
+figure('NumberTitle', 'off', 'Name', dataDist.name);
 %% set point plote
         t_sim = 0:0.001:2*dataStep.time;
         subplot(2,2,1);
@@ -47,6 +47,7 @@ figure();
     bar(X_dist,Y_dist);    
     title('IAE Trend disturbance rejection');
  %% Save figure
-    savefig('Figure');
+
+    savefig(dataDist.name);
 end
 
