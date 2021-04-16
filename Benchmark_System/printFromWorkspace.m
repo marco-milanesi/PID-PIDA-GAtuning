@@ -50,21 +50,20 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     
     
 %% Step control variable
+    G = dataStep.systemTransferFunction;
+    K_pid = dataStep.Controller.pid;
+    K_pida = dataStep.Controller.pida;
+    K1 = dataStep.Controller.ipd.K1;
+    K2 = dataStep.Controller.ipd.K2;
+    c1 = dataStep.Controller.dpi.K1;
+    c2 = dataStep.Controller.dpi.K2;
+    c3 = dataStep.Controller.dpi.K3;
+    
+    u_dpi = (c1+c2)/(1+G*c1*c2 +G*c3);
+    u_ipd = (K1)/(1+G*(K1+K2));
 
-    [y_PID,t] = step(dataStep.ClosedLoop.pid,t_sim);
-    u_PID = lsim(dataStep.Controller.pid,1-y_PID,t);
-    
-%     [y_I_PD,t] = step(dataStep.ClosedLoop.ipd,t_sim);
-%     u_I_PD = lsim(dataStep.Controller.ipd,1-y_I_PD,t);
-%     
-%     [y_PI_D,t] = step(dataStep.ClosedLoop.dpi,t_sim);
-%     u_PI_D = lsim(dataStep.Controller.dpi,1-y_PI_D,t);
-    
-    [y_PIDA,t] = step(dataStep.ClosedLoop.pida,t_sim);
-    u_PIDA = lsim(dataStep.Controller.pida,1-y_PIDA,t);
-    
     subplot(2,3,2);
-    plot(t_sim,u_PID,'r-',t_sim,u_PIDA,'m-');
+    plot(t_sim,step(K_pid/(1+K_pid*G),t_sim),'r-',t_sim,step(u_ipd,t_sim),'b-',t_sim,step(u_dpi,t_sim),'k-',t_sim,step(K_pida/(1+K_pida*G),t_sim),'m-');
     legend('PID','I-PD','PI-D','PIDA');
     title('Control variable');
     xlabel('time');
