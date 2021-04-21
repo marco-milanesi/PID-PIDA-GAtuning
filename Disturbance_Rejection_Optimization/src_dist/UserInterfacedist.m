@@ -472,7 +472,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         PopSize = 200;
+
         MaxGeneration = 1500;
+
+
 
 %% PID genetic algorithm
         %{
@@ -492,13 +495,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
 
         rng(1,'twister') %for reproducibility
-         population = rand(PopSize,4);
+
+        population = rand(PopSize,4);
+
         
         clear gaoutfun
 
-        for k=1:PopSize
-          mat_PID(k,:)=[5.1711857 1.18025229  1.90128973 319.455905];
-        end
+%         for k=1:PopSize
+%           mat_PID(k,:)=[1.15569584684262 4.32129227937765  2.88629198028713 106.729249387601];
+%         end
         
         
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@gaoutfun);
@@ -542,14 +547,21 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
 
         rng(1,'twister') % for reproducibility
-       population3 = rand(PopSize,6);
-        
+
+        population3 = rand(PopSize,6);
+
         clear gaoutfun
         
 %         for k=1:PopSize
+
+%           mat_PIDA(k,:)=[3.29969993562398 5.3262966820908  2.99080475852572 5.48875716112868 139.62251985722  2.31663534236129];
+%         end
+%         
+
 %           mat_PIDA(k,:)=[208.5087277 0.05278840  18.13698337 27.8580705 0.8877880383  96.41769598];
 %         end
         
+
         
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@gaoutfun);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],[],[],[],optionsdist3);
