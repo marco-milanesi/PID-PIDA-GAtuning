@@ -83,6 +83,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     
  %% Save figure
     savefig(dataDist.name);
+<<<<<<< HEAD
     
 %%
 %% histograph set point
@@ -113,5 +114,10 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     
     
     
+=======
+
+%% plot latex Workspace
+    conversione_latex(dataStep, dataDist)
+>>>>>>> a20e4ee42b32e5c53f34de08928787aee98790d5
 end
 
