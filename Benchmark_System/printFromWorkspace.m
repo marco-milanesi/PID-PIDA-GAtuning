@@ -81,7 +81,9 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     grid on;
     
  %% Save figure
-
     savefig(dataDist.name);
+
+%% plot latex Workspace
+    conversione_latex(dataStep, dataDist)
 end
 
