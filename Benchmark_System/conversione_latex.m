@@ -11,12 +11,12 @@ System= latex(sys)
 
 
 %% set point
-%pid%
+%pid
 SYSpid=dataStep.Controller.pid;
 [num,den]=tfdata(SYSpid);
 sys_syms = vpa(poly2sym(cell2mat(num),s)/poly2sym(cell2mat(den),s),4);
 pid = latex(sys_syms)
-%ipd%
+%i-pd
 SYSipd1=dataStep.Controller.ipd.K1;
 SYSipd2=dataStep.Controller.ipd.K2;
 [num1,den1]=tfdata(SYSipd1);
@@ -25,7 +25,7 @@ sys_syms1 = vpa(poly2sym(cell2mat(num1),s)/poly2sym(cell2mat(den1),s),4);
 sys_syms2 = vpa(poly2sym(cell2mat(num2),s)/poly2sym(cell2mat(den2),s),4);
 c1_ipd = latex(sys_syms1)
 c2_ipd = latex(sys_syms2) 
-%dpi%
+%pi-d
 sys_syms1=dataStep.Controller.dpi.K1;
 SYSdpi2=dataStep.Controller.dpi.K2;
 SYSdpi3=dataStep.Controller.dpi.K3;
@@ -36,7 +36,7 @@ sys_syms3 = vpa(poly2sym(cell2mat(numd3),s)/poly2sym(cell2mat(dend3),s),4);
 c1_dpi = sys_syms1
 c2_dpi = latex(sys_syms2)
 c3_dpi = latex(sys_syms3)
-%èida%
+%pida
 SYSpida=dataStep.Controller.pida;
 [numpida,denpida]=tfdata(SYSpida);
 sys_symspida = vpa(poly2sym(cell2mat(numpida),s)/poly2sym(cell2mat(denpida),s),4);
@@ -45,12 +45,12 @@ pida = latex(sys_symspida)
 
 
 %% disturbance rejection latex
-%pid%
+%pid
 SYSpidd=dataDist.Controller.pid;
 [numd,dend]=tfdata(SYSpidd);
 sys_symsd = vpa(poly2sym(cell2mat(numd),s)/poly2sym(cell2mat(dend),s),4);
 pid_dist = latex(sys_symsd)
-%pida%
+%pida
 SYSpidad=dataDist.Controller.pida;
 [numpidad,denpidad]=tfdata(SYSpidad);
 sys_symspidad = vpa(poly2sym(cell2mat(numpidad),s)/poly2sym(cell2mat(denpidad),s),4);
@@ -69,6 +69,12 @@ pida_dist = latex(sys_symspidad)
 %% disturbance rejection  gain maigin and phase margin
 [pid_dist_gainMargin,pid_dist_phaseMargin] = margin(dataDist.Loop.pid)
 [pida_dist_gainMargin,pida_dist_phaseMargin] = margin(dataDist.Loop.pida)
+
+
+%% Maximum Sensitivity
+% 
+% S = feedback(1,dataDist.Loop.pid);
+% PeakGain = getPeakGain(S);
 
 end
 
