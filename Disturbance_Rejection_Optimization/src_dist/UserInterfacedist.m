@@ -496,7 +496,11 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         rng(1,'twister') %for reproducibility
 
+<<<<<<< HEAD
         population = rand(PopSize,4);
+=======
+         population = rand(PopSize,4);
+>>>>>>> f042d8e26c59b17dbce82137ad32ce8fe153b48b
 
         
         clear gaoutfun
@@ -548,14 +552,22 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         rng(1,'twister') % for reproducibility
 
+<<<<<<< HEAD
         population3 = rand(PopSize,6);
+=======
+         population3 = rand(PopSize,6);
+>>>>>>> f042d8e26c59b17dbce82137ad32ce8fe153b48b
 
         clear gaoutfun
         
 %         for k=1:PopSize
 %           mat_PIDA(k,:)=[76.5082562855351 0.0539103536379477  46.5609189632138 0.0976284717785702 9.60289421411683  15.7541362558075];
 %         end
+<<<<<<< HEAD
         
+=======
+%         
+>>>>>>> f042d8e26c59b17dbce82137ad32ce8fe153b48b
         
         
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@gaoutfun);
