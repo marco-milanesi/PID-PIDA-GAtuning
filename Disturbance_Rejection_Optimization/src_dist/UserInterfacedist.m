@@ -496,17 +496,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         rng(1,'twister') %for reproducibility
 
-%         population = rand(PopSize,4);
+        population = rand(PopSize,4);
 
         
         clear gaoutfun
 
-        for k=1:PopSize
-          mat_PID(k,:)=[2.3747839828699 0.0856403675794818  1.04706922021382 114.60043829008];
-        end
+%         for k=1:PopSize
+%           mat_PID(k,:)=[2.3747839828699 0.0856403675794818  1.04706922021382 114.60043829008];
+%         end
         
         
-        optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',mat_PID,'OutputFcn',@gaoutfun);
+        optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@gaoutfun);
         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],optionsdist);
         record_PID_dist = gaoutfun();
         save 'history_PID_dist.mat'  record_PID_dist ;
@@ -548,17 +548,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         rng(1,'twister') % for reproducibility
 
-%         population3 = rand(PopSize,6);
+        population3 = rand(PopSize,6);
 
         clear gaoutfun
         
-        for k=1:PopSize
-          mat_PIDA(k,:)=[76.5082562855351 0.0539103536379477  46.5609189632138 0.0976284717785702 9.60289421411683  15.7541362558075];
-        end
+%         for k=1:PopSize
+%           mat_PIDA(k,:)=[76.5082562855351 0.0539103536379477  46.5609189632138 0.0976284717785702 9.60289421411683  15.7541362558075];
+%         end
         
         
         
-        optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',mat_PIDA,'OutputFcn',@gaoutfun);
+        optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@gaoutfun);
         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],[],[],[],optionsdist3);
         record_PIDA_dist = gaoutfun();
         save 'history_PIDA_dist.mat'  record_PIDA_dist ;
