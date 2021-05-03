@@ -83,6 +83,34 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     grid on;
     
 
+%% Maximum Sensitivity Set point
+
+    subplot(2,2,2);
+    opts = bodeoptions;
+    opts.PhaseVisible = 'off';
+    
+    bode(feedback(1,dataStep.Loop.pid),feedback(1,dataStep.Loop.ipd),feedback(1,dataStep.Loop.dpi),feedback(1,dataStep.Loop.pida),opts);
+
+    legend('PID','I-PD','PI-D','PIDA');
+    title('Sensitivity function');
+    xlabel('time');
+    ylabel('amplitude');
+    grid on;
+       
+%% Maximum Sensitivity Disturbance
+
+    subplot(2,2,4);
+    opts = bodeoptions;
+    opts.PhaseVisible = 'off';
+    bode(feedback(1,dataDist.Loop.pid),feedback(1,dataDist.Loop.pida),opts)
+    legend('PID','PIDA');
+    title('Sensitivity function');
+    xlabel('time');
+    ylabel('amplitude');
+    grid on;
+    
+
+
  %% Save figure
     savefig(strcat(dataDist.name,"_contol"));
 %% plot latex Workspace

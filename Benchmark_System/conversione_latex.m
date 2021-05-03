@@ -71,10 +71,7 @@ pida_dist = latex(sys_symspidad)
 [pida_dist_gainMargin,pida_dist_phaseMargin] = margin(dataDist.Loop.pida)
 
 
-%% Maximum Sensitivity
-% 
-% S = feedback(1,dataDist.Loop.pid);
-% PeakGain = getPeakGain(S);
+
 
 end
 
