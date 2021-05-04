@@ -466,6 +466,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
                 G = [];
         end
         analized = struct;
+        analized.type = variable;
+        analized.name = strSelection;
         analized.systemTransferFunction = G;
 
         %time step
@@ -475,8 +477,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 100;
-        MaxGeneration = 200;
+        PopSize = 1;
+        MaxGeneration = 1;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility

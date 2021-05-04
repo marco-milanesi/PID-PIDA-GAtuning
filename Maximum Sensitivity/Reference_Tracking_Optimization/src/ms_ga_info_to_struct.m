@@ -1,4 +1,4 @@
-function controller = ga_info_to_struct(favl,x,S_controller,type)
+function controller = ms_ga_info_to_struct(favl,x,S_controller,type)
     %funzione per convertire i dati riguardanti un controllore in una sotto
     %struttura
     controller = struct ;

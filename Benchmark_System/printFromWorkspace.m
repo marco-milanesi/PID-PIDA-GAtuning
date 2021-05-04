@@ -108,12 +108,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     xlabel('time');
     ylabel('amplitude');
     grid on;
-    
-
-
  %% Save figure
     savefig(strcat(dataDist.name,"_contol"));
-%% plot latex Workspace
-    conversione_latex(dataStep, dataDist)
 end
 

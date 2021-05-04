@@ -466,6 +466,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
                 G = [];
         end
         analized = struct;
+        analized.type = variable;
+        analized.name = strSelection;
         analized.systemTransferFunction = G;
 
         %time step
@@ -475,8 +477,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 1;
-        MaxGeneration = 1;
+        PopSize = 100;
+        MaxGeneration = 200;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
@@ -503,7 +505,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         analized.Loop.pid = Loop_PID;
         analized.ClosedLoop.pid = ClosedLoop_PID;
-        
+        analized.Sensitivity.pid = getPeakGain(feedback(1,Loop_PID));
         info = stepinfo(ClosedLoop_PID);
         analized.pid = ga_info_to_struct(IAE,control,info,'pid');
         analized.time = info.SettlingTime;
@@ -540,7 +542,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         analized.Controller.ipd.K1 = K1_ipd;
         analized.Controller.ipd.K2 = K2_ipd;
-        
+        analized.Sensitivity.ipd= getPeakGain(feedback(1,Loop_IPD));
         analized.Loop.ipd = Loop_IPD;
         analized.ClosedLoop.ipd = ClosedLoop_IPD;
         info = stepinfo(ClosedLoop_IPD); 
@@ -580,8 +582,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.Controller.dpi.K1 = K1_dpi;
         analized.Controller.dpi.K2 = K2_dpi;
         analized.Controller.dpi.K3 = K3_dpi;
-        
-        analized.Loop.dpi =(K1_dpi+K2_dpi)*(G/(1+(G*K3_dpi)));
+        Loop_DPI = (K1_dpi+K2_dpi)*(G/(1+(G*K3_dpi)));
+        analized.Sensitivity.dpi = getPeakGain(feedback(1,Loop_DPI));
+        analized.Loop.dpi =Loop_DPI;
         analized.ClosedLoop.dpi = ClosedLoop_DPI;
         
         info = stepinfo(ClosedLoop_DPI); 
@@ -615,7 +618,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_PIDA = series(K_pida,G);
         global ClosedLoop_PIDA;
         ClosedLoop_PIDA = feedback(Loop_PIDA,1);
-        
+        analized.Sensitivity.pida = getPeakGain(feedback(1,Loop_PIDA));
         analized.Controller.pida = K_pida;
         analized.Loop.pida = Loop_PIDA;
         

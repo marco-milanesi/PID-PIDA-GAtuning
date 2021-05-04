@@ -1,4 +1,4 @@
-function costFunctionAddition = costFunctionAddition(Loop)
+function costFunctionAddition = ms_costFunctionAddition(Loop)
 
 wc = getGainCrossover(Loop,1); %Find the 0dB crossover frequencies
 

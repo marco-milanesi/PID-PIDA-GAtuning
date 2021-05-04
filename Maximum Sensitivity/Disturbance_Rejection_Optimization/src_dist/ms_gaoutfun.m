@@ -1,4 +1,4 @@
-function [state,options,optchanged] = gaoutfun(options,state,flag)
+function [state,options,optchanged] = ms_gaoutfun(options,state,flag)
     persistent state_record 
     if isempty(state_record)
       state_record = struct('Population', {}, 'Best', {}, 'Score', {});

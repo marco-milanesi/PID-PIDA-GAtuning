@@ -70,8 +70,5 @@ pida_dist = latex(sys_symspidad)
 [pid_dist_gainMargin,pid_dist_phaseMargin] = margin(dataDist.Loop.pid)
 [pida_dist_gainMargin,pida_dist_phaseMargin] = margin(dataDist.Loop.pida)
 
-
-
-
 end
 

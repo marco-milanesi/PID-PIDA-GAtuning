@@ -20,6 +20,8 @@ function [] = ms_print_exceldist(ms_dataDist,name,type)
     
     filename_mat = strcat(name,string(type),'_ms_dist','.mat');
     save(filename_mat,'ms_dataDist');
+    
+    ms_Latex_dist(ms_dataDist,name,type)
 end
 
     
