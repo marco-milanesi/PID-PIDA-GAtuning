@@ -1,12 +1,12 @@
 function [] = ms_print_exceldist(ms_dataDist,name,type)
     %pid con b=1 c=1 ingresso disturbo
-    PID_DIST ={ms_dataDist.pid_dist.IAE;ms_dataDist.pid_dist.Kp;ms_dataDist.pid_dist.Ti;ms_dataDist.pid_dist.Td;ms_dataDist.pid_dist.Ta;ms_dataDist.pid_dist.b;ms_dataDist.pid_dist.c;ms_dataDist.pid_dist.N;ms_dataDist.pid_dist.alfa;ms_dataDist.pid_dist.Risetime;ms_dataDist.pid_dist.settlingtime;ms_dataDist.pid_dist.overshoot;ms_dataDist.pid_dist.undershoot;ms_dataDist.pid_dist.peak;ms_dataDist.pid_dist.peaktime};
+    PID_DIST ={ms_dataDist.pid_dist.IAE;ms_dataDist.pid_dist.Kp;ms_dataDist.pid_dist.Ti;ms_dataDist.pid_dist.Td;ms_dataDist.pid_dist.Ta;ms_dataDist.pid_dist.b;ms_dataDist.pid_dist.c;ms_dataDist.pid_dist.N;ms_dataDist.pid_dist.alfa;ms_dataDist.Sensitivity.pid;ms_dataDist.pid_dist.Risetime;ms_dataDist.pid_dist.settlingtime;ms_dataDist.pid_dist.overshoot;ms_dataDist.pid_dist.undershoot;ms_dataDist.pid_dist.peak;ms_dataDist.pid_dist.peaktime};
     
     %pida ingresso disturbo
-    PIDA_DIST ={ms_dataDist.pida_dist.IAE;ms_dataDist.pida_dist.Kp;ms_dataDist.pida_dist.Ti;ms_dataDist.pida_dist.Td;ms_dataDist.pida_dist.Ta;ms_dataDist.pida_dist.b;ms_dataDist.pida_dist.c;ms_dataDist.pida_dist.N;ms_dataDist.pida_dist.alfa;ms_dataDist.pida_dist.Risetime;ms_dataDist.pida_dist.settlingtime;ms_dataDist.pida_dist.overshoot;ms_dataDist.pida_dist.undershoot;ms_dataDist.pida_dist.peak;ms_dataDist.pida_dist.peaktime};
+    PIDA_DIST ={ms_dataDist.pida_dist.IAE;ms_dataDist.pida_dist.Kp;ms_dataDist.pida_dist.Ti;ms_dataDist.pida_dist.Td;ms_dataDist.pida_dist.Ta;ms_dataDist.pida_dist.b;ms_dataDist.pida_dist.c;ms_dataDist.pida_dist.N;ms_dataDist.pida_dist.alfa;ms_dataDist.Sensitivity.pida;ms_dataDist.pida_dist.Risetime;ms_dataDist.pida_dist.settlingtime;ms_dataDist.pida_dist.overshoot;ms_dataDist.pida_dist.undershoot;ms_dataDist.pida_dist.peak;ms_dataDist.pida_dist.peaktime};
     
     %nomi dei  parametri dei pid/pida
-    parametri = {'IAE';'Kp';'Ti';'Td';'Ta';'b';'c';'N';'alfa';'Risetime';'settlingtime';'overshoot %';'undershoot';'peak';'peaktime'};
+    parametri = {'IAE';'Kp';'Ti';'Td';'Ta';'b';'c';'N';'alfa';'Sensitivity';'Risetime';'settlingtime';'overshoot %';'undershoot';'peak';'peaktime'};
     
     %generaazione dati in tabella completo     
     %Tab = table(parametri,PID_DIST,IPD_DIST,DPI_DIST,PIDA_DIST);

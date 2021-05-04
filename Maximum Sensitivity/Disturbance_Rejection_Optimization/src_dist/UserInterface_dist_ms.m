@@ -520,7 +520,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_PID = series(G,K_piddist);
         analized.Loop.pid = Loop_PID;
         analized.Disturb.pid = Disturb_PID;
-        
+        analized.Sensitivity.pid = getPeakGain(feedback(1,Loop_PID));
         infodist = stepinfo(Disturb_PID);
         analized.pid_dist = ms_ga_info_to_struct(IAEdist,controldist,infodist,'pid');
         analized.time = infodist.SettlingTime;
@@ -573,7 +573,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         analized.Controller.pida = K_pidadist;
         Loop_PIDA = series(K_pidadist,G);
         analized.Loop.pida = Loop_PIDA;
-        
+        analized.Sensitivity.pida = getPeakGain(feedback(1,Loop_PIDA));
         analized.Disturb.pida = Disturb_PIDA;
         infodist3 = stepinfo(Disturb_PIDA);
         analized.pida_dist = ms_ga_info_to_struct(IAEdist3,controldist3,infodist3,'pida');

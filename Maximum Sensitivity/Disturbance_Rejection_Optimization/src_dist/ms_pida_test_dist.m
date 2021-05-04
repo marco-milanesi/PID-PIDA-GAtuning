@@ -8,7 +8,7 @@ stable = allmargin(G*K).Stable;
 t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
 J1=sum(abs(y)*dt);
-        
+Loop = series(K,G);
 switch stable
     case 1
         S = feedback(1,Loop);
