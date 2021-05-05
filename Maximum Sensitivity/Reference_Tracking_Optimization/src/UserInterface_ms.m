@@ -566,7 +566,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %             mat_PI_D(k,:)=[0.8992 6.3313 2.2645 40.0796];
 %         end
 %         
-        clear gaoutfun
+        clear ms_gaoutfun
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@ms_gaoutfun);
         [control2,IAE2] = ga(@(K)ms_dpitest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options2);
         record_I_PD = ms_gaoutfun();
