@@ -51,6 +51,8 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
  %% Save figure
     savefig(dataDist.name);
     figure('NumberTitle', 'off', 'Name', strcat(dataDist.name,"_contol"));
+    
+    
 %% Step control variable
     G = dataStep.systemTransferFunction;
     K_pid = dataStep.Controller.pid;

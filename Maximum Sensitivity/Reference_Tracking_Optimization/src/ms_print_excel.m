@@ -25,12 +25,12 @@ function [] = ms_print_excel(ms_dataStep,name,type)
     Tab = table(parametri,PID,IPD,DPI,PIDA);
     
     %generazione nome del file da salvare in base al sistema in input
-    filename_excel = strcat(name,string(type),'_ms','.xlsx');
+    filename_excel = strcat(name,string(type),'_ms14','.xlsx');
     
     %scrittura file excel
     writetable(Tab,filename_excel);
     
-    filename_mat = strcat(name,string(type),'_ms','.mat');
+    filename_mat = strcat(name,string(type),'_ms14','.mat');
     save(filename_mat,'ms_dataStep');
     ms_Latex(ms_dataStep,name,type);
 end

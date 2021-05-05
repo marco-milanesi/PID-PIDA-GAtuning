@@ -17,12 +17,12 @@ function [] = ms_print_exceldist(ms_dataDist,name,type)
     Tab = table(parametri,PID_DIST,PIDA_DIST);
     
     %generazione nome del file da salvare in base al sistema in input
-    filename_excel = strcat(name,string(type),'_ms_dist','.xlsx');
+    filename_excel = strcat(name,string(type),'_ms14_dist','.xlsx');
     
     %scrittura file excel
     writetable(Tab,filename_excel);
     
-    filename_mat = strcat(name,string(type),'_ms_dist','.mat');
+    filename_mat = strcat(name,string(type),'_ms14_dist','.mat');
     save(filename_mat,'ms_dataDist');
     
     ms_Latex_dist(ms_dataDist,name,type)
