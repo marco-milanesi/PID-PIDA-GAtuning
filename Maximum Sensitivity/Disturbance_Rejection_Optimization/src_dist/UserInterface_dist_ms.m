@@ -472,10 +472,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         
-        PopSize = 100;
-        MaxGeneration = 1000;
-
-
+        PopSize = 250;
+        MaxGeneration = 1500;
 
 %% PID genetic algorithm
         %{
@@ -511,10 +509,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         record_PID_dist = ms_gaoutfun();
         save 'ms_history_PID_dist.mat'  record_PID_dist ;
         
+        
         K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
         
         global Disturb_PID;
         Disturb_PID = feedback(G,K_piddist);
+        t = 0:dt:100;
+        [y,t] = step(Disturb_PID,t);
+        IAEdist=sum(abs(y)*dt);
         
         analized.Controller.pid = K_piddist;
         Loop_PID = series(G,K_piddist);
@@ -570,6 +572,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         global Disturb_PIDA;
         Disturb_PIDA = feedback(G,K_pidadist);
                 
+        t = 0:dt:100;
+        [y,t] = step(Disturb_PIDA,t);
+        IAEdist3=sum(abs(y)*dt);
+        
         analized.Controller.pida = K_pidadist;
         Loop_PIDA = series(K_pidadist,G);
         analized.Loop.pida = Loop_PIDA;

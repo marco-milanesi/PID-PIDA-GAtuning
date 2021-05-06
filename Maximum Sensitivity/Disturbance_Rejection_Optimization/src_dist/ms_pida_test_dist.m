@@ -18,16 +18,21 @@ switch stable
 %         end
         
         if peakGain > 1.4
-            J1 = J1 + 0.1*peakGain;
+            if peakGain > 3
+                J1 = J1 + 0.6*peakGain;
+            else
+                J1 = J1 + 0.2*peakGain;
+            end
         end
+        
         if J1< minimum_IAE
             minimum_IAE=J1;
         end
         
     otherwise
-        if J1< minimum_IAE
+        if J1< (minimum_IAE)
             costFunction = ms_costFunctionAddition(Loop);
-            J1 = J1+0.1*costFunction;
+            J1 = J1+0.3*costFunction;
         end
 end
 
