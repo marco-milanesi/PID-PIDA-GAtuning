@@ -19,11 +19,14 @@ switch stable
         
         if peakGain > 1.4
             if peakGain > 3
-                J1 = J1 + 0.6*peakGain;
-            else
-                J1 = J1 + 0.2*peakGain;
+                J1 = J1 + peakGain;
             end
+            if peakGain > 2
+                J1 = J1 + 0.5*peakGain;
+            end
+            J1 = J1 + 0.2*peakGain;
         end
+        
         
         if J1< minimum_IAE
             minimum_IAE=J1;

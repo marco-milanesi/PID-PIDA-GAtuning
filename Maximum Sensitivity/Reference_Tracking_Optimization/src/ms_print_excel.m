@@ -6,7 +6,7 @@ function [] = ms_print_excel(ms_dataStep,name,type)
     [pida_gainMargin,pida_phaseMargin] =margin(ms_dataStep.Loop.pida);
 
     %pid con b=1 c=1 ingresso setpoint
-    PID ={ms_dataStep.pid.IAE;ms_dataStep.pid.Kp;ms_dataStep.pid.Ti;ms_dataStep.pid.Td;ms_dataStep.pid.Ta;ms_dataStep.pid.b;ms_dataStep.pid.c;ms_dataStep.pid.N;ms_dataStep.pid.alfa;ms_dataStep.Sensitivity.pid;ms_dataStep.pid.Risetime;ms_dataStep.pid.settlingtime;ms_dataStep.pid.overshoot;ms_dataStep.pid.undershoot;ms_dataStep.pid.peak;ms_dataStep.pid.peaktimepid_gainMargin;pid_phaseMargin};
+    PID ={ms_dataStep.pid.IAE;ms_dataStep.pid.Kp;ms_dataStep.pid.Ti;ms_dataStep.pid.Td;ms_dataStep.pid.Ta;ms_dataStep.pid.b;ms_dataStep.pid.c;ms_dataStep.pid.N;ms_dataStep.pid.alfa;ms_dataStep.Sensitivity.pid;ms_dataStep.pid.Risetime;ms_dataStep.pid.settlingtime;ms_dataStep.pid.overshoot;ms_dataStep.pid.undershoot;ms_dataStep.pid.peak;ms_dataStep.pid.peaktime;pid_gainMargin;pid_phaseMargin};
     
     %pid con b=0 c=1 ingresso setpoint
     IPD ={ms_dataStep.ipd.IAE;ms_dataStep.ipd.Kp;ms_dataStep.ipd.Ti;ms_dataStep.ipd.Td;ms_dataStep.ipd.Ta;ms_dataStep.ipd.b;ms_dataStep.ipd.c;ms_dataStep.ipd.N;ms_dataStep.ipd.alfa;ms_dataStep.Sensitivity.ipd;ms_dataStep.ipd.Risetime;ms_dataStep.ipd.settlingtime;ms_dataStep.ipd.overshoot;ms_dataStep.ipd.undershoot;ms_dataStep.ipd.peak;ms_dataStep.ipd.peaktime;ipd_gainMargin;ipd_phaseMargin};
