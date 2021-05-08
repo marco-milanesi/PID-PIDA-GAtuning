@@ -3,7 +3,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
 
 %% set point plote
         t_sim = 0:0.001:2*dataStep.time;
-        subplot(2,2,1);
+         subplot(2,2,1);
         plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),'r-',t_sim,step(dataStep.ClosedLoop.ipd,t_sim),'b-',t_sim,step(dataStep.ClosedLoop.dpi,t_sim),'k-',t_sim,step(dataStep.ClosedLoop.pida,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
         title('reference traking');
@@ -13,8 +13,9 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
                 
 
 %% disturbance rejection plote
+%figure();
         t_sim = 0:0.001:2*dataStep.time;
-        subplot(2,2,3);
+         subplot(2,2,3);
         plot(t_sim,step(dataDist.Disturb.pid,t_sim),'r-',t_sim,step(dataDist.Disturb.pida,t_sim),'m-');
         legend('PID','PIDA');
         title('disturbance rejection');
@@ -86,7 +87,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     
 
 %% Maximum Sensitivity Set point
-
+    %figure();
     subplot(2,2,2);
     opts = bodeoptions;
     opts.PhaseVisible = 'off';
@@ -100,7 +101,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     grid on;
        
 %% Maximum Sensitivity Disturbance
-
+    %figure();
     subplot(2,2,4);
     opts = bodeoptions;
     opts.PhaseVisible = 'off';
