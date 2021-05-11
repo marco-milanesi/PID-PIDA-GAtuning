@@ -14,12 +14,14 @@ switch stable
     case 1
         S = feedback(1,Loop);
         peakGain = getPeakGain(S);
-%         if peakGain > 2
-%            J1 = J1 + 0.1*peakGain;
-%         end
         if peakGain > 1.4
-           J1 = J1 + 0.1*peakGain;
+            if peakGain > 1.45
+           J1 = J1 + 100*peakGain;
+            else
+           J1 = J1 + 10*peakGain;
+            end
         end
+        
         if J1< minimum_IAE
             minimum_IAE=J1;
         end
