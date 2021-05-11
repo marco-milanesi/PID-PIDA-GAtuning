@@ -106,5 +106,5 @@ Integral action is applied to the control error while Proportional and Derivativ
 
 | <a href="marcomilanesi.com" target="_blank">**Marco Milanesi**</a> | <a href="https://github.com/EdoGitMira" target="_blank">**Edoardo Mirandola**</a> |
 | :---: |:---:|
-| [![MarcoMilanesi](https://avatars.githubusercontent.com/u/47824890?v=3&s=200)](marcomilanesi.com)  | [![Mirandola Edoardo](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](https://github.com/EdoGitMira)  |
+| [![MarcoMilanesi](https://avatars.githubusercontent.com/u/47824890?v=3&s=200)](marcomilanesi.com)  | [![Mirandola Edoardo]()](https://github.com/EdoGitMira)  |
 | <a href="https://github.com/marco-milanesi" target="_blank">`github.com/marco-milanesi`</a> | <a href="https://github.com/EdoGitMira" target="_blank">`github.com/EdoGitMira`</a> |
