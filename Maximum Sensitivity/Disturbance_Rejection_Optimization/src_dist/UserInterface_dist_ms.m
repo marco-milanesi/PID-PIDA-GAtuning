@@ -491,17 +491,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
 %         K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
         
-
-        rng(1,'twister') %for reproducibility
-
-        population = rand(PopSize,4);
+% 
+%         rng(1,'twister') %for reproducibility
+% 
+%         population = rand(PopSize,4);
 
         
         clear ms_gaoutfun
 
-%         for k=1:PopSize
-%           mat_PID(k,:)=[2.3747839828699 0.0856403675794818  1.04706922021382 114.60043829008];
-%         end
+        for k=1:PopSize
+          population(k,:)=[0.775132378588289 2.529517530749842 0.829201433553357 72.035339619648200];;
+        end
         
         
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@ms_gaoutfun);
@@ -548,16 +548,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfunpidadist);
 %         [controldist3,IAEdist3] = ga(@(K)pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA_dist,ub_PIDA_dist,[],optionsdist3);
 
-        rng(1,'twister') % for reproducibility
-
-        population3 = rand(PopSize,6);
-
-
+%         rng(1,'twister') % for reproducibility
+% 
+%         population3 = rand(PopSize,6);
+% 
+% 
         clear ms_gaoutfun
         
-%         for k=1:PopSize
-%           mat_PIDA(k,:)=[76.5082562855351 0.0539103536379477  46.5609189632138 0.0976284717785702 9.60289421411683  15.7541362558075];
-%         end
+        for k=1:PopSize
+          population3(k,:)=[0.624861540874037 2.071638681458740 2.071638681458740 1.109809110119878 1.759526120166821 0.706287547530294];
+        end
         
         
         
