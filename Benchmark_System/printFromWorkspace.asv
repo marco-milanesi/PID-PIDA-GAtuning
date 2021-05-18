@@ -48,12 +48,12 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
 
  %% Save figure
      savefig(strcat(dataDist.name,"_setpoint")); 
-    figure('NumberTitle', 'off', 'Name', strcat(dataDist.name,num2dataStep.type));
+    figure('NumberTitle', 'off', 'Name', strcat(dataDist.name));
     
         
     
 %% disturbance rejection plote
-        t_sim = 0:0.001:2*dataStep.time;
+        t_sim = 0:0.001:10*dataStep.time;
          subplot(2,2,1);
         plot(t_sim,step(dataDist.Disturb.pid,t_sim),'r-',t_sim,step(dataDist.Disturb.pida,t_sim),'m-');
         legend('PID','PIDA');
@@ -63,7 +63,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
         grid on;
         
 %% histograph disturbance rejection
-    subplot(2,2,2);
+    subplot(2,2,3);
     Y_dist = [dataDist.pid_dist.IAE dataDist.pida_dist.IAE];
     % The bar function uses a sorted list of the categories, so the bars might display in a different order than you expect. 
     % To preserve the order, call the reordercats function.
@@ -77,7 +77,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
   
 %% Disturbance Control variable
    
-    subplot(2,2,3);
+    subplot(2,2,2);
     plot(t_sim,step(t_sim,-feedback(dataDist.Loop.pid ,1)),'r-',t_sim,step(t_sim,-feedback(dataDist.Loop.pida ,1)),'m-');
     legend('PID','PIDA');
     title('Control variable');
@@ -96,7 +96,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
 
     legend('PID','I-PD','PI-D','PIDA');
     title('Sensitivity function');
-    xlabel('time');
+    xlabel('frequency');
     ylabel('amplitude');
     grid on;
     savefig(strcat(dataDist.name,"_bodeset"));   
@@ -109,7 +109,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     bode(feedback(1,dataDist.Loop.pid),feedback(1,dataDist.Loop.pida),opts)
     legend('PID','PIDA');
     title('Sensitivity function');
-    xlabel('time');
+    xlabel('');
     ylabel('amplitude');
     grid on;
     savefig(strcat(dataDist.name,"_bodedist"));

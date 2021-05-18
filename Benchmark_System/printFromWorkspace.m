@@ -53,7 +53,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
         
     
 %% disturbance rejection plote
-        t_sim = 0:0.001:2*dataStep.time;
+        t_sim = 0:0.001:10*dataStep.time;
          subplot(2,2,1);
         plot(t_sim,step(dataDist.Disturb.pid,t_sim),'r-',t_sim,step(dataDist.Disturb.pida,t_sim),'m-');
         legend('PID','PIDA');
@@ -96,7 +96,7 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
 
     legend('PID','I-PD','PI-D','PIDA');
     title('Sensitivity function');
-    xlabel('time');
+    xlabel('frequency');
     ylabel('amplitude');
     grid on;
     savefig(strcat(dataDist.name,"_bodeset"));   
@@ -109,8 +109,8 @@ figure('NumberTitle', 'off', 'Name', dataDist.name);
     bode(feedback(1,dataDist.Loop.pid),feedback(1,dataDist.Loop.pida),opts)
     legend('PID','PIDA');
     title('Sensitivity function');
-    xlabel('time');
-    ylabel('amplitude');
+    xlabel('');
+    ylabel('frequency');
     grid on;
     savefig(strcat(dataDist.name,"_bodedist"));
 end
