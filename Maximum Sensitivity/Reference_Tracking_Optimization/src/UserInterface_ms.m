@@ -477,19 +477,19 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 200;
-        MaxGeneration = 500;
+        PopSize = 150;
+        MaxGeneration = 200;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
-%       population = rand(PopSize,4);
+      population = rand(PopSize,4);
         
         for k=1:PopSize
-            mat_PID(k,:)=[2.22139715466599 2.95058496899097 1.50957955593686 120.579985475212];
+         %   population=[1.753893554416655, 2.418019036936863, 0.789702583242023, 8.526260094875795];
         end
 
         clear ms_gaoutfun
-        options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',mat_PID,'OutputFcn',@ms_gaoutfun);
+        options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@ms_gaoutfun);
         [control,IAE] = ga(@(K)ms_pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options);
         record_PID = ms_gaoutfun();
         save 'ms_history_PID.mat'  record_PID ;
@@ -514,15 +514,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% I-PD genetic algorithm      
 
         rng(1,'twister') % for reproducibility
-%         population1 = rand(PopSize,4);
+        population1 = rand(PopSize,4);
 
         for k=1:PopSize
-            mat_I_PD(k,:)=[5.096216142394 2.24912310129299 1.1270175529762 101.174203210503];
+          %  population1=[9.591766281910320, 1.742022822873647, 0.763642583642651, 13.527847576188698];
         end
 
         
         clear ms_gaoutfun
-        options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',mat_I_PD,'OutputFcn',@ms_gaoutfun);
+        options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@ms_gaoutfun);
         [control1,IAE1] = ga(@(K)ms_ipdtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options1);
         record_PI_D = ms_gaoutfun();
         save 'ms_history_PI_D.mat'  record_PI_D ;
@@ -551,14 +551,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         minimum_IAE = 100;       
  %%   PI-D genetic algorithm 
         rng(1,'twister') % for reproducibility
-%         population2 = rand(PopSize,4);
+          population2= rand(PopSize,4);
 
         for k=1:PopSize
-            mat_PI_D(k,:)=[3.35230047947737 7.29901657303092 1.27919531399465 112.581389180334];
+          %  population2=[2.120210150906742, 4.355116333632377, 1.077675817863413, 12.225019371184747];
         end
          
         clear ms_gaoutfun
-        options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',mat_PI_D,'OutputFcn',@ms_gaoutfun);
+        options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@ms_gaoutfun);
         [control2,IAE2] = ga(@(K)ms_dpitest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options2);
         record_I_PD = ms_gaoutfun();
         save 'ms_history_I_PD.mat'  record_I_PD ;
@@ -589,15 +589,15 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %% PIDA genetic algorithm
 
         rng(1,'twister') % for reproducibility
-%         population3 = rand(PopSize,6);
+         population3 = rand(PopSize,6);
 
-%         
-        for k=1:PopSize
-            mat_PIDA(k,:)=[21.4166732623795 3.61413835410836 1.35535347663004 1.15168899327377 104.222112570915 3.63389423163309];       
-        end
+        
+       for k=1:PopSize
+          % population3=[2.880192534496034, 1.751044936945689, 1.774137020062742, 0.704569200357092, 5.598788026546289, 2.811736841123529];       
+       end
         
         clear ms_gaoutfun
-        options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',mat_PIDA,'OutputFcn',@ms_gaoutfun);
+        options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@ms_gaoutfun);
         [control3,IAE3] = ga(@(K)ms_pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],[],[],[],options3);
         record_PIDA = ms_gaoutfun();
         save 'ms_history_PIDA.mat'  record_PIDA ;
