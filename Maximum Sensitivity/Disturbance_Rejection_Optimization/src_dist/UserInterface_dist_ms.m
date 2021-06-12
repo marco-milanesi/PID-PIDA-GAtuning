@@ -494,13 +494,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % 
 %         rng(1,'twister') %for reproducibility
 % 
-%         population = rand(PopSize,4);
+         population = rand(PopSize,4);
 
         
         clear ms_gaoutfun
 
         for k=1:PopSize
-          population(k,:)=[0.775132378588289 2.529517530749842 0.829201433553357 72.035339619648200];;
+%          population(k,:)=[0.775132378588289 2.529517530749842 0.829201433553357 72.035339619648200];;
         end
         
         
@@ -550,13 +550,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 %         rng(1,'twister') % for reproducibility
 % 
-%         population3 = rand(PopSize,6);
+         population3 = rand(PopSize,6);
 % 
 % 
         clear ms_gaoutfun
         
         for k=1:PopSize
-          population3(k,:)=[0.624861540874037 2.071638681458740 2.071638681458740 1.109809110119878 1.759526120166821 0.706287547530294];
+          %population3(k,:)=[0.624861540874037 2.071638681458740 2.071638681458740 1.109809110119878 1.759526120166821 0.706287547530294];
         end
         
         
