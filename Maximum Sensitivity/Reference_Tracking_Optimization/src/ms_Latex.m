@@ -65,7 +65,7 @@ pida = strcat('$C(s) =', latex(sys_symspida),'$');
     Tab = table(parametri,PID,IPD,DPI,PIDA);
     
     %generazione nome del file da salvare in base al sistema in input
-    filename_excel = strcat(name,string(type),'_ms14_latex.xlsx');
+    filename_excel = strcat(name,string(type),'_ms2_latex.xlsx');
     
     %scrittura file excel
     writetable(Tab,filename_excel);
