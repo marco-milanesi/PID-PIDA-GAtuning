@@ -14,8 +14,8 @@ switch stable
     case 1
         S = feedback(1,Loop);
         peakGain = getPeakGain(S);
-        if peakGain > 1.4
-            if peakGain > 1.45
+        if peakGain > 2.0
+            if peakGain > 2.05
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;
