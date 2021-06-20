@@ -478,14 +478,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         %Population Size of each Iteration
         PopSize = 250;
-        MaxGeneration = 300;
+        MaxGeneration = 350;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
       population = rand(PopSize,4);
         
         for k=1:PopSize
-         %   population=[1.753893554416655, 2.418019036936863, 0.789702583242023, 8.526260094875795];
+      %      population=[1.0019, 2.4896, 0.8638, 16.9448];
         end
 
         clear ms_gaoutfun
@@ -517,7 +517,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         population1 = rand(PopSize,4);
 
         for k=1:PopSize
-          %  population1=[9.591766281910320, 1.742022822873647, 0.763642583642651, 13.527847576188698];
+        %    population1=[1.65313, 2.2745, 0.9054, 23.6062];
         end
 
         
@@ -554,7 +554,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
           population2= rand(PopSize,4);
 
         for k=1:PopSize
-          %  population2=[2.120210150906742, 4.355116333632377, 1.077675817863413, 12.225019371184747];
+         %   population2=[1.05038, 3.28554, 0.88909, 14.90313];
         end
          
         clear ms_gaoutfun
@@ -593,7 +593,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         
        for k=1:PopSize
-          % population3=[2.880192534496034, 1.751044936945689, 1.774137020062742, 0.704569200357092, 5.598788026546289, 2.811736841123529];       
+        %   population3=[1.0019909, 2.489697, 0.86382, 0, 0, 16.9448];       
        end
         
         clear ms_gaoutfun
@@ -617,7 +617,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end       
-          
+        save;
 %% export to Excel
         ms_print_excel(analized,strSelection,variable);
         msgbox('end simulation');
