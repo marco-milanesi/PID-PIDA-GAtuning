@@ -477,8 +477,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 250;
-        MaxGeneration = 350;
+        PopSize = 150;
+        MaxGeneration = 250;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
@@ -617,7 +617,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         if analized.time < info.SettlingTime
             analized.time = info.SettlingTime;
         end       
-        save;
+       
 %% export to Excel
         ms_print_excel(analized,strSelection,variable);
         msgbox('end simulation');

@@ -2,8 +2,8 @@
 %%  
 s=tf('s');
 dt = 0.0001;%time step
-variable =1
- G = (1-variable*s)/(s+1)^3
+variable =0.2
+G = 1/(s+1)/(1+variable*s)/(1+variable^2*s)/(1+variable^3*s)
         PopSize = 200;
         MaxGeneration = 300;
 
