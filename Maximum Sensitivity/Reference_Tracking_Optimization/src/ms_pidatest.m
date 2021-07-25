@@ -13,7 +13,7 @@ J1=sum(abs(1-y)*dt);
 switch stable
     case 1
         S = feedback(1,Loop);
-        peakGain = getPeakGain(S);
+        peakGain = peakgain_research(S);
         if peakGain > 1.4
             if peakGain > 1.45
            J1 = J1 + 100*peakGain;

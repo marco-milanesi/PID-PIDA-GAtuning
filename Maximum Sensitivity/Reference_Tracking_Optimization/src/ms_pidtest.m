@@ -1,7 +1,6 @@
 function J = ms_pidtest(G,dt,parms)
 global minimum_IAE
 s = tf('s');
-
 K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(4)))); 
 Loop = series(K,G);
 ClosedLoop = feedback(Loop,1);
@@ -14,7 +13,7 @@ J1=sum(abs(1-y)*dt);
 switch stable
     case 1
         S = feedback(1,Loop);
-        peakGain = getPeakGain(S);
+        peakGain = peakgain_research(S);
         if peakGain > 2.0
             if peakGain > 2.05
            J1 = J1 + 100*peakGain;

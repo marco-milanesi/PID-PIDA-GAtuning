@@ -12,7 +12,7 @@ Loop = series(K,G);
 switch stable
     case 1
         S = feedback(1,Loop);
-        peakGain = getPeakGain(S);
+        peakGain = peakgain_research_dist(S);   
 
         if peakGain > 2.0
             if peakGain > 2.05

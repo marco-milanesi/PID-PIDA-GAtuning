@@ -477,16 +477,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 150;
-        MaxGeneration = 250;
+        PopSize = 50;
+        MaxGeneration = 100;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
       population = rand(PopSize,4);
         
-        for k=1:PopSize
-      %      population=[1.0019, 2.4896, 0.8638, 16.9448];
-        end
+%         for k=1:PopSize
+%            population=[13.409093919874048 1.216940084053960 0.188673499969155 1.012098370523877e+02];
+%         end
 
         clear ms_gaoutfun
         options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@ms_gaoutfun);
