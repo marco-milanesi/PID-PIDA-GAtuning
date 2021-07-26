@@ -477,8 +477,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 50;
-        MaxGeneration = 100;
+        PopSize = 200;
+        MaxGeneration = 300;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
@@ -499,7 +499,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_PID = series(K_pid,G);
         global ClosedLoop_PID;
         ClosedLoop_PID = feedback(Loop_PID,1);
-        analized.Sensitivity.pid = getPeakGain(feedback(1,Loop_PID));
+        analized.Sensitivity.pid = peakgain_research(feedback(1,Loop_PID));
         analized.Controller.pid = K_pid;
         
         analized.Loop.pid = Loop_PID;
@@ -533,7 +533,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         ClosedLoop1_IPD = feedback(G,K2_ipd);
         Loop_IPD = series(K1_ipd,ClosedLoop1_IPD);
         global ClosedLoop_IPD;
-        ClosedLoop_IPD = feedback(Loop_IPD,1);
+        ClosedLoop_IPD = peakgain_research(Loop_IPD,1);
         
         analized.Controller.ipd.K1 = K1_ipd;
         analized.Controller.ipd.K2 = K2_ipd;
@@ -577,7 +577,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_DPI = (K1_dpi+K2_dpi)*(G/(1+(G*K3_dpi)));
         analized.Loop.dpi = Loop_DPI;
         analized.ClosedLoop.dpi = ClosedLoop_DPI;
-        analized.Sensitivity.dpi = getPeakGain(feedback(1,Loop_DPI));
+        analized.Sensitivity.dpi = peakgain_research(feedback(1,Loop_DPI));
         info = stepinfo(ClosedLoop_DPI); 
         analized.dpi = ms_ga_info_to_struct(IAE2,control2,info,'pi_d');
         if analized.time < info.SettlingTime
@@ -610,7 +610,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         analized.Controller.pida = K_pida;
         analized.Loop.pida = Loop_PIDA;
-        analized.Sensitivity.pida = getPeakGain(feedback(1,Loop_PIDA));
+        analized.Sensitivity.pida = peakgain_research(feedback(1,Loop_PIDA));
         analized.ClosedLoop.pida = ClosedLoop_PIDA;
         info = stepinfo(ClosedLoop_PIDA);     
         analized.pida = ms_ga_info_to_struct(IAE3,control3,info,'pida');

@@ -2,7 +2,7 @@ function printFromWorkspace(dataStep, dataDist)
 figure('NumberTitle', 'off', 'Name', dataDist.name);
 
 %% set point plote
-        t_sim = 0:0.001:2*dataStep.time;
+        t_sim = 0:0.001:10*dataStep.time;
          subplot(2,2,1);
         plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),'r-',t_sim,step(dataStep.ClosedLoop.ipd,t_sim),'b-',t_sim,step(dataStep.ClosedLoop.dpi,t_sim),'k-',t_sim,step(dataStep.ClosedLoop.pida,t_sim),'m-');
         legend('PID','I-PD','PI-D','PIDA');
