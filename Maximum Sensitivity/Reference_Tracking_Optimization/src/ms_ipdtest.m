@@ -25,8 +25,8 @@ switch stable
         S = feedback(1,Loop);
         peakGain = peakgain_research(S);
         
-        if peakGain > 2.0
-            if peakGain > 2.05
+        if peakGain > 1.4
+            if peakGain > 1.45
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;

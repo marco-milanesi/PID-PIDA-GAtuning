@@ -477,12 +477,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 200;
-        MaxGeneration = 300;
+        PopSize = 50;
+        MaxGeneration = 100;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
-      population = rand(PopSize,4);
+        population = rand(PopSize,4);
         
 %         for k=1:PopSize
 %            population=[13.409093919874048 1.216940084053960 0.188673499969155 1.012098370523877e+02];
@@ -533,13 +533,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         ClosedLoop1_IPD = feedback(G,K2_ipd);
         Loop_IPD = series(K1_ipd,ClosedLoop1_IPD);
         global ClosedLoop_IPD;
-        ClosedLoop_IPD = peakgain_research(Loop_IPD,1);
+        ClosedLoop_IPD = feedback(Loop_IPD,1);
         
         analized.Controller.ipd.K1 = K1_ipd;
         analized.Controller.ipd.K2 = K2_ipd;
         
         analized.Loop.ipd = Loop_IPD;
-        analized.Sensitivity.ipd = getPeakGain(feedback(1,Loop_IPD));
+        analized.Sensitivity.ipd = peakgain_research(feedback(1,Loop_IPD));
         analized.ClosedLoop.ipd = ClosedLoop_IPD;
         info = stepinfo(ClosedLoop_IPD); 
         
