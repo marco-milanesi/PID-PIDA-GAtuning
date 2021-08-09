@@ -527,7 +527,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         record_PI_D = ms_gaoutfun();
         save 'ms_history_PI_D.mat'  record_PI_D ;
         
-        K1_ipd = control1(1)/(s*control1(2));
+        K1_ipd = control1(1)*(1+ 1/(s*control1(2)));
         K2_ipd = control1(1)*(1+(s*control1(3))/(1 + s*(control1(3)/control1(4))));
         
         ClosedLoop1_IPD = feedback(G,K2_ipd);
