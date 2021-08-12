@@ -23,10 +23,10 @@ J1=sum(abs(1-y)*dt);
 switch stable
     case 1
         S = feedback(1,Loop);
-        peakGain = peakgain_research(S);
+        peakGain = getPeakGain(S);
         
-        if peakGain > 1.4
-            if peakGain > 1.45
+        if peakGain > 2.0
+            if peakGain > 2.05
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;
@@ -39,7 +39,7 @@ switch stable
     otherwise
         if J1< minimum_IAE
             costFunction = ms_costFunctionAddition(Loop);
-            J1 = J1+0.1*costFunction;
+            J1 = 100*J1+0.1*costFunction;
         end
 end
 

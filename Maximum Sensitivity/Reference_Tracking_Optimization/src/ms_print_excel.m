@@ -25,7 +25,7 @@ function [] = ms_print_excel(ms_dataStep,name,type)
     Tab = table(parametri,PID,IPD,DPI,PIDA);
     
     %generazione nome del file da salvare in base al sistema in input
-    filename_excel = strcat(name,string(type),'_ms2','.xlsx');
+    filename_excel = strcat(name,string(type),'_ms14','.xlsx');
     
     %scrittura file excel
     writetable(Tab,filename_excel);
