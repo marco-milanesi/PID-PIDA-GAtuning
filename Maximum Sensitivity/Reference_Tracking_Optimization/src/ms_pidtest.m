@@ -7,13 +7,18 @@ ClosedLoop = feedback(Loop,1);
 
 stable = allmargin(G*K).Stable;
 t = 0:dt:100;
-[y,t] = step(ClosedLoop,t);
-J1=sum(abs(1-y)*dt);
+
 
 switch stable
     case 1
+        [y,t] = step(ClosedLoop,t);
+        J1=sum(abs(1-y)*dt);
         S = feedback(1,Loop);
+<<<<<<< HEAD
         peakGain = peakgain_research(S);
+=======
+        peakGain =peakgain_research(S);
+>>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
         if peakGain > 2.0
             if peakGain > 2.05
            J1 = J1 + 100*peakGain;
@@ -26,10 +31,10 @@ switch stable
         end
         
     otherwise
-        if J1< minimum_IAE
+        %if J1< minimum_IAE
             costFunction = ms_costFunctionAddition(Loop);
-            J1 = J1+0.1*costFunction;
-        end
+            J1 = 10+0.1*costFunction;
+        %end
 end
 J=J1;
 end

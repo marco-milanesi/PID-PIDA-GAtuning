@@ -39,7 +39,7 @@ switch stable
     otherwise
         if J1< minimum_IAE
             costFunction = ms_costFunctionAddition(Loop);
-            J1 = J1+0.1*costFunction;
+            J1 = 100*J1+0.1*costFunction;
         end
 end
 
