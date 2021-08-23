@@ -59,7 +59,7 @@ grid on;
 
 % %% disturbance rejection plote
 % figure()
-% t_sim = 0:0.0001:20;
+% t_sim = 0:0.0001:100;
 % subplot(2,2,1);
 % plot(t_sim,step(dataDist.Disturb.pid,t_sim),t_sim,step(dataDist.Disturb.pida,t_sim));
 % legend('PID','PIDA');
@@ -84,7 +84,7 @@ grid on;
 % %% Disturbance Control variable
 % 
 % subplot(2,2,2);
-% t_cv = 0:0.0001:50;
+% t_cv = 0:0.0001:100;
 % plot(t_cv,step(t_cv,-feedback(dataDist.Loop.pid ,1)),t_cv,step(t_cv,-feedback(dataDist.Loop.pida ,1)));
 % legend('PID','PIDA');
 % title('Control variable');

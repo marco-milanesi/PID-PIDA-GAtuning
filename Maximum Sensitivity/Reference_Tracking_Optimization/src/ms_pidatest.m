@@ -11,10 +11,15 @@ t = 0:dt:100;
         
 switch stable
     case 1
+        try
         [y,t] = step(ClosedLoop,t);
         J1=sum(abs(1-y)*dt);
+        catch
+            J1 = 10;
+        end
+        
         S = feedback(1,Loop);
-        peakGain = getPeakGain(S);
+        peakGain = peakgain_research(S);
         if peakGain > 2.0
             if peakGain > 2.05
            J1 = J1 + 100*peakGain;
