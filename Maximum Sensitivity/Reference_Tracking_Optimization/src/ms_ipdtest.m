@@ -8,7 +8,7 @@ s = tf('s');
 % formula presa da https://www.sciencedirect.com/science/article/pii/S2405896318304543
 
 
-K1 = parms(1)*(1 + 1/(s*parms(2)));
+K1 = parms(1)/(s*parms(2));
 K2 = parms(1)*(1+(s*parms(3))/(1 + s*(parms(3)/parms(4))));
  
 ClosedLoop1 = feedback(G,K2);
@@ -25,8 +25,8 @@ switch stable
         S = feedback(1,Loop);
         peakGain = peakgain_research(S);
         
-        if peakGain > 1.4
-            if peakGain > 1.45
+        if peakGain > 2.0
+            if peakGain > 2.05
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;

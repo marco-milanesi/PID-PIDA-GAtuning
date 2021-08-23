@@ -24,7 +24,7 @@ c1 = dataStep.Controller.dpi.K1;
 c2 = dataStep.Controller.dpi.K2;
 c3 = dataStep.Controller.dpi.K3;
 
-u_dpi = (c1+c2)/(1+G*c1*c2 +G*c3);
+u_dpi = (c1+c2)/(1+G*(c1+c2+c3));
 u_ipd = (K1)/(1+G*(K1+K2));
 
 
@@ -59,7 +59,7 @@ grid on;
 
 %% disturbance rejection plote
 figure()
-t_sim = 0:0.001:20;
+t_sim = 0:0.001:100;
 subplot(2,2,1);
 plot(t_sim,step(dataDist.Disturb.pid,t_sim),t_sim,step(dataDist.Disturb.pida,t_sim));
 legend('PID','PIDA');
@@ -84,7 +84,7 @@ title('IAE Trend Disturbance Rejection');
 %% Disturbance Control variable
 
 subplot(2,2,2);
-t_cv = 0:0.001:50;
+t_cv = 0:0.001:100;
 plot(t_cv,step(t_cv,-feedback(dataDist.Loop.pid ,1)),t_cv,step(t_cv,-feedback(dataDist.Loop.pida ,1)));
 legend('PID','PIDA');
 title('Control variable');

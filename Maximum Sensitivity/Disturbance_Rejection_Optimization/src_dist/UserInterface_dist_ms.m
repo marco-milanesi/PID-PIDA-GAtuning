@@ -472,8 +472,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         
-        PopSize = 300;
-        MaxGeneration = 600;
+        PopSize = 50;
+        MaxGeneration = 500;
 
 %% PID genetic algorithm
         %{
@@ -503,9 +503,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %          population(k,:)=[0.775132378588289 2.529517530749842 0.829201433553357 72.035339619648200];;
         end
         
+        %lower bounds lb
+        lb_PID = [10 0.3 0.1 12];
+        %upper bounds ub 
+        ub_PID = [12 1 0.3 15];
+        
         
         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@ms_gaoutfun);
-        [controldist,IAEdist] = ga(@(K)ms_pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],optionsdist);
+        [controldist,IAEdist] = ga(@(K)ms_pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,[],[],optionsdist);
         record_PID_dist = ms_gaoutfun();
         save 'ms_history_PID_dist.mat'  record_PID_dist ;
         
@@ -559,10 +564,13 @@ function pushbutton1_Callback(hObject, eventdata, handles)
           %population3(k,:)=[0.624861540874037 2.071638681458740 2.071638681458740 1.109809110119878 1.759526120166821 0.706287547530294];
         end
         
-        
+        %lower bounds lb
+        lb_PIDA = [10 0.3 0.1 0.001 10 10];
+        %upper bounds ub 
+        ub_PIDA = [12 1 0.3 10 100 15];
         
         optionsdist3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@ms_gaoutfun);
-        [controldist3,IAEdist3] = ga(@(K)ms_pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],[],[],[],optionsdist3);
+        [controldist3,IAEdist3] = ga(@(K)ms_pida_test_dist(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,[],[],optionsdist3);
         record_PIDA_dist = ms_gaoutfun();
         save 'ms_history_PIDA_dist.mat'  record_PIDA_dist ;
         
