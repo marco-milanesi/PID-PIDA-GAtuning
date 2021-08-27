@@ -25,7 +25,11 @@ switch stable
 
         if peakGain > 2.0
             if peakGain > 2.05
+<<<<<<< HEAD
+           J1 = J1 + 100*peakGain;
+=======
                 J1 = J1 + 100*peakGain;
+>>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
             else
                 J1 = J1 + 10*peakGain;
             end

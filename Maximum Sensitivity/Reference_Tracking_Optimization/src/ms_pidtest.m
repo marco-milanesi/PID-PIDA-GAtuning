@@ -14,7 +14,11 @@ switch stable
         [y,t] = step(ClosedLoop,t);
         J1=sum(abs(1-y)*dt);
         S = feedback(1,Loop);
+<<<<<<< HEAD
+        peakGain = peakgain_research(S);
+=======
         peakGain =peakgain_research(S);
+>>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
         if peakGain > 2.0
             if peakGain > 2.05
            J1 = J1 + 100*peakGain;

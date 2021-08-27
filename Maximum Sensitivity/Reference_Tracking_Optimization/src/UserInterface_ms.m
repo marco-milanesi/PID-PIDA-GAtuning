@@ -482,11 +482,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
-        population = rand(PopSize,4);
+%       population = rand(PopSize,4);
         
-%         for k=1:PopSize
-%            population=[13.409093919874048 1.216940084053960 0.188673499969155 1.012098370523877e+02];
-%         end
+        for k=1:PopSize
+           population=[4.089199783229361 5.452200498777766 0.417615558470507 36.614583612329380];
+        end
+
+%         %lower bounds lb
+%         lb_PID = [4 5.4 0.4 36];
+%         %upper bounds ub 
+%         ub_PID = [4.1 5.46 0.42 36.8];
 
         clear ms_gaoutfun
         options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@ms_gaoutfun);
@@ -516,12 +521,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
        % PopSize = 10;
        % MaxGeneration = 10;
         rng(1,'twister') % for reproducibility
-        population1 = rand(PopSize,4);
+%         population1 = rand(PopSize,4);
 
+        
         for k=1:PopSize
-        %    population1=[1.65313, 2.2745, 0.9054, 23.6062];
+           population1=[6.760133460059318 1.861924929648904 0.393703889687407 16.222375069598720];
         end
-
+        
+%         %lower bounds lb
+%         lb_I_PD = [6.6 1.8 0.35 16];
+%         %upper bounds ub 
+%         ub_I_PD = [6.8 1.9 0.4 16.5];
         
         clear ms_gaoutfun
         options1 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population1,'OutputFcn',@ms_gaoutfun);
@@ -539,7 +549,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         save 'ipd' 'control1';
         
         
-        K1_ipd = control1(1)*(1+ 1/(s*control1(2)));
+        K1_ipd = control1(1)/(s*control1(2));
         K2_ipd = control1(1)*(1+(s*control1(3))/(1 + s*(control1(3)/control1(4))));
         
         ClosedLoop1_IPD = feedback(G,K2_ipd);
@@ -562,14 +572,25 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Minum Error
         minimum_IAE = 1000;       
  %%   PI-D genetic algorithm 
+<<<<<<< HEAD
+ 
+        
+=======
          %PopSize = 1;
         %MaxGeneration = 1;
+>>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
         rng(1,'twister') % for reproducibility
-          population2= rand(PopSize,4);
+%         population2= rand(PopSize,4);
 
         for k=1:PopSize
-         %   population2=[1.05038, 3.28554, 0.88909, 14.90313];
+           population2=[4.458543193698281 7.102139748981018 0.408931422557381 36.129690930396485];
         end
+
+
+%         %lower bounds lb
+%         lb_PI_D = [4.4 7 0.4 36];
+%         %upper bounds ub 
+%         ub_PI_D = [4.5 7.2 0.5 36.2];
          
         clear ms_gaoutfun
         options2 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population2,'OutputFcn',@ms_gaoutfun);
@@ -608,15 +629,28 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         minimum_IAE = 1000;        
 %% PIDA genetic algorithm
 
+<<<<<<< HEAD
+        PopSize = 200;
+        MaxGeneration = 1000;
+=======
         PopSize = 100;
         MaxGeneration = 50;
         rng(1,'twister') % for reproducibility
          population3 = rand(PopSize,6);
 
+>>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
         
-       for k=1:PopSize
-        %   population3=[1.0019909, 2.489697, 0.86382, 0, 0, 16.9448];       
-       end
+        rng(1,'twister') % for reproducibility
+        population3 = rand(PopSize,6);
+       
+%        for k=1:PopSize
+%           population3=[4.510350995076744 5.486201108402703 0.450033577243169 0.221127185146550 1.104977553223426 0.716253287278750];       
+%        end
+
+        %lower bounds lb
+        lb_PIDA = [4 5.2 0.5 0.32 0.1 0.1];
+        %upper bounds ub 
+        ub_PIDA = [5 6 1 1  2];
         
         clear ms_gaoutfun
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@ms_gaoutfun);
