@@ -1,59 +1,60 @@
 function printFromWorkspace(dataStep, dataDist)
 
 %% set point plote
-figure()
-t_sim = 0:0.0001:2*dataStep.time;
-subplot(2,2,1);
-plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),t_sim,step(dataStep.ClosedLoop.ipd,t_sim),t_sim,step(dataStep.ClosedLoop.dpi,t_sim),t_sim,step(dataStep.ClosedLoop.pida,t_sim));
-legend('PID','I-PD','PI-D','PIDA');
-title('Reference Tracking');
-xlabel('Time (s)');
-ylabel('Amplitude');
-grid on;
-                
+% figure()
+% t_sim = 0:0.0001:2*dataStep.time;
+% subplot(2,2,1);
+% plot(t_sim,step(dataStep.ClosedLoop.pid,t_sim),t_sim,step(dataStep.ClosedLoop.ipd,t_sim),t_sim,step(dataStep.ClosedLoop.dpi,t_sim),t_sim,step(dataStep.ClosedLoop.pida,t_sim));
+% legend('PID','I-PD','PI-D','PIDA');
+% title('Reference Tracking');
+% xlabel('Time (s)');
+% ylabel('Amplitude');
+% grid on;
+%                 
 
     
 %% Step control variable
-G = dataStep.systemTransferFunction;
-K_pid = dataStep.Controller.pid;
-K_pida = dataStep.Controller.pida;
-K1 = dataStep.Controller.ipd.K1;
-K2 = dataStep.Controller.ipd.K2;
-
-c1 = dataStep.Controller.dpi.K1;
-c2 = dataStep.Controller.dpi.K2;
-c3 = dataStep.Controller.dpi.K3;
-
-u_dpi = (c1+c2)/(1+G*(c1+c2+c3));
-u_ipd = (K1)/(1+G*(K1+K2));
-
-
-subplot(2,2,2);
-t_cv = 0:0.0001:80;
-plot(t_cv,step(K_pid/(1+K_pid*G),t_cv),t_cv,step(u_ipd,t_cv),t_cv,step(u_dpi,t_cv),t_cv,step(K_pida/(1+K_pida*G),t_cv));
-legend('PID','I-PD','PI-D','PIDA');
-title('Control Variable');
-xlabel('Time (s)');
-ylabel('Amplitude');
-grid on;
+% G = dataStep.systemTransferFunction;
+% K_pid = dataStep.Controller.pid;
+% K_pida = dataStep.Controller.pida;
+% K1 = dataStep.Controller.ipd.K1;
+% K2 = dataStep.Controller.ipd.K2;
+% 
+% c1 = dataStep.Controller.dpi.K1;
+% c2 = dataStep.Controller.dpi.K2;
+% c3 = dataStep.Controller.dpi.K3;
+% 
+% u_dpi = (c1+c2)/(1+G*(c1+c2+c3));
+% u_ipd = (K1)/(1+G*(K1+K2));
+% 
+% 
+% subplot(2,2,2);
+% t_cv = 0:0.0001:80;
+% plot(t_cv,step(K_pid/(1+K_pid*G),t_cv),t_cv,step(u_ipd,t_cv),t_cv,step(u_dpi,t_cv),t_cv,step(K_pida/(1+K_pida*G),t_cv));
+% legend('PID','I-PD','PI-D','PIDA');
+% title('Control Variable');
+% xlabel('Time (s)');
+% ylabel('Amplitude');
+% grid on;
 
 %% histograph set point
-subplot(2,2,3);
-Y = [dataStep.pid.IAE dataStep.ipd.IAE dataStep.dpi.IAE dataStep.pida.IAE];
-% The bar function uses a sorted list of the categories, so the bars might display in a different order than you expect.
-% To preserve the order, call the reordercats function.
-
-X = categorical({'PID','I-PD','PI-D','PIDA'});
-X = reordercats(X,{'PID','I-PD','PI-D','PIDA'});
-
-bar(X,Y);
-title('IAE Trend Reference Tracking');
+% subplot(2,2,3);
+% Y = [dataStep.pid.IAE dataStep.ipd.IAE dataStep.dpi.IAE dataStep.pida.IAE];
+% % The bar function uses a sorted list of the categories, so the bars might display in a different order than you expect.
+% % To preserve the order, call the reordercats function.
+% 
+% X = categorical({'PID','I-PD','PI-D','PIDA'});
+% X = reordercats(X,{'PID','I-PD','PI-D','PIDA'});
+% 
+% bar(X,Y);
+% title('IAE Trend Reference Tracking');
 
 %% Maximum Sensitivity Set point
-subplot(2,2,4);
+figure()
+%subplot(2,2,4);
 
-bodemag(feedback(1,dataStep.Loop.pid),feedback(1,dataStep.Loop.ipd),feedback(1,dataStep.Loop.dpi),feedback(1,dataStep.Loop.pida));
-legend('PID','I-PD','PI-D','PIDA');
+bodemag(feedback(1,dataStep.Loop.pid),'k--',feedback(1,dataStep.Loop.pida),'k-');
+legend('PID','PIDA');
 grid on;
 
 
@@ -92,12 +93,14 @@ grid on;
 % ylabel('Amplitude');
 % grid on;
 % 
-% %% Maximum Sensitivity Disturbance
-% 
-% subplot(2,2,4);
-% 
-% bodemag(feedback(1,dataDist.Loop.pid),feedback(1,dataDist.Loop.pida))
-% legend('PID','PIDA');
-% grid on;
+%% Maximum Sensitivity Disturbance
+figure()
+%subplot(2,2,4);
+
+bodemag(feedback(1,dataDist.Loop.pid),'k--',feedback(1,dataDist.Loop.pida),'k-')
+legend('PID','PIDA');
+grid on;
+% font 14 times new romans togliere titoli
+%sia L che S
 %     
 end
