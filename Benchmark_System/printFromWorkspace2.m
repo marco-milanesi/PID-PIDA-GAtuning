@@ -1,8 +1,13 @@
 function printFromWorkspace(dataStep1, dataDist1, dataStep2, dataDist2)
 
+
+figure()
+bodemag(dataDist1.Loop.pid, dataDist1.Loop.pida,dataDist2.Loop.pid, dataDist2.Loop.pida)
+legend('PID02','PIDA02','PID05','PIDA05');
+
 %% set point plote
 figure()
-t_sim = 0:0.001:12;
+t_sim = 0:0.001:20;
 
 x1= step(dataStep1.ClosedLoop.pid,t_sim);
 plot(t_sim,x1,'Color','#000000')
@@ -19,7 +24,7 @@ title('Reference Tracking');
 xlabel('Time (s)');
 ylabel('Amplitude');
 grid on;
-                
+              
 
     
 %% disturbance rejection plote
