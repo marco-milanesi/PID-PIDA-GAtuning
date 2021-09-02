@@ -2,46 +2,45 @@ function print_articolo(dataStep, dataDist)
 %% salvataggio
 % 0 non salva
 % 1     salva
-    salva = 1;
-    s ='P2_N4_14';
+    salva = 0;
+    s ='P1_T5_2';
 
 %% set parametri grafici 
 %% SET RISPOSTA SETPOINT
 
-temp1 = 10;%tempo per set point
-ax_set=[0 temp1 -0.1 1.2];%limiti per set point step
-ax_set_control=[0 temp1 -550 200];%limiti per variabile di controllo
-
+temp1 = 50;%tempo per set point
+ax_set=[0 temp1 -0.01 1.5];%limiti per set point step
+ax_set_control=[0 temp1 -15 10];
 
 %% SET RISPOSTA DISTURBO
 
-temp2 = 20;%tempo per distrubo
-ax_dist=[0 temp2 -0.1 0.7];%limiti per set point step
-ax_dist_control=[0 temp2 -1.5 0.01];%limiti per variabile di controllo
+temp2 = 10;%tempo per distrubo
+ax_dist=[0 temp2 -0.3 0.6];%limiti per set point step
+ax_dist_control=[0 temp2 -1.7 0.5];%limiti per variabile di controllo
 
 
 %% SET BODE MS SET POINT
 
 w1={10^-3,10^5};%omega per bode set point MS
-x1=[0.1 1000 0.1 5];%limite del grafico di bode set point MS [freqmin freqmax valmin valmax]
+x1=[0.1 10000 0.01 5];%limite del grafico di bode set point MS [freqmin freqmax valmin valmax]
 
 
 %% SET BODE MS DIST
 
 w2={10^-3,10^5};%omega per bode disturbo  MS
-x2=[0.1 1000 0.1 5];%limite del grafico di bode disturbo MS [freqmin freqmax valmin valmax]
+x2=[0.1 1000 0.01 5];%limite del grafico di bode disturbo MS [freqmin freqmax valmin valmax]
 
 
 %% SET BODE LOOP SET POINT
 
 w3={10^-3,10^5};%omega per bode set point LOOP
-x3=[0.01 100 0.001 1000];%limite del grafico di bode set point loop [freqmin freqmax valmin valmax]
+x3=[0.01 1000 0.01 1000];%limite del grafico di bode set point loop [freqmin freqmax valmin valmax]
 
 
 %% SET BODE LOOP DIST
 
 w4={10^-3,10^5};%omega per bode disturbo  LOOP
-x4=[0.01 100 0.001 1000];%limite del grafico di bode disturbo loop [freqmin freqmax valmin valmax]
+x4=[0.01 1000 0.01 1000];%limite del grafico di bode disturbo loop [freqmin freqmax valmin valmax]
 
 
 
@@ -75,7 +74,7 @@ u_ipd = (K1)/(1+G*(K1+K2));
 subplot(2,1,2);
 t_cv = 0:0.0001:temp1;
 plot(t_cv,step(K_pid/(1+K_pid*G),t_cv),'k--',t_cv,step(K_pida/(1+K_pida*G),t_cv),'k-','LineWidth',2);
-legend('PID','PIDA','FontSize',12,'FontName','Times New Roman','Location','southeast');
+legend('PID','PIDA','FontSize',12,'FontName','Times New Roman');
 xlabel('time','FontSize',14,'FontName','Times New Roman');
 ylabel('control variable','FontSize',14,'FontName','Times New Roman');
 axis(ax_set_control);
@@ -132,7 +131,7 @@ for h1=1:1:i1
     data1(1,h1)=f1(1,1,h1);
 end
 loglog(tempo,data,'k--',tempo1,data1,'k-','LineWidth',2)
-legend('PID','PIDA','FontSize',12,'FontName','Times New Roman');
+legend('PID','PIDA','FontSize',12,'FontName','Times New Roman','Location','southeast');
 yticks(y_ti)
 yticklabels(y_la)
 xlabel('frequency (rad/s)','FontSize',14,'FontName','Times New Roman');
@@ -159,7 +158,7 @@ for h3=1:1:i3
 end   
 
 loglog(tempo2,data2,'k--',tempo3,data3,'k-','LineWidth',2)
-legend('PID','PIDA','FontSize',12,'FontName','Times New Roman');
+legend('PID','PIDA','FontSize',12,'FontName','Times New Roman','Location','southeast');
 yticks(y_ti)
 yticklabels(y_la)
 xlabel('frequency (rad/s)','FontSize',14,'FontName','Times New Roman');
