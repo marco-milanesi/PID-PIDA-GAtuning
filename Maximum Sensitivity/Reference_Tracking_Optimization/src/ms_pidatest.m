@@ -2,22 +2,20 @@ function J = ms_pidatest(G,dt,parms)
 global minimum_IAE;
 s = tf('s');
 
-K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(6))) + (parms(4)*s^2)/((1 + s*(parms(4)/parms(5))))^2); 
+K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(6))) + (parms(4)*s^2)/((1 + s*(parms(4)/parms(5))))^2);
 Loop = series(K,G);
 ClosedLoop = minreal(feedback(Loop,1));
 stable = allmargin(Loop).Stable;
 t = 0:dt:100;
-
+[y,t] = step(ClosedLoop,t);
+J1=sum(abs(1-y)*dt); 
         
 switch stable
-    case 1
-
-        [y,t] = step(ClosedLoop,t);
-        J1=sum(abs(1-y)*dt);        
+    case 1      
         S = feedback(1,Loop);
         peakGain = peakgain_research(S);
-        if peakGain > 2.5
-            if peakGain > 2.4
+        if peakGain > 1.4
+            if peakGain > 1.45
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;

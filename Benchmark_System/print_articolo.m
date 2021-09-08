@@ -3,44 +3,44 @@ function print_articolo(dataStep, dataDist)
 % 0 non salva
 % 1     salva
     salva = 1;
-    s ='P1_T5_2';
+    s ='P3_N8_14';
 
 %% set parametri grafici 
 %% SET RISPOSTA SETPOINT
 
-temp1 = 8;%tempo per set point
+temp1 = 50;%tempo per set point
 ax_set=[0 temp1 -0.01 1.2];%limiti per set point step
 ax_set_control=[0 temp1 -40 100];
 
 %% SET RISPOSTA DISTURBO
 
-temp2 = 15;%tempo per distrubo
-ax_dist=[0 temp2 -0.05 0.3];%limiti per set point step
-ax_dist_control=[0 temp2 -1.5 0.4];%limiti per variabile di controllo
+temp2 = 60;%tempo per distrubo
+ax_dist=[0 temp2 -0.2 0.8];%limiti per set point step
+ax_dist_control=[0 temp2 -1.3 0.4];%limiti per variabile di controllo
 
 
 %% SET BODE MS SET POINT
 
 w1={10^-3,10^5};%omega per bode set point MS
-x1=[0.1 10000 0.01 5];%limite del grafico di bode set point MS [freqmin freqmax valmin valmax]
+x1=[0.001 100 0.01 5];%limite del grafico di bode set point MS [freqmin freqmax valmin valmax]
 
 
 %% SET BODE MS DIST
 
 w2={10^-3,10^5};%omega per bode disturbo  MS
-x2=[0.01 1000 0.001 5];%limite del grafico di bode disturbo MS [freqmin freqmax valmin valmax]
+x2=[0.001 100 0.001 5];%limite del grafico di bode disturbo MS [freqmin freqmax valmin valmax]
 
 
 %% SET BODE LOOP SET POINT
 
 w3={10^-3,10^5};%omega per bode set point LOOP
-x3=[0.01 1000 0.01 1000];%limite del grafico di bode set point loop [freqmin freqmax valmin valmax]
+x3=[0.01 10 0.01 100];%limite del grafico di bode set point loop [freqmin freqmax valmin valmax]
 
 
 %% SET BODE LOOP DIST
 
 w4={10^-3,10^5};%omega per bode disturbo  LOOP
-x4=[0.01 1000 0.01 1000];%limite del grafico di bode disturbo loop [freqmin freqmax valmin valmax]
+x4=[0.01 10 0.01 100];%limite del grafico di bode disturbo loop [freqmin freqmax valmin valmax]
 
 
 

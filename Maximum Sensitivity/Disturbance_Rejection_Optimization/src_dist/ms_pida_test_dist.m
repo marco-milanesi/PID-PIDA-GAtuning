@@ -13,13 +13,8 @@ switch stable
     case 1
         S = feedback(1,Loop);
         peakGain = peakgain_research_dist(S);   
-
         if peakGain > 1.4
-<<<<<<< HEAD
             if peakGain > 1.45
-=======
-            if peakGain >1.45
->>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;

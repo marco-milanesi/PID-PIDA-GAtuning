@@ -472,12 +472,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         %Population Size of each Iteration
         
-        PopSize = 50;
-<<<<<<< HEAD
+        PopSize = 100;
         MaxGeneration = 500;
-=======
-        MaxGeneration = 20;
->>>>>>> 24efd043710472ca73c6f47b66e8426e84f7c74d
+
 
 %% PID genetic algorithm
         %{
@@ -487,10 +484,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         x(4)= N
         %} 
 
-%         %lower bounds lb
-%         lb_PID_dist = [30 0.1 0.001 150];
-%         %upper bounds ub 
-%         ub_PID_dist = [100 5 5 250];
+
 %         optionsdist = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'OutputFcn',@myfundist);
 %         [controldist,IAEdist] = ga(@(K)pid_test_dist(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID_dist,ub_PID_dist,[],optionsdist);
 %         K_piddist = controldist(1)*(1 + 1/(controldist(2)*s) + (controldist(3)*s)/(1 + s*(controldist(3)/controldist(4))));
@@ -498,17 +492,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % 
 %         rng(1,'twister') %for reproducibility
 % 
-         population = rand(PopSize,4);
+%          population = rand(PopSize,4);
 
         
         clear ms_gaoutfun
 
         for k=1:PopSize
-%          population(k,:)=[0.775132378588289 2.529517530749842 0.829201433553357 72.035339619648200];;
+         population=[1.155896791 4.320107233 2.887487826 109.4362925 ];
         end
         
         %lower bounds lb
-        lb_PID = [10 0.3 0.1 12];
+        lb_PID = [0.01 0.01 0.01 0.01];
         %upper bounds ub 
         ub_PID = [12 1 0.3 15];
         
@@ -540,8 +534,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         minimum_IAE = 100;
         
 %% PIDA genetic algorithm
-        PopSize = 100;
-        MaxGeneration = 20;
+
         %{
         x(1) = Kp
         x(2) = Ti
@@ -561,17 +554,17 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 %         rng(1,'twister') % for reproducibility
 % 
-         population3 = rand(PopSize,6);
+%          population3 = rand(PopSize,6);
 % 
 % 
         clear ms_gaoutfun
         
         for k=1:PopSize
-          %population3(k,:)=[0.624861540874037 2.071638681458740 2.071638681458740 1.109809110119878 1.759526120166821 0.706287547530294];
+          population3=[3.285265538 5.262435143 3.052290444 5.552289657 154.603634 2.34181803];
         end
         
         %lower bounds lb
-        lb_PIDA = [10 0.3 0.1 0.001 10 10];
+        lb_PIDA = [0.01 0.01 0.01 0.01 0.01 0.01];
         %upper bounds ub 
         ub_PIDA = [12 1 0.3 10 100 15];
         

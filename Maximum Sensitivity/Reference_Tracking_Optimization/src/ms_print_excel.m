@@ -30,7 +30,7 @@ function [] = ms_print_excel(ms_dataStep,name,type)
     %scrittura file excel
     writetable(Tab,filename_excel);
     
-    filename_mat = strcat(name,string(type),'_ms2','.mat');
+    filename_mat = strcat(name,string(type),'_ms14','.mat');
     save(filename_mat,'ms_dataStep');
     ms_Latex(ms_dataStep,name,type);
 end

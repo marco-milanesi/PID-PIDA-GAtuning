@@ -478,24 +478,24 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         
         %Population Size of each Iteration
         PopSize = 1;
-        MaxGeneration = 1;
+        MaxGeneration = 10;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
-%       population = rand(PopSize,4);
+%         population = rand(PopSize,4);
         
         for k=1:PopSize
-           population=[4.093067269  5.45457994507 0.419496743 38.77162427];
+           population=[13.175118108275534 1.218692506687403 0.195780770592273 1.037209327665792e+02];
         end 
 
-%         %lower bounds lb
-%         lb_PID = [4 5.4 0.4 36];
-%         %upper bounds ub 
-%         ub_PID = [4.1 5.46 0.42 36.8];
+        %lower bounds lb
+        lb_PID = [0.01 0.01 0.01 0.01];
+        %upper bounds ub 
+        ub_PID = [4.1 5.46 0.42 36.8];
 
         clear ms_gaoutfun
         options = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population,'OutputFcn',@ms_gaoutfun);
-        [control,IAE] = ga(@(K)ms_pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],[],[],[],options);
+        [control,IAE] = ga(@(K)ms_pidtest(G,dt,K),4,-eye(4),zeros(4,1),[],[],lb_PID,[],[],options);
         record_PID = ms_gaoutfun();
         save 'ms_history_PID.mat'  record_PID ;
         K_pid = control(1)*(1 + 1/(s*control(2)) + (control(3)*s)/(1 + s*(control(3)/control(4))));        
@@ -517,6 +517,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         minimum_IAE = 1000;       
  %% I-PD genetic algorithm      
 
+        PopSize = 1;
+        MaxGeneration = 1;
+        
         rng(1,'twister') % for reproducibility
 %         population1 = rand(PopSize,4);
 
@@ -559,7 +562,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         minimum_IAE = 1000;       
  %%   PI-D genetic algorithm 
 
-
+        PopSize = 1;
+        MaxGeneration = 1;
+        
         rng(1,'twister') % for reproducibility
 %         population2= rand(PopSize,4);
 
@@ -604,20 +609,25 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %% PIDA genetic algorithm
        
         rng(1,'twister') % for reproducibility
-%         population3 = rand(PopSize,6);
+        population3 = rand(PopSize,6);
        
+        PopSize = 200;
+        MaxGeneration = 300;
+        
        for k=1:PopSize
-          population3=[4.236909427 5.463326168 0.435155438 0.055177152 0.756634262 4.377939531];       
+          population3=[54.324272019256620 1.296483928870295 0.243679590129450 0.015558677425038 83.551237901226190 1.075810306042331e+02];       
        end
 
+      
+       
         %lower bounds lb
-        lb_PIDA = [4 5.2 0.5 0.32 0.1 0.1];
+        lb_PIDA = [0.01 0.01 0.01 0.01 0.01 0.01];
         %upper bounds ub 
         ub_PIDA = [5 6 1 1  2];
         
         clear ms_gaoutfun
         options3 = optimoptions(@ga,'PopulationSize',PopSize,'MaxGeneration',MaxGeneration,'InitialPopulation',population3,'OutputFcn',@ms_gaoutfun);
-        [control3,IAE3] = ga(@(K)ms_pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],[],[],[],options3);
+        [control3,IAE3] = ga(@(K)ms_pidatest(G,dt,K),6,-eye(6),zeros(6,1),[],[],lb_PIDA,[],[],options3);
         record_PIDA = ms_gaoutfun();
         save 'ms_history_PIDA.mat'  record_PIDA ;
 
