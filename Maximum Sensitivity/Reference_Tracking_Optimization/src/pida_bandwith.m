@@ -1,6 +1,6 @@
-function W = pid_bandwith(G,dt,parms)
+function W = pida_bandwith(G,dt,parms)
 s = tf('s');
-K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(4)))); 
+K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(6))) + (parms(4)*s^2)/((1 + s*(parms(4)/parms(5))))^2);
 Loop = series(K,G);
 S=allmargin(Loop);
 W1=S.PMFrequency;
@@ -19,3 +19,5 @@ end
 
 W=1/W1;
 end
+
+
