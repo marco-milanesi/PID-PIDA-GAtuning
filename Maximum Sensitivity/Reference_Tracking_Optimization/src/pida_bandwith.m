@@ -8,7 +8,6 @@ W1=S.PMFrequency;
 if S.Stable == 1
     S = feedback(1,Loop);
     peakGain = peakgain_research(S);
-    bode(S)
     if peakGain > 1.40
         W1 = (peakGain - 1.40+1)*W1;
     end

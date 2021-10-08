@@ -502,7 +502,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
         Loop_PID = series(K_pid,G);
         global ClosedLoop_PID;
+
+        
         ClosedLoop_PID = feedback(Loop_PID,1);
+        t = 0:dt:100;
+        [y,t] = step(ClosedLoop_PID,t);
+        IAE=sum(abs(1-y)*dt);
         analized.Sensitivity.pid = peakgain_research(feedback(1,Loop_PID));
         analized.Controller.pid = K_pid;
         
@@ -609,9 +614,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         rng(1,'twister') % for reproducibility
          population3 = rand(PopSize,6);
        
-       for k=1:PopSize
-          population3=[1.86 2.40 0.39 0.10 0.81 1.41];       
-       end
+%        for k=1:PopSize
+%           population3=[1.86 2.40 0.39 0.10 0.81 1.41];       
+%        end
 
         %lower bounds lb
         lb_PIDA = [0.01 0.01 0.01 0.01 0.01 0.01];
@@ -629,7 +634,9 @@ function pushbutton1_Callback(hObject, eventdata, handles)
         Loop_PIDA = series(K_pida,G);
         global ClosedLoop_PIDA;
         ClosedLoop_PIDA = feedback(Loop_PIDA,1);
-        
+        t = 0:dt:100;
+        [y1,t] = step(ClosedLoop_PIDA,t);
+        IAE3=sum(abs(1-y1)*dt);
         analized.Controller.pida = K_pida;
         analized.Loop.pida = Loop_PIDA;
         analized.Sensitivity.pida = peakgain_research(feedback(1,Loop_PIDA));
