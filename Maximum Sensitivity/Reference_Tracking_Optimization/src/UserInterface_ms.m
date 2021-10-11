@@ -477,16 +477,16 @@ function pushbutton1_Callback(hObject, eventdata, handles)
  %% Genetic Algorithm Paremeters
         
         %Population Size of each Iteration
-        PopSize = 10;
-        MaxGeneration = 30;
+        PopSize = 50;
+        MaxGeneration = 50;
         
 %% PID genetic algorithm
         rng(1,'twister') % for reproducibility
        population = rand(PopSize,4);
         
-        for k=1:PopSize
-           population=[4.12190 5.457769 0.42365 61.55174];
-        end 
+%         for k=1:PopSize
+%            population=[4.12190 5.457769 0.42365 61.55174];
+%         end 
 
 %         %lower bounds lb
         lb_PID = [0.01 0.01 0.01 0.01];
@@ -609,8 +609,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 %% Minum Error
         minimum_IAE = 1000;        
 %% PIDA genetic algorithm
-        PopSize = 10;
-        MaxGeneration = 30;
+        PopSize = 50;
+        MaxGeneration = 50;
         rng(1,'twister') % for reproducibility
          population3 = rand(PopSize,6);
        
