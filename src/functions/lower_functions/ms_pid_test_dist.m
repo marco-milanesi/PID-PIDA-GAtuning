@@ -1,22 +1,20 @@
-function J = ms_pidtest(G,dt,parms)
-global minimum_IAE
+function J  = ms_pid_test_dist(G,dt,parms,Ms)
 s = tf('s');
+global minimum_IAE;
 K = parms(1)*(1 + 1/(parms(2)*s) + (parms(3)*s)/(1 + s*(parms(3)/parms(4)))); 
-Loop = series(K,G);
-ClosedLoop = feedback(Loop,1);
+ClosedLoop = minreal(feedback(G,K));
 
 stable = allmargin(G*K).Stable;
 t = 0:dt:100;
 [y,t] = step(ClosedLoop,t);
-J1=sum(abs(1-y)*dt);
-
+J1=sum(abs(y)*dt);
+Loop = series(K,G);        
 switch stable
     case 1
         S = feedback(1,Loop);
-        peakGain =peakgain_research(S);
-
-        if peakGain > 1.40
-            if peakGain > 1.45
+        peakGain = peakgain_research_dist(S);   
+        if peakGain > Ms
+            if peakGain > Ms +0.05
            J1 = J1 + 100*peakGain;
             else
            J1 = J1 + 10*peakGain;
@@ -27,11 +25,14 @@ switch stable
         end
         
     otherwise
-        if J1< minimum_IAE
+        if J1< (minimum_IAE)
             costFunction = ms_costFunctionAddition(Loop);
-            J1 = 10+0.1*costFunction;
+            J1 = J1+2*costFunction;
         end
 end
+
 J=J1;
+
 end
+
 

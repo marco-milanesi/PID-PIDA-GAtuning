@@ -1,0 +1,116 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="1321944965" file="D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity\src\GA_PID_tuning.prj" location="D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity\src" name="GA_PID_tuning" target="target.mlapps" target-name="Package App">
+    <param.appname>GA_PID_tuning</param.appname>
+    <param.authnamewatermark>Marco Milanesi</param.authnamewatermark>
+    <param.email>marco.milanesi.99@gmail.com</param.email>
+    <param.company />
+    <param.icon>${PROJECT_ROOT}\GA_PID_tuning_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\GA_PID_tuning_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\GA_PID_tuning_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\GA_PID_tuning_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Implementation of a genetic algorithm to determine the parameters of the PID, PI-D, I-PD and PIDA controllers.</param.summary>
+    <param.description>Implementation of a genetic algorithm to determine the parameters of the PID, PI-D, I-PD and PIDA controllers. 
+In particular, by considering separately a set-point and a load disturbance rejection unit step response the IAE is minimized by constraining the maximum sensitivity.</param.description>
+    <param.screenshot>C:\Users\Marco Milanesi\AppData\Local\Temp\tp20041718_b660_47a1_a8b3_3980bf84ed01.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name>
+      <item>MATLAB</item>
+      <item>Simulink</item>
+      <item>Global Optimization Toolbox</item>
+    </param.products.name>
+    <param.products.id>
+      <item>1</item>
+      <item>2</item>
+      <item>90</item>
+    </param.products.id>
+    <param.products.version>
+      <item>9.11</item>
+      <item>10.4</item>
+      <item>4.6</item>
+    </param.products.version>
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>9b26f764-c34c-437f-b5bd-6ae9a2ef9363</param.guid>
+    <unset>
+      <param.company />
+      <param.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\main_App.mlapp</file>
+    </fileset.main>
+    <fileset.depfun>
+      <file>${PROJECT_ROOT}\functions\checkInputValidity.m</file>
+      <file>${PROJECT_ROOT}\functions\ipd_setpoint.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_costFunctionAddition.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_dpitest.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_ga_info_to_struct.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_gaoutfun.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_ipdtest.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_pid_test_dist.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_pida_test_dist.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_pidatest.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_pidtest.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\ms_print_excel.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\peakgain_research.m</file>
+      <file>${PROJECT_ROOT}\functions\lower_functions\peakgain_research_dist.m</file>
+      <file>${PROJECT_ROOT}\functions\pi_d_setpoint.m</file>
+      <file>${PROJECT_ROOT}\functions\pid_loaddisturbance.m</file>
+      <file>${PROJECT_ROOT}\functions\pid_setpoint.m</file>
+      <file>${PROJECT_ROOT}\functions\pida_loaddisturbance.m</file>
+      <file>${PROJECT_ROOT}\functions\pida_setpoint.m</file>
+      <file>${PROJECT_ROOT}\functions\plot_bodeplot.m</file>
+      <file>${PROJECT_ROOT}\functions\plot_closedloop_stepresponse.m</file>
+      <file>${PROJECT_ROOT}\functions\plot_sensitivity.m</file>
+      <file>${PROJECT_ROOT}\functions\printout_TF.m</file>
+      <file>${PROJECT_ROOT}\functions\tf2string.m</file>
+    </fileset.depfun>
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity" name="src" optional="false">D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity\src</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2021b</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabhdlcoder" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
