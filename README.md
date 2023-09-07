@@ -78,17 +78,25 @@ to enable running MATLAB® simulation m-scripts
 
 4) Press the **Install** button if prompted to _"Install to My Apps"_.
 
+Once the toolbox has been installed, an app icon will be available in
+the _APPS_ toolbar to start the _CFDTool_ GUI. (Note that MATLAB® may
+not show or indicate the toolbox installation progress
+or completion.)
+
 ![installation](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/6cb693f4-b51a-4e83-a242-c6b1eeeb633a)
 
 
-Once the toolbox has been installed, an app icon will be available in
-the _APPS_ toolbar to start the _CFDTool_ GUI. (Note that MATLAB® may
-not show or give any indication of the toolbox installation progress
-or completion.)
+
 
 ## Basic Use
 
 ## Documentation
+
+| IAE function | Cost Addition Function |
+|:-----:|:-----:|
+| ![pseduo1](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/4437297b-8d1b-4a37-8b58-3986f28e04ab) |  ![pseduo2](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/64f18614-efac-429f-be2a-0267cfaed905)
+|
+
 
 ## Type of Controllers
 
