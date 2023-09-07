@@ -67,19 +67,19 @@ Follow the steps below to install _FEATool_ as a MATLAB® toolbox, and
 to enable running MATLAB® simulation m-scripts
 
 1) Download the
-   [CFDTool.mlappinstall](https://github.com/precise-simulation/cfdtool/releases/latest/download/CFDTool.mlappinstall)
+   [GA_PID_tuning.mlappinstall](https://github.com/marco-milanesi/PID-PIDA-GAtuning/blob/main/src/GA_PID_tuning.mlappinstall)
    toolbox installation file.
 
 2) Then start MATLAB®, press the **APPS** toolbar button,
    and select the **Install App** button.
 
 3) When prompted to choose a toolbox file to install, select the
-   **CFDTool.mlappinstall** file and press **OK**.
+   **GA_PID_tuning.mlappinstall** file and press **OK**.
 
 4) Press the **Install** button if prompted to _"Install to My Apps"_.
 
 Once the toolbox has been installed, an app icon will be available in
-the _APPS_ toolbar to start the _CFDTool_ GUI. (Note that MATLAB® may
+the _APPS_ toolbar to start the _GA_PID_tuning_ GUI. (Note that MATLAB® may
 not show or indicate the toolbox installation progress
 or completion.)
 
