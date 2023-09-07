@@ -8,10 +8,10 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="README_images/PID_GA_tuning_logo.png" alt="Logo" width="160" height="160">
   </a>
 
-  <h3 align="center">PID GA Tuning Toolbox</h3>
+  <h1 align="center">PID GA Tuning Toolbox</h3>
 
   <p align="center">
     PID, PI-D, I-PD and PIDA genetic algorithm parameters optimization made easy with this GUI!
