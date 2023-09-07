@@ -1,46 +1,50 @@
-# PID and PIDA Controllers
+[![View PID GA Tuning on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/72999-fsda)
+![GitHub top language](https://img.shields.io/github/languages/top/marco-milanesi/PID-PIDA-GAtuning)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/marco-milanesi/PID-PIDA-GAtuning)
+
+
+
+# PID GA Tuning Toolbox
+*PID, PI-D, I-PD and PIDA genetic algorithm parameters optimization made easy with this GUI!*
+
+![final_gui](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/939604b2-0b56-4314-8087-ebadf6ae8aef)
+
 
 * * * 
 
-## Run the program
-To run the program launch the UserInterface.m in the command window.
+## About
+PID GA Tuning Toolbox is a Toolbox for
+
+## Features
+
+PID GA Tuning Toolbox includes the following features:
+  
+## MATLAB® Toolbox Installation
+Follow the steps below to install _FEATool_ as a MATLAB® toolbox, and
+to enable running MATLAB® simulation m-scripts
+
+1) Download the
+   [CFDTool.mlappinstall](https://github.com/precise-simulation/cfdtool/releases/latest/download/CFDTool.mlappinstall)
+   toolbox installation file.
+
+2) Then start MATLAB®, press the **APPS** toolbar button,
+   and select the **Install App** button.
+
+3) When prompted to choose a toolbox file to install, select the
+   **CFDTool.mlappinstall** file and press **OK**.
+
+4) Press the **Install** button if prompted to _"Install to My Apps"_.
+
+![CFDTool MATLAB® Toolbox Installation](https://www.featool.com/doc/featool-multiphysics-toolbox-installation_50.jpg)
+
+Once the toolbox has been installed, an app icon will be available in
+the _APPS_ toolbar to start the _CFDTool_ GUI. (Note that MATLAB® may
+not show or give any indication of the toolbox installation progress
+or completion.)
+
+## Basic Use
 
 ## Documentation
-
-In this program we implement Genetic Algorithm (GA) in determing PID, PI-D, I-PD and PIDA controllers parameters to compensate different benchmark systems.
-  
-|      Benchmark Systems       |      Transfer Function  G(s)     |
-| -----------------------------|:--------------------------------------:|
-| Multiple Equal Poles         |![ Multiple Equal Poles](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7Bs&plus;1%7D)|
-| Fourth Order System          | ![Fourth Order System](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7B%28s&plus;1%29%281&plus;0.1s%29%281&plus;0.1%5E%7B2%7Ds%29%281&plus;0.1%5E%7B3%7Ds%29%7D)    | 
-| Right Half Plane Zero        | ![Right Half Plane Zero ](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1-0.1s%7D%7B%28s&plus;1%29%5E3%7D) |
-|   Time Delay and Lag         | ![Time Delay and Lag](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7B1&plus;0.1s%7D%20e%5E%7B-s%7D) |
-| Time Delay and Double Lag    | ![Time Delay and Double Lag](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7B%281&plus;0.1s%29%5E%7B2%7D%7D%20e%5E%7B-s%7D)|
-| Fast and Slow modes          |![Fast and Slow modes](https://latex.codecogs.com/gif.latex?%5Cfrac%7B100%7D%7B%28s&plus;10%29%5E%7B2%7D%7D%5Cleft%20%28%20%5Cfrac%7B1%7D%7Bs&plus;1%7D&plus;%5Cfrac%7B0.5%7D%7Bs&plus;0.05%7D%20%5Cright%20%29) |
-|Oscillatory System            |![Oscillatory System](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7B%28s&plus;1%29%28s%5E%7B2%7D&plus;0.2s&plus;1%29%7D) |
-|Unstable Pole                 |![Unstable Pole](https://latex.codecogs.com/gif.latex?%5Cfrac%7B1%7D%7Bs%5E%7B2%7D-1%7D)|
-
-## Lower and upper bound
-
-|      Controller              |      Values    |
-| :---------------------------:|:--------------------------------------:|
-| Proportional Action         |![Kp](https://latex.codecogs.com/gif.latex?Kp%20%3D%5Cleft%20%5B%200.001%20%5C%3A%2010%20%5Cright%20%5D)|
-| Integral Action         |![Ti](https://latex.codecogs.com/gif.latex?Ti%20%3D%5Cleft%20%5B%200.1%20%5C%3A%20500%20%5Cright%20%5D)|
-| Derivative Action        |![Td](https://latex.codecogs.com/gif.latex?Td%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|
-| Second Derivative Action       |![Ta](https://latex.codecogs.com/gif.latex?Ta%20%3D%5Cleft%20%5B%200.00001%20%5C%3A%2010%20%5Cright%20%5D)|
-|Filter of Derivative Action       |![N](https://latex.codecogs.com/gif.latex?N%3D%5Cleft%20%5B%203%20%5C%3A%2033%20%5Cright%20%5D)|
-| Filter of the Second Derivative Action       |![alpha](https://latex.codecogs.com/gif.latex?%5Calpha%20%3D%5Cleft%20%5B%203%20%5C%3A%2033%20%5Cright%20%5D)|
-
-
-## Explanation of the program
-> A simple explanation of the user interface of the programme and which parameters it calculates.
-
-- After launching the program, select the Benchsmark system you want to compensate and the GA calculates the objective function IAE.
-
-
-- The Program will display the reference tracking and disturbance rejection og the four controllers and the system you have selected.
-
-- The program will also export an Excel file in the same folder of the program with step informations such as Rise time, settling time, and other step-response characteristics.
 
 ## Type of Controllers
 
