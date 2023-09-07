@@ -8,7 +8,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="README_images/PID_GA_tuning_logo.png" alt="Logo" width="160" height="160">
+    <img src="README_images/PID_GA_tuning_logo.png" alt="Logo" width="30%">
   </a>
 
   <h1 align="center">PID GA Tuning Toolbox</h3>
