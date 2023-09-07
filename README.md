@@ -1,11 +1,34 @@
+<a name="readme-top"></a>
+
 [![View PID GA Tuning on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/72999-fsda)
 ![GitHub top language](https://img.shields.io/github/languages/top/marco-milanesi/PID-PIDA-GAtuning)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/marco-milanesi/PID-PIDA-GAtuning)
 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">PID GA Tuning Toolbox</h3>
+
+  <p align="center">
+    PID, PI-D, I-PD and PIDA genetic algorithm parameters optimization made easy with this GUI!
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+  </p>
+</div>
 
 
-# PID GA Tuning Toolbox
-*PID, PI-D, I-PD and PIDA genetic algorithm parameters optimization made easy with this GUI!*
+
 
 ![final_gui](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/939604b2-0b56-4314-8087-ebadf6ae8aef)
 
