@@ -78,7 +78,8 @@ to enable running MATLAB® simulation m-scripts
 
 4) Press the **Install** button if prompted to _"Install to My Apps"_.
 
-![CFDTool MATLAB® Toolbox Installation](https://www.featool.com/doc/featool-multiphysics-toolbox-installation_50.jpg)
+![installation](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/6cb693f4-b51a-4e83-a242-c6b1eeeb633a)
+
 
 Once the toolbox has been installed, an app icon will be available in
 the _APPS_ toolbar to start the _CFDTool_ GUI. (Note that MATLAB® may
