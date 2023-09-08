@@ -21,9 +21,9 @@
     <br />
     <a href="#demo">View Demo</a>
     ·
-    <a href=">Report Bug</a>
+    <a href="https://github.com/marco-milanesi/PID-PIDA-GAtuning/issues">Report Bug</a>
     ·
-    <a href="">Request Feature</a>
+    <a href="https://github.com/marco-milanesi/PID-PIDA-GAtuning/pulls">Request Feature</a>
   </p>
 </div>
 
