@@ -11,7 +11,7 @@
 [![View PID GA Tuning Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://it.mathworks.com/matlabcentral/fileexchange/134971-pid-ga-tuning-toolbox)
 ![GitHub top language](https://img.shields.io/github/languages/top/marco-milanesi/PID-PIDA-GAtuning)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/marco-milanesi/PID-PIDA-GAtuning)
-  
+ [![License](https://img.shields.io/badge/license-MIT-blue.svg)]([https://opensource.org/licenses/MIT](https://github.com/marco-milanesi/PID-PIDA-GAtuning/blob/main/LICENSE)) 
 
   <p align="center">
     PID, PI-D, I-PD and PIDA genetic algorithm parameters optimization made easy with this GUI!
