@@ -19,7 +19,7 @@
     <a href=""><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="">View Demo</a>
+    <a href="#demo">View Demo</a>
     ·
     <a href=">Report Bug</a>
     ·
@@ -117,6 +117,17 @@ To effectively utilize the PID GA Tuning Toolbox, follow these simple steps:
 6. **Start Simulation:** Finally, press `Start Simulation` to begin the tuning process.
 
 These straightforward steps will help you make the most of the PID GA Tuning Toolbox for your controller parameter optimization needs.
+
+* * * 
+### Demo
+
+
+
+https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/489f6ea7-64fc-49e9-8be6-e7ddbec05fe6
+
+
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
