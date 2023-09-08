@@ -1,9 +1,5 @@
 <a name="readme-top"></a>
 
-[![View PID GA Tuning Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://it.mathworks.com/matlabcentral/fileexchange/134971-pid-ga-tuning-toolbox)
-![GitHub top language](https://img.shields.io/github/languages/top/marco-milanesi/PID-PIDA-GAtuning)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/marco-milanesi/PID-PIDA-GAtuning)
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -12,6 +8,9 @@
     <h1 align="center">PID GA Tuning Toolbox</h3>
   </a>
 
+[![View PID GA Tuning Toolbox on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://it.mathworks.com/matlabcentral/fileexchange/134971-pid-ga-tuning-toolbox)
+![GitHub top language](https://img.shields.io/github/languages/top/marco-milanesi/PID-PIDA-GAtuning)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/marco-milanesi/PID-PIDA-GAtuning)
   
 
   <p align="center">
@@ -52,15 +51,28 @@
 </details>
 
 
+
 ## About
-PID GA Tuning Toolbox is a Toolbox for
+The PID GA Tuning Toolbox is a powerful tool for tuning the parameters of PID, PI-D, I-PD, and PIDA controllers using genetic algorithms. It has been extensively used in the development of the article titled [A comparison between PID and PIDA](https://ieeexplore-ieee-org.proxy.unibs.it/document/9921724). 
+
+The tuning of the controllers is determined with genetic algorithms by minimizing the integrated absolute error. Both the set-point following and load disturbance rejection tasks can be selected separately. In order to provide a fair comparison, a constraint on the maximum sensitivity is also posed, by selecting between 1.4 and 2 so that the achieved robustness is taken into account.
+
+
+The **PID GA Tuning Toolbox** is a valuable resource for achieving optimal controller performance and robustness. It provides a basis for conducting comparative studies, as demonstrated in the referenced article.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## Features
+The PID GA Tuning Toolbox includes the following features:
 
-PID GA Tuning Toolbox includes the following features:
+- **Controller Selection:** Choose from four different controllers.
+- **Control Task:** Opt for either setpoint following or load disturbance rejection.
+- **Process Compatibility:** Compatible with any type of process.
+- **User-Friendly GUI:** Utilize a simple graphical user interface (GUI) to visualize simulation results, including process variable, control action, Bode plot, and Sensitivity plot.
+- **Result Evaluation:** Easily assess step response and Bode plot characteristics for effective tuning.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
   
 ## MATLAB® Toolbox Installation
 Follow the steps below to install _FEATool_ as a MATLAB® toolbox, and
@@ -86,9 +98,42 @@ or completion.)
 ![installation](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/6cb693f4-b51a-4e83-a242-c6b1eeeb633a)
 
 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Basic Use
+
+To effectively utilize the PID GA Tuning Toolbox, follow these simple steps:
+
+1. **Controller Selection:** Choose the type of controllers you want to tune.
+
+2. **Process Model:** Insert the process model by separating each coefficient with a comma and press the `Insert Transfer Function`. You can verify your transfer function to ensure correct insertion.
+
+3. **Maximum Sensitivity:** Select the maximum sensitivity between *1.4* and *2* for enhanced robustness.
+
+4. **Task Optimization:** Choose your task optimization between *Setpoint Following* and *Load Disturbance Rejection* based on your control requirements.
+
+5. **Algorithm Parameters:** Configure the *Population Size* and the *Maximum Generation* as needed for your tuning process.
+
+6. **Start Simulation:** Finally, press `Start Simulation` to begin the tuning process.
+
+These straightforward steps will help you make the most of the PID GA Tuning Toolbox for your controller parameter optimization needs.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See <a href=https://github.com/marco-milanesi/PID-PIDA-GAtuning/blob/main/LICENSE>`LICENSE.txt`</a>  for more information.
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Contact
+
+- Marco Milanesi - <a href = "mailto: marco.milanesi.99@gmail.com">marco.milanesi.99@gmail.com</a>
+- Edoardo Mirandola - <a href = "mailto: e.mirandola@studenti.unibs.it">e.mirandola@studenti.unibs.it</a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Documentation
 
@@ -157,10 +202,3 @@ Integral action is applied to the control error while Proportional and Derivativ
 ![](https://latex.codecogs.com/gif.latex?%5Cdpi%7B120%7D%20%5Cfrac%7BY%7D%7BD%7D%20%3D%20%5Cfrac%7BG%7D%7B1&plus;GC%7D)
 
 
-## Team
-
-
-| <a href="https://marcomilanesi.com/" target="_blank">**Marco Milanesi**</a> | <a href="https://github.com/EdoGitMira" target="_blank">**Edoardo Mirandola**</a> |
-| :---: |:---:|
-| [![MarcoMilanesi](https://avatars.githubusercontent.com/u/47824890?v=3&s=200)](https://marcomilanesi.com/)  | [![Mirandola Edoardo]()](https://github.com/EdoGitMira)  |
-| <a href="https://github.com/marco-milanesi" target="_blank">`github.com/marco-milanesi`</a> | <a href="https://github.com/EdoGitMira" target="_blank">`github.com/EdoGitMira`</a> |

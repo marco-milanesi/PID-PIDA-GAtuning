@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="1321944965" file="D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity\src\GA_PID_tuning.prj" location="D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity\src" name="GA_PID_tuning" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="1331738479" file="D:\Github\PID-PIDA-GAtuning\src\GA_PID_tuning.prj" location="D:\Github\PID-PIDA-GAtuning\src" name="GA_PID_tuning" target="target.mlapps" target-name="Package App">
     <param.appname>GA_PID_tuning</param.appname>
     <param.authnamewatermark>Marco Milanesi</param.authnamewatermark>
     <param.email>marco.milanesi.99@gmail.com</param.email>
@@ -13,8 +13,8 @@
     <param.summary>Implementation of a genetic algorithm to determine the parameters of the PID, PI-D, I-PD and PIDA controllers.</param.summary>
     <param.description>Implementation of a genetic algorithm to determine the parameters of the PID, PI-D, I-PD and PIDA controllers. 
 In particular, by considering separately a set-point and a load disturbance rejection unit step response the IAE is minimized by constraining the maximum sensitivity.</param.description>
-    <param.screenshot>C:\Users\Marco Milanesi\AppData\Local\Temp\tp20041718_b660_47a1_a8b3_3980bf84ed01.png</param.screenshot>
-    <param.version>1.0</param.version>
+    <param.screenshot>C:\Users\Marco Milanesi\AppData\Local\Temp\tp3b94b7c1_974a_4902_9c4e_d074a3c61a96.png</param.screenshot>
+    <param.version>1.1</param.version>
     <param.products.name>
       <item>MATLAB</item>
       <item>Simulink</item>
@@ -34,8 +34,9 @@ In particular, by considering separately a set-point and a load disturbance reje
     <param.output>${PROJECT_ROOT}</param.output>
     <param.guid>9b26f764-c34c-437f-b5bd-6ae9a2ef9363</param.guid>
     <unset>
+      <param.authnamewatermark />
+      <param.email />
       <param.company />
-      <param.version />
       <param.platforms />
       <param.output />
     </unset>
@@ -71,7 +72,7 @@ In particular, by considering separately a set-point and a load disturbance reje
     <fileset.resources />
     <fileset.package />
     <build-deliverables>
-      <file location="D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity" name="src" optional="false">D:\Github\Copy_of_PID-PIDA-Controllers\Maximum Sensitivity\src</file>
+      <file location="D:\Github\PID-PIDA-GAtuning" name="src" optional="false">D:\Github\PID-PIDA-GAtuning\src</file>
     </build-deliverables>
     <workflow />
     <matlab>
