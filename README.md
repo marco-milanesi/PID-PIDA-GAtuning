@@ -16,14 +16,14 @@
   <p align="center">
     PID, PI-D, I-PD and PIDA genetic algorithm parameters optimization made easy with this GUI!
     <br />
-    <a href=""><strong>Explore the docs »</strong></a>
+    <a href="#documentation"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="#demo">View Demo</a>
     ·
     <a href=">Report Bug</a>
     ·
-    <a href=">Request Feature</a>
+    <a href="">Request Feature</a>
   </p>
 </div>
 
