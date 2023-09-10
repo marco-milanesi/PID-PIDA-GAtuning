@@ -148,14 +148,6 @@ Distributed under the MIT License. See <a href=https://github.com/marco-milanesi
 
 ## Documentation
 
-| IAE function | Cost Addition Function |
-|:-----:|:-----:|
-| ![pseduo1](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/4437297b-8d1b-4a37-8b58-3986f28e04ab) |  ![pseduo2](https://github.com/marco-milanesi/PID-PIDA-GAtuning/assets/47824890/64f18614-efac-429f-be2a-0267cfaed905)
-|
-
-
-## Type of Controllers
-
 ### PID Controller
 -------------------------------------------------
 
